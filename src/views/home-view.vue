@@ -373,9 +373,9 @@ onMounted(async () => {
 										:aria-label="t('weather.forecast.toggleView')" />
 								</div>
 							</template>
-							<div class="pb-2 flex relative overflow-x-auto">
+							<div class="pb-2 flex gap-4 relative overflow-x-auto">
 								<template v-for="(day, index) in currentWeather.daily.time" :key="index">
-									<div class="mx-2 flex-1 flex-shrink-0 min-w-[140px] relative first:ml-0 last:mr-0 sm:min-w-[180px]">
+									<div class="flex-1 flex-shrink-0 min-w-[140px] relative sm:min-w-[180px]">
 										<!-- Separator between tiles except adjacent to selected tile -->
 										<div
 											v-if="index > 0 && selectedDayIndex !== index && selectedDayIndex !== index - 1"
