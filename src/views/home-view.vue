@@ -23,22 +23,52 @@ const advancedForecastView = ref(false); // Set simple view as default
 const { currentWeather, error, fetchWeatherData, loading, loadingLocation, location, useCurrentLocation } =
 	useWeather();
 
-// Determine if it's currently daytime based on current hour
+// Determine if it's currently daytime based on sunrise and sunset times
 const isDaytime = computed((): boolean => {
-	if (!currentWeather.value?.current?.is_day) {
-		// If is_day is available from API, use it
-		return currentWeather.value?.current?.is_day === 1;
+	if (!currentWeather.value?.current) {
+		return false;
 	}
 
-	// Fallback: assume daytime between 6 AM and 6 PM
-	const currentHour = new Date().getHours();
-	return currentHour >= 6 && currentHour < 18;
+	// Get current date and time
+	const now = new Date();
+	const currentDate = now.toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+
+	// Find today's sunrise and sunset times
+	const todayIndex = currentWeather.value.daily.time.findIndex(
+		(date) => date.toISOString().split('T')[0] === currentDate,
+	);
+
+	if (todayIndex === -1) {
+		// Fallback: assume daytime between 6 AM and 6 PM
+		const currentHour = now.getHours();
+		return currentHour >= 6 && currentHour < 18;
+	}
+
+	const sunrise = currentWeather.value.daily.sunrise[todayIndex];
+	const sunset = currentWeather.value.daily.sunset[todayIndex];
+
+	// Check if current time is between sunrise and sunset
+	return now >= sunrise && now < sunset;
 });
 
-// Check if a specific hour is daytime (for hourly forecast)
-const isHourDaytime = (hourDate: Date): boolean => {
-	const hour = hourDate.getHours();
-	return hour >= 6 && hour < 18;
+// Determine if a specific day is currently in daytime
+const isDayForDailyForecast = (dayIndex: number): boolean => {
+	if (!currentWeather.value?.daily) {
+		return true; // Default to day if no data
+	}
+
+	// For today, use current time to determine day/night
+	const now = new Date();
+	const today = now.toISOString().split('T')[0];
+	const forecastDay = currentWeather.value.daily.time[dayIndex].toISOString().split('T')[0];
+
+	// If it's today, use current time to check if it's daytime
+	if (forecastDay === today) {
+		return isDaytime.value;
+	}
+
+	// For future days, use midday (12:00) as the reference time for the icon
+	return true;
 };
 
 // Weather icon mapping
@@ -210,7 +240,7 @@ const selectedDayHourlyForecast = computed(() => {
 				return {
 					airPressure: currentWeather.value.hourly.pressure_msl?.[index],
 					humidity: currentWeather.value.hourly.relative_humidity_2m[index],
-					isDay: currentWeather.value.hourly.is_day?.[index] === 1 || isHourDaytime(hourDate),
+					isDay: currentWeather.value.hourly.is_day?.[index] === 1,
 					precipitation: currentWeather.value.hourly.precipitation[index],
 					precipitationProbability: currentWeather.value.hourly.precipitation_probability[index],
 					temperature: currentWeather.value.hourly.temperature_2m[index],
@@ -409,7 +439,7 @@ onMounted(async () => {
 											:min-temperature="formatTemperature(currentWeather.daily.temperature_2m_min[index])"
 											:weather-code="currentWeather.daily.weather_code[index]"
 											:is-active="selectedDayIndex === index"
-											:is-day="true"
+											:is-day="isDayForDailyForecast(index)"
 											:details="
 												advancedForecastView
 													? [

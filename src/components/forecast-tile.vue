@@ -28,11 +28,8 @@ const weatherCodeToIcon = (code: number, isDay: boolean = true): string => {
 	// Clear sky
 	if (code === 0) return isDay ? 'i-custom-clear-day' : 'i-custom-clear-night';
 
-	// Mainly clear
-	if (code === 1) return isDay ? 'i-custom-partly-cloudy-day' : 'i-custom-partly-cloudy-night';
-
-	// Partly cloudy
-	if (code === 2) return isDay ? 'i-custom-partly-cloudy-day' : 'i-custom-partly-cloudy-night';
+	// Mainly clear, partly cloudy
+	if (code === 1 || code === 2) return isDay ? 'i-custom-partly-cloudy-day' : 'i-custom-partly-cloudy-night';
 
 	// Overcast
 	if (code === 3) return isDay ? 'i-custom-overcast-day' : 'i-custom-overcast-night';
@@ -82,8 +79,7 @@ const weatherCodeToIcon = (code: number, isDay: boolean = true): string => {
 	// Thunderstorm: Slight/moderate, with hail
 	if (code >= 95 && code <= 99) {
 		if (code === 95) return isDay ? 'i-custom-thunderstorms-day' : 'i-custom-thunderstorms-night';
-		if (code === 96 || code === 99)
-			return isDay ? 'i-custom-thunderstorms-day-hail' : 'i-custom-thunderstorms-night-hail';
+		if (code === 96 || code === 99) return isDay ? 'i-custom-thunderstorms-day' : 'i-custom-thunderstorms-night';
 		return 'i-custom-thunderstorms';
 	}
 
@@ -91,7 +87,7 @@ const weatherCodeToIcon = (code: number, isDay: boolean = true): string => {
 };
 
 const weatherIcon = computed((): string => {
-	return weatherCodeToIcon(properties.weatherCode, properties.isDay !== false);
+	return weatherCodeToIcon(properties.weatherCode, properties.isDay ?? true);
 });
 </script>
 
@@ -119,6 +115,7 @@ const weatherIcon = computed((): string => {
 					{{ minTemperature }}
 				</span>
 			</div>
+
 			<div :class="weatherIcon" class="text-4xl text-primary-500 sm:text-5xl dark:text-primary-400"></div>
 		</div>
 
