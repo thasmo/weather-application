@@ -107,6 +107,8 @@ export default {
 		precipitation: 'Precipitation',
 		precipitation_short: 'Precipitation',
 		pressure: 'Pressure',
+		pressure_short: 'Pressure',
+		temperature: 'Temperature',
 		temperature_short: 'Temperature',
 		time: 'Time',
 		units: {

@@ -2,6 +2,7 @@
 interface HourlyForecastItem {
 	airPressure: number;
 	humidity: number;
+	isDay?: boolean;
 	precipitation: number;
 	precipitationProbability: number;
 	temperature: number;
@@ -18,7 +19,7 @@ interface VerticalForecastProperties {
 	temperatureFormatter: (temperature: number) => string;
 	timeFormatter: (date: Date) => string;
 	translationFunction: (key: string) => string;
-	weatherCodeToIcon: (code: number) => string;
+	weatherCodeToIcon: (code: number, isDay: boolean) => string;
 	windSpeedFormatter: (speed: number) => string;
 }
 
@@ -87,7 +88,7 @@ const isCurrentHour = (time: Date): boolean => {
 						</td>
 						<td class="px-2 py-2 text-center sm:px-4 sm:py-3">
 							<div
-								:class="weatherCodeToIcon(hour.weatherCode)"
+								:class="weatherCodeToIcon(hour.weatherCode, hour.isDay !== false)"
 								class="text-2xl text-primary-500 mx-auto sm:text-3xl dark:text-primary-400"></div>
 						</td>
 						<td

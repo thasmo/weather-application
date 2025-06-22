@@ -19,6 +19,8 @@ interface DailyForecast {
 	precipitation_sum: number[];
 	relative_humidity_2m_max: number[];
 	relative_humidity_2m_min: number[];
+	sunrise: Date[];
+	sunset: Date[];
 	temperature_2m_max: number[];
 	temperature_2m_min: number[];
 	time: Date[];
@@ -27,6 +29,7 @@ interface DailyForecast {
 }
 
 interface HourlyForecast {
+	is_day: number[];
 	precipitation: number[];
 	precipitation_probability: number[];
 	relative_humidity_2m: number[];
@@ -130,10 +133,10 @@ export function useWeather() {
 				current:
 					'temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,rain,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,pressure_msl',
 				daily:
-					'weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,relative_humidity_2m_max,relative_humidity_2m_min,wind_speed_10m_max',
+					'weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,relative_humidity_2m_max,relative_humidity_2m_min,wind_speed_10m_max,sunrise,sunset',
 				forecast_days: 7,
 				hourly:
-					'temperature_2m,precipitation_probability,precipitation,weather_code,relative_humidity_2m,wind_speed_10m',
+					'temperature_2m,precipitation_probability,precipitation,weather_code,relative_humidity_2m,wind_speed_10m,is_day',
 				latitude: [lat],
 				longitude: [lon],
 				timezone: 'auto',
@@ -196,6 +199,8 @@ export function useWeather() {
 				relative_humidity_2m_min: [...(daily.variables(5)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
+				sunrise: [...(daily.variables(7)?.valuesArray() || [])].map(Number).map((timeValue) => processTime(timeValue)),
+				sunset: [...(daily.variables(8)?.valuesArray() || [])].map(Number).map((timeValue) => processTime(timeValue)),
 				temperature_2m_max: [...(daily.variables(1)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
@@ -215,6 +220,7 @@ export function useWeather() {
 			);
 
 			const hourlyForecast: HourlyForecast = {
+				is_day: [...(hourly.variables(6)?.valuesArray() || [])].map(Number),
 				precipitation: [...(hourly.variables(2)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
