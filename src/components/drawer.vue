@@ -14,6 +14,11 @@ interface DrawerProperties {
 	 */
 	readonly closeOnOutsideClick?: boolean;
 	/**
+	 * Whether to disable closing the drawer entirely
+	 * @default false
+	 */
+	readonly disableClose?: boolean;
+	/**
 	 * Whether to show an overlay behind the drawer
 	 * @default true
 	 */
@@ -39,6 +44,7 @@ type DrawerSize = 'large' | 'medium' | 'small';
 const properties = withDefaults(defineProps<DrawerProperties>(), {
 	closeOnEsc: true,
 	closeOnOutsideClick: true,
+	disableClose: false,
 	hasOverlay: true,
 	position: 'right',
 	size: 'medium',
@@ -59,7 +65,7 @@ const updateIsMobile = (): void => {
 };
 
 const handleEscKey = (event: KeyboardEvent): void => {
-	if (properties.closeOnEsc && properties.isOpen && event.key === 'Escape') {
+	if (properties.closeOnEsc && !properties.disableClose && properties.isOpen && event.key === 'Escape') {
 		emit('close');
 	}
 };
@@ -67,6 +73,7 @@ const handleEscKey = (event: KeyboardEvent): void => {
 const handleOutsideClick = (event: MouseEvent): void => {
 	if (
 		properties.closeOnOutsideClick &&
+		!properties.disableClose &&
 		properties.isOpen &&
 		drawerRef.value &&
 		!drawerRef.value.contains(event.target as Node)
@@ -83,9 +90,9 @@ const drawerClasses = computed(() => {
 	};
 
 	const sizeClasses = {
-		large: isMobile.value ? 'h-2/3' : properties.position === 'bottom' ? 'h-2/3' : 'w-96',
-		medium: isMobile.value ? 'h-1/2' : properties.position === 'bottom' ? 'h-1/2' : 'w-80',
-		small: isMobile.value ? 'h-1/3' : properties.position === 'bottom' ? 'h-1/3' : 'w-64',
+		large: isMobile.value ? 'max-h-[90vh] min-h-[10rem]' : properties.position === 'bottom' ? 'h-2/3' : 'w-96',
+		medium: isMobile.value ? 'max-h-[80vh] min-h-[8rem]' : properties.position === 'bottom' ? 'h-1/2' : 'w-80',
+		small: isMobile.value ? 'max-h-[70vh] min-h-[6rem]' : properties.position === 'bottom' ? 'h-1/3' : 'w-64',
 	};
 
 	const transformClasses = {

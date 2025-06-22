@@ -193,6 +193,7 @@ const selectedDayHourlyForecast = computed(() => {
 	const hourlyData = currentWeather.value.hourly;
 	const filteredHourlyData = hourlyData.time
 		.map((time, index) => ({
+			airPressure: hourlyData.pressure_msl?.[index],
 			humidity: hourlyData.relative_humidity_2m[index],
 			precipitation: hourlyData.precipitation[index],
 			precipitationProbability: hourlyData.precipitation_probability[index],
@@ -411,12 +412,16 @@ onMounted(async () => {
 																value: formatWindSpeed(currentWeather.daily.wind_speed_10m_max[index]),
 																unit: '',
 															},
-															{
-																icon: '',
-																label: t('weather.pressure'),
-																value: formatAirPressure(currentWeather.daily.pressure_msl_mean[index]),
-																unit: '',
-															},
+															...(currentWeather.daily.pressure_msl_mean
+																? [
+																		{
+																			icon: '',
+																			label: t('weather.pressure'),
+																			value: formatAirPressure(currentWeather.daily.pressure_msl_mean[index]),
+																			unit: '',
+																		},
+																	]
+																: []),
 														]
 													: []
 											"

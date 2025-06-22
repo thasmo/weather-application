@@ -86,6 +86,8 @@ const currentLabel = computed(() => {
 							v-for="option in properties.options"
 							:key="option.value"
 							:item="option.value"
+							@click.stop
+							@mousedown.stop
 							class="text-sm text-gray-700 font-medium px-4 py-2.5 flex cursor-pointer items-center justify-between dark:text-gray-200 hover:bg-primary-50 dark:hover:bg-primary-900/20">
 							<Select.ItemText class="text-left">{{ option.label }}</Select.ItemText>
 							<Select.ItemIndicator class="text-primary-600 ml-2 dark:text-primary-400">

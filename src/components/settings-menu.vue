@@ -60,6 +60,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 const isOpen = ref(false);
 const isMobile = useMediaQuery('(max-width: 767px)');
+const isSelectInteracting = ref(false);
 
 const handleAirPressureUnitChange = (value: string): void => {
 	emit('updateAirPressureUnit', value as 'hpa' | 'inHg');
@@ -93,7 +94,13 @@ const closeSettings = (): void => {
 <template>
 	<div>
 		<!-- Mobile: Drawer from bottom -->
-		<Drawer v-if="isMobile" :is-open="isOpen" position="bottom" size="medium" @close="closeSettings">
+		<Drawer
+			v-if="isMobile"
+			:is-open="isOpen"
+			position="bottom"
+			size="medium"
+			:disable-close="isSelectInteracting"
+			@close="closeSettings">
 			<template #header>
 				<div class="flex items-center justify-between">
 					<h2 class="text-xl font-bold">{{ t('app.settings.title') }}</h2>
