@@ -1,5 +1,6 @@
 <script setup lang="ts">
 interface HourlyForecastItem {
+	airPressure: number;
 	humidity: number;
 	precipitation: number;
 	precipitationProbability: number;
@@ -10,12 +11,15 @@ interface HourlyForecastItem {
 }
 
 interface VerticalForecastProperties {
+	airPressureFormatter: (pressure: number) => string;
 	hourlyData: HourlyForecastItem[];
 	isAdvancedView: boolean;
-	temperatureFormatter: (temporary: number) => string;
+	precipitationFormatter: (precipitation: number) => string;
+	temperatureFormatter: (temperature: number) => string;
 	timeFormatter: (date: Date) => string;
 	translationFunction: (key: string) => string;
 	weatherCodeToIcon: (code: number) => string;
+	windSpeedFormatter: (speed: number) => string;
 }
 
 defineProps<VerticalForecastProperties>();
@@ -57,6 +61,11 @@ const isCurrentHour = (time: Date): boolean => {
 							class="text-gray-700 font-medium px-2 py-3 text-center dark:text-gray-300 sm:px-4">
 							{{ translationFunction('weather.wind_short') }}
 						</th>
+						<th
+							v-if="isAdvancedView"
+							class="text-gray-700 font-medium px-2 py-3 text-center dark:text-gray-300 sm:px-4">
+							{{ translationFunction('weather.pressure_short') }}
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -84,7 +93,7 @@ const isCurrentHour = (time: Date): boolean => {
 						<td
 							v-if="isAdvancedView"
 							class="text-gray-800 font-medium px-2 py-2 text-center dark:text-gray-300 sm:px-4 sm:py-3">
-							{{ hour.precipitationProbability }}%
+							{{ precipitationFormatter(hour.precipitation) }} ({{ hour.precipitationProbability }}%)
 						</td>
 						<td
 							v-if="isAdvancedView"
@@ -94,7 +103,12 @@ const isCurrentHour = (time: Date): boolean => {
 						<td
 							v-if="isAdvancedView"
 							class="text-gray-800 font-medium px-2 py-2 text-center dark:text-gray-300 sm:px-4 sm:py-3">
-							{{ hour.windSpeed }} km/h
+							{{ windSpeedFormatter(hour.windSpeed) }}
+						</td>
+						<td
+							v-if="isAdvancedView"
+							class="text-gray-800 font-medium px-2 py-2 text-center dark:text-gray-300 sm:px-4 sm:py-3">
+							{{ airPressureFormatter(hour.airPressure) }}
 						</td>
 					</tr>
 				</tbody>

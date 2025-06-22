@@ -1,5 +1,10 @@
 export default {
 	app: {
+		airPressure: {
+			hpa: 'Hectopascal (hPa)',
+			inHg: 'Inches of Mercury (inHg)',
+			title: 'Air Pressure Unit',
+		},
 		error: 'Error',
 		language: {
 			de: 'German',
@@ -10,6 +15,11 @@ export default {
 		location: {
 			button: 'Use my current location',
 			loading: 'Getting your location...',
+		},
+		precipitation: {
+			inches: 'Inches (in)',
+			mm: 'Millimeters (mm)',
+			title: 'Precipitation Unit',
 		},
 		settings: {
 			button: 'Settings',
@@ -32,6 +42,12 @@ export default {
 			twentyFourHour: '24-hour',
 		},
 		title: 'Weather',
+		windSpeed: {
+			kmh: 'Kilometers per hour (km/h)',
+			mph: 'Miles per hour (mph)',
+			ms: 'Meters per second (m/s)',
+			title: 'Wind Speed Unit',
+		},
 	},
 	weather: {
 		codes: {

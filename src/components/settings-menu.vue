@@ -11,6 +11,14 @@ import ThemeSwitcher from './theme-switcher.vue';
 
 interface SettingsMenuProperties {
 	/**
+	 * The air pressure unit value
+	 */
+	readonly airPressureUnit: 'hpa' | 'inHg';
+	/**
+	 * The precipitation unit value
+	 */
+	readonly precipitationUnit: 'inches' | 'mm';
+	/**
 	 * The temperature unit value
 	 */
 	readonly temperatureUnit: 'celsius' | 'fahrenheit';
@@ -18,31 +26,59 @@ interface SettingsMenuProperties {
 	 * The time format value
 	 */
 	readonly timeFormat: 'twelveHour' | 'twentyFourHour';
+	/**
+	 * The wind speed unit value
+	 */
+	readonly windSpeedUnit: 'kmh' | 'mph' | 'ms';
 }
 
 const properties = defineProps<SettingsMenuProperties>();
 
 const emit = defineEmits<{
 	/**
-	 * Emitted when the time format changes
+	 * Emitted when the air pressure unit changes
 	 */
-	(event: 'updateTimeFormat', value: 'twelveHour' | 'twentyFourHour'): void;
+	(event: 'updateAirPressureUnit', value: 'hpa' | 'inHg'): void;
+	/**
+	 * Emitted when the precipitation unit changes
+	 */
+	(event: 'updatePrecipitationUnit', value: 'inches' | 'mm'): void;
 	/**
 	 * Emitted when the temperature unit changes
 	 */
 	(event: 'updateTemperatureUnit', value: 'celsius' | 'fahrenheit'): void;
+	/**
+	 * Emitted when the time format changes
+	 */
+	(event: 'updateTimeFormat', value: 'twelveHour' | 'twentyFourHour'): void;
+	/**
+	 * Emitted when the wind speed unit changes
+	 */
+	(event: 'updateWindSpeedUnit', value: 'kmh' | 'mph' | 'ms'): void;
 }>();
 
 const { t } = useI18n();
 const isOpen = ref(false);
 const isMobile = useMediaQuery('(max-width: 767px)');
 
-const handleTimeFormatChange = (value: string): void => {
-	emit('updateTimeFormat', value as 'twelveHour' | 'twentyFourHour');
+const handleAirPressureUnitChange = (value: string): void => {
+	emit('updateAirPressureUnit', value as 'hpa' | 'inHg');
+};
+
+const handlePrecipitationUnitChange = (value: string): void => {
+	emit('updatePrecipitationUnit', value as 'inches' | 'mm');
 };
 
 const handleTemperatureUnitChange = (value: string): void => {
 	emit('updateTemperatureUnit', value as 'celsius' | 'fahrenheit');
+};
+
+const handleTimeFormatChange = (value: string): void => {
+	emit('updateTimeFormat', value as 'twelveHour' | 'twentyFourHour');
+};
+
+const handleWindSpeedUnitChange = (value: string): void => {
+	emit('updateWindSpeedUnit', value as 'kmh' | 'mph' | 'ms');
 };
 
 const toggleSettings = (): void => {
@@ -104,6 +140,49 @@ const closeSettings = (): void => {
 									{ value: 'fahrenheit', label: t('app.temperature.fahrenheit').split(' ')[0] },
 								]"
 								@update:model-value="handleTemperatureUnitChange" />
+						</div>
+
+						<div class="flex flex-col gap-1">
+							<label class="text-sm text-gray-600 dark:text-gray-400">
+								{{ t('app.windSpeed.title') }}
+							</label>
+							<SelectDropdown
+								:aria-label="t('app.windSpeed.title')"
+								:model-value="properties.windSpeedUnit"
+								:options="[
+									{ value: 'kmh', label: t('app.windSpeed.kmh').split(' ')[0] },
+									{ value: 'mph', label: t('app.windSpeed.mph').split(' ')[0] },
+									{ value: 'ms', label: t('app.windSpeed.ms').split(' ')[0] },
+								]"
+								@update:model-value="handleWindSpeedUnitChange" />
+						</div>
+
+						<div class="flex flex-col gap-1">
+							<label class="text-sm text-gray-600 dark:text-gray-400">
+								{{ t('app.precipitation.title') }}
+							</label>
+							<SelectDropdown
+								:aria-label="t('app.precipitation.title')"
+								:model-value="properties.precipitationUnit"
+								:options="[
+									{ value: 'mm', label: t('app.precipitation.mm').split(' ')[0] },
+									{ value: 'inches', label: t('app.precipitation.inches').split(' ')[0] },
+								]"
+								@update:model-value="handlePrecipitationUnitChange" />
+						</div>
+
+						<div class="flex flex-col gap-1">
+							<label class="text-sm text-gray-600 dark:text-gray-400">
+								{{ t('app.airPressure.title') }}
+							</label>
+							<SelectDropdown
+								:aria-label="t('app.airPressure.title')"
+								:model-value="properties.airPressureUnit"
+								:options="[
+									{ value: 'hpa', label: t('app.airPressure.hpa').split(' ')[0] },
+									{ value: 'inHg', label: t('app.airPressure.inHg').split(' ')[0] },
+								]"
+								@update:model-value="handleAirPressureUnitChange" />
 						</div>
 
 						<div class="flex flex-col gap-1">
@@ -184,6 +263,49 @@ const closeSettings = (): void => {
 								{ value: 'fahrenheit', label: t('app.temperature.fahrenheit').split(' ')[0] },
 							]"
 							@update:model-value="handleTemperatureUnitChange" />
+					</div>
+
+					<div class="flex flex-col gap-1">
+						<label class="text-sm text-gray-600 dark:text-gray-400">
+							{{ t('app.windSpeed.title') }}
+						</label>
+						<SelectDropdown
+							:aria-label="t('app.windSpeed.title')"
+							:model-value="properties.windSpeedUnit"
+							:options="[
+								{ value: 'kmh', label: t('app.windSpeed.kmh').split(' ')[0] },
+								{ value: 'mph', label: t('app.windSpeed.mph').split(' ')[0] },
+								{ value: 'ms', label: t('app.windSpeed.ms').split(' ')[0] },
+							]"
+							@update:model-value="handleWindSpeedUnitChange" />
+					</div>
+
+					<div class="flex flex-col gap-1">
+						<label class="text-sm text-gray-600 dark:text-gray-400">
+							{{ t('app.precipitation.title') }}
+						</label>
+						<SelectDropdown
+							:aria-label="t('app.precipitation.title')"
+							:model-value="properties.precipitationUnit"
+							:options="[
+								{ value: 'mm', label: t('app.precipitation.mm').split(' ')[0] },
+								{ value: 'inches', label: t('app.precipitation.inches').split(' ')[0] },
+							]"
+							@update:model-value="handlePrecipitationUnitChange" />
+					</div>
+
+					<div class="flex flex-col gap-1">
+						<label class="text-sm text-gray-600 dark:text-gray-400">
+							{{ t('app.airPressure.title') }}
+						</label>
+						<SelectDropdown
+							:aria-label="t('app.airPressure.title')"
+							:model-value="properties.airPressureUnit"
+							:options="[
+								{ value: 'hpa', label: t('app.airPressure.hpa').split(' ')[0] },
+								{ value: 'inHg', label: t('app.airPressure.inHg').split(' ')[0] },
+							]"
+							@update:model-value="handleAirPressureUnitChange" />
 					</div>
 
 					<div class="flex flex-col gap-1">
