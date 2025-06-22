@@ -1,0 +1,1759 @@
+[
+	{
+		"id": 1392685764,
+		"city_ascii": "Tokyo",
+		"country": "Japan",
+		"lat": 35.687,
+		"lng": 139.7495
+	},
+	{
+		"id": 1360771077,
+		"city_ascii": "Jakarta",
+		"country": "Indonesia",
+		"lat": -6.175,
+		"lng": 106.8275
+	},
+	{
+		"id": 1608618140,
+		"city_ascii": "Manila",
+		"country": "Philippines",
+		"lat": 14.5958,
+		"lng": 120.9772
+	},
+	{
+		"id": 1410836482,
+		"city_ascii": "Seoul",
+		"country": "Korea, South",
+		"lat": 37.5667,
+		"lng": 126.9833
+	},
+	{
+		"id": 1484247881,
+		"city_ascii": "Mexico City",
+		"country": "Mexico",
+		"lat": 19.4333,
+		"lng": -99.1333
+	},
+	{
+		"id": 1818253931,
+		"city_ascii": "Cairo",
+		"country": "Egypt",
+		"lat": 30.0444,
+		"lng": 31.2358
+	},
+	{
+		"id": 1050529279,
+		"city_ascii": "Dhaka",
+		"country": "Bangladesh",
+		"lat": 23.7289,
+		"lng": 90.3944
+	},
+	{
+		"id": 1156228865,
+		"city_ascii": "Beijing",
+		"country": "China",
+		"lat": 39.9067,
+		"lng": 116.3975
+	},
+	{
+		"id": 1764068610,
+		"city_ascii": "Bangkok",
+		"country": "Thailand",
+		"lat": 13.7525,
+		"lng": 100.4942
+	},
+	{
+		"id": 1643318494,
+		"city_ascii": "Moscow",
+		"country": "Russia",
+		"lat": 55.7506,
+		"lng": 37.6175
+	},
+	{
+		"id": 1032717330,
+		"city_ascii": "Buenos Aires",
+		"country": "Argentina",
+		"lat": -34.6036,
+		"lng": -58.3814
+	},
+	{
+		"id": 1364305026,
+		"city_ascii": "Tehran",
+		"country": "Iran",
+		"lat": 35.6889,
+		"lng": 51.3897
+	},
+	{
+		"id": 1180000363,
+		"city_ascii": "Kinshasa",
+		"country": "Congo (Kinshasa)",
+		"lat": -4.3219,
+		"lng": 15.3119
+	},
+	{
+		"id": 1826645935,
+		"city_ascii": "London",
+		"country": "United Kingdom",
+		"lat": 51.5072,
+		"lng": -0.1275
+	},
+	{
+		"id": 1250015082,
+		"city_ascii": "Paris",
+		"country": "France",
+		"lat": 48.8567,
+		"lng": 2.3522
+	},
+	{
+		"id": 1604728603,
+		"city_ascii": "Lima",
+		"country": "Peru",
+		"lat": -12.06,
+		"lng": -77.0375
+	},
+	{
+		"id": 1024949724,
+		"city_ascii": "Luanda",
+		"country": "Angola",
+		"lat": -8.8383,
+		"lng": 13.2344
+	},
+	{
+		"id": 1458988644,
+		"city_ascii": "Kuala Lumpur",
+		"country": "Malaysia",
+		"lat": 3.1686,
+		"lng": 101.698
+	},
+	{
+		"id": 1704413791,
+		"city_ascii": "Hanoi",
+		"country": "Vietnam",
+		"lat": 21,
+		"lng": 105.85
+	},
+	{
+		"id": 1170483426,
+		"city_ascii": "Bogota",
+		"country": "Colombia",
+		"lat": 4.7111,
+		"lng": -74.0722
+	},
+	{
+		"id": 1729268475,
+		"city_ascii": "Khartoum",
+		"country": "Sudan",
+		"lat": 15.6031,
+		"lng": 32.5265
+	},
+	{
+		"id": 1344982653,
+		"city_ascii": "Hong Kong",
+		"country": "Hong Kong",
+		"lat": 22.3,
+		"lng": 114.2
+	},
+	{
+		"id": 1682999334,
+		"city_ascii": "Riyadh",
+		"country": "Saudi Arabia",
+		"lat": 24.65,
+		"lng": 46.71
+	},
+	{
+		"id": 1152554349,
+		"city_ascii": "Santiago",
+		"country": "Chile",
+		"lat": -33.4372,
+		"lng": -70.6506
+	},
+	{
+		"id": 1104616656,
+		"city_ascii": "Rangoon",
+		"country": "Burma",
+		"lat": 16.795,
+		"lng": 96.16
+	},
+	{
+		"id": 1724616994,
+		"city_ascii": "Madrid",
+		"country": "Spain",
+		"lat": 40.4169,
+		"lng": -3.7033
+	},
+	{
+		"id": 1368596238,
+		"city_ascii": "Baghdad",
+		"country": "Iraq",
+		"lat": 33.3153,
+		"lng": 44.3661
+	},
+	{
+		"id": 1702341327,
+		"city_ascii": "Singapore",
+		"country": "Singapore",
+		"lat": 1.3,
+		"lng": 103.8
+	},
+	{
+		"id": 1792572891,
+		"city_ascii": "Ankara",
+		"country": "Turkey",
+		"lat": 39.93,
+		"lng": 32.85
+	},
+	{
+		"id": 1231824991,
+		"city_ascii": "Addis Ababa",
+		"country": "Ethiopia",
+		"lat": 9.03,
+		"lng": 38.74
+	},
+	{
+		"id": 1404000661,
+		"city_ascii": "Nairobi",
+		"country": "Kenya",
+		"lat": -1.2864,
+		"lng": 36.8172
+	},
+	{
+		"id": 1840006060,
+		"city_ascii": "Washington",
+		"country": "United States",
+		"lat": 38.9047,
+		"lng": -77.0163
+	},
+	{
+		"id": 1384207980,
+		"city_ascii": "Abidjan",
+		"country": "Côte d’Ivoire",
+		"lat": 5.3364,
+		"lng": -4.0267
+	},
+	{
+		"id": 1710680650,
+		"city_ascii": "Cape Town",
+		"country": "South Africa",
+		"lat": -33.9253,
+		"lng": 18.4239
+	},
+	{
+		"id": 1276451290,
+		"city_ascii": "Berlin",
+		"country": "Germany",
+		"lat": 52.52,
+		"lng": 13.405
+	},
+	{
+		"id": 1004993580,
+		"city_ascii": "Kabul",
+		"country": "Afghanistan",
+		"lat": 34.5253,
+		"lng": 69.1783
+	},
+	{
+		"id": 1466965925,
+		"city_ascii": "Bamako",
+		"country": "Mali",
+		"lat": 12.6458,
+		"lng": -7.9922
+	},
+	{
+		"id": 1400522593,
+		"city_ascii": "Amman",
+		"country": "Jordan",
+		"lat": 31.9497,
+		"lng": 35.9328
+	},
+	{
+		"id": 1566342270,
+		"city_ascii": "Abuja",
+		"country": "Nigeria",
+		"lat": 9.0667,
+		"lng": 7.4833
+	},
+	{
+		"id": 1862748204,
+		"city_ascii": "Caracas",
+		"country": "Venezuela",
+		"lat": 10.4806,
+		"lng": -66.9036
+	},
+	{
+		"id": 1860331871,
+		"city_ascii": "Tashkent",
+		"country": "Uzbekistan",
+		"lat": 41.3111,
+		"lng": 69.2797
+	},
+	{
+		"id": 1854029208,
+		"city_ascii": "Ouagadougou",
+		"country": "Burkina Faso",
+		"lat": 12.3686,
+		"lng": -1.5275
+	},
+	{
+		"id": 1300715560,
+		"city_ascii": "Athens",
+		"country": "Greece",
+		"lat": 37.9842,
+		"lng": 23.7281
+	},
+	{
+		"id": 1320197916,
+		"city_ascii": "Guatemala City",
+		"country": "Guatemala",
+		"lat": 14.6417,
+		"lng": -90.5133
+	},
+	{
+		"id": 1414102075,
+		"city_ascii": "Kuwait City",
+		"country": "Kuwait",
+		"lat": 29.3697,
+		"lng": 47.9783
+	},
+	{
+		"id": 1804382913,
+		"city_ascii": "Kyiv",
+		"country": "Ukraine",
+		"lat": 50.45,
+		"lng": 30.5233
+	},
+	{
+		"id": 1408738594,
+		"city_ascii": "Pyongyang",
+		"country": "Korea, North",
+		"lat": 39.0167,
+		"lng": 125.7475
+	},
+	{
+		"id": 1710176249,
+		"city_ascii": "Pretoria",
+		"country": "South Africa",
+		"lat": -25.7461,
+		"lng": 28.1881
+	},
+	{
+		"id": 1380382862,
+		"city_ascii": "Rome",
+		"country": "Italy",
+		"lat": 41.8931,
+		"lng": 12.4828
+	},
+	{
+		"id": 1760685964,
+		"city_ascii": "Damascus",
+		"country": "Syria",
+		"lat": 33.502,
+		"lng": 36.2981
+	},
+	{
+		"id": 1178340306,
+		"city_ascii": "Brazzaville",
+		"country": "Congo (Brazzaville)",
+		"lat": -4.2667,
+		"lng": 15.2667
+	},
+	{
+		"id": 1887750814,
+		"city_ascii": "Sanaa",
+		"country": "Yemen",
+		"lat": 15.3483,
+		"lng": 44.2064
+	},
+	{
+		"id": 1158881289,
+		"city_ascii": "Taipei",
+		"country": "Taiwan",
+		"lat": 25.0375,
+		"lng": 121.5625
+	},
+	{
+		"id": 1120298240,
+		"city_ascii": "Yaounde",
+		"country": "Cameroon",
+		"lat": 3.8667,
+		"lng": 11.5167
+	},
+	{
+		"id": 1422847713,
+		"city_ascii": "Beirut",
+		"country": "Lebanon",
+		"lat": 33.8981,
+		"lng": 35.5058
+	},
+	{
+		"id": 1642414442,
+		"city_ascii": "Bucharest",
+		"country": "Romania",
+		"lat": 44.4325,
+		"lng": 26.1039
+	},
+	{
+		"id": 1012973369,
+		"city_ascii": "Algiers",
+		"country": "Algeria",
+		"lat": 36.7325,
+		"lng": 3.0872
+	},
+	{
+		"id": 1031946365,
+		"city_ascii": "Baku",
+		"country": "Azerbaijan",
+		"lat": 40.3667,
+		"lng": 49.8352
+	},
+	{
+		"id": 1040261752,
+		"city_ascii": "Vienna",
+		"country": "Austria",
+		"lat": 48.2083,
+		"lng": 16.3725
+	},
+	{
+		"id": 1116260534,
+		"city_ascii": "Phnom Penh",
+		"country": "Cambodia",
+		"lat": 11.5696,
+		"lng": 104.921
+	},
+	{
+		"id": 1706893395,
+		"city_ascii": "Mogadishu",
+		"country": "Somalia",
+		"lat": 2.0392,
+		"lng": 45.3419
+	},
+	{
+		"id": 1192752771,
+		"city_ascii": "Havana",
+		"country": "Cuba",
+		"lat": 23.1367,
+		"lng": -82.3589
+	},
+	{
+		"id": 1616024847,
+		"city_ascii": "Warsaw",
+		"country": "Poland",
+		"lat": 52.23,
+		"lng": 21.0111
+	},
+	{
+		"id": 1112348503,
+		"city_ascii": "Minsk",
+		"country": "Belarus",
+		"lat": 53.9006,
+		"lng": 27.5586
+	},
+	{
+		"id": 1630035577,
+		"city_ascii": "San Juan",
+		"country": "Puerto Rico",
+		"lat": 18.3985,
+		"lng": -66.061
+	},
+	{
+		"id": 1218441993,
+		"city_ascii": "Quito",
+		"country": "Ecuador",
+		"lat": -0.22,
+		"lng": -78.5125
+	},
+	{
+		"id": 1894157390,
+		"city_ascii": "Lusaka",
+		"country": "Zambia",
+		"lat": -15.4167,
+		"lng": 28.2833
+	},
+	{
+		"id": 1858107000,
+		"city_ascii": "Montevideo",
+		"country": "Uruguay",
+		"lat": -34.9056,
+		"lng": -56.1842
+	},
+	{
+		"id": 1348611435,
+		"city_ascii": "Budapest",
+		"country": "Hungary",
+		"lat": 47.4983,
+		"lng": 19.0408
+	},
+	{
+		"id": 1800406299,
+		"city_ascii": "Kampala",
+		"country": "Uganda",
+		"lat": 0.3136,
+		"lng": 32.5811
+	},
+	{
+		"id": 1324568159,
+		"city_ascii": "Conakry",
+		"country": "Guinea",
+		"lat": 9.5092,
+		"lng": -13.7122
+	},
+	{
+		"id": 1762930616,
+		"city_ascii": "Dushanbe",
+		"country": "Tajikistan",
+		"lat": 38.5367,
+		"lng": 68.78
+	},
+	{
+		"id": 1716196799,
+		"city_ascii": "Harare",
+		"country": "Zimbabwe",
+		"lat": -17.8292,
+		"lng": 31.0522
+	},
+	{
+		"id": 1188749877,
+		"city_ascii": "San Jose",
+		"country": "Costa Rica",
+		"lat": 9.9325,
+		"lng": -84.08
+	},
+	{
+		"id": 1222647454,
+		"city_ascii": "San Salvador",
+		"country": "El Salvador",
+		"lat": 13.6989,
+		"lng": -89.1914
+	},
+	{
+		"id": 1768409132,
+		"city_ascii": "Lome",
+		"country": "Togo",
+		"lat": 6.1308,
+		"lng": 1.2153
+	},
+	{
+		"id": 1562932886,
+		"city_ascii": "Niamey",
+		"country": "Niger",
+		"lat": 13.515,
+		"lng": 2.1175
+	},
+	{
+		"id": 1784176710,
+		"city_ascii": "Abu Dhabi",
+		"country": "United Arab Emirates",
+		"lat": 24.4667,
+		"lng": 54.3667
+	},
+	{
+		"id": 1528355309,
+		"city_ascii": "Amsterdam",
+		"country": "Netherlands",
+		"lat": 52.3728,
+		"lng": 4.8936
+	},
+	{
+		"id": 1686604760,
+		"city_ascii": "Dakar",
+		"country": "Senegal",
+		"lat": 14.6726,
+		"lng": -17.432
+	},
+	{
+		"id": 1512035506,
+		"city_ascii": "Muscat",
+		"country": "Oman",
+		"lat": 23.6139,
+		"lng": 58.5922
+	},
+	{
+		"id": 1100762037,
+		"city_ascii": "Sofia",
+		"country": "Bulgaria",
+		"lat": 42.6979,
+		"lng": 23.3217
+	},
+	{
+		"id": 1496024767,
+		"city_ascii": "Ulaanbaatar",
+		"country": "Mongolia",
+		"lat": 47.9214,
+		"lng": 106.9055
+	},
+	{
+		"id": 1203744823,
+		"city_ascii": "Prague",
+		"country": "Czechia",
+		"lat": 50.0875,
+		"lng": 14.4214
+	},
+	{
+		"id": 1208763942,
+		"city_ascii": "Copenhagen",
+		"country": "Denmark",
+		"lat": 55.6805,
+		"lng": 12.5615
+	},
+	{
+		"id": 1246177997,
+		"city_ascii": "Helsinki",
+		"country": "Finland",
+		"lat": 60.1708,
+		"lng": 24.9375
+	},
+	{
+		"id": 1450978461,
+		"city_ascii": "Antananarivo",
+		"country": "Madagascar",
+		"lat": -18.91,
+		"lng": 47.525
+	},
+	{
+		"id": 1056469830,
+		"city_ascii": "Brussels",
+		"country": "Belgium",
+		"lat": 50.8467,
+		"lng": 4.3525
+	},
+	{
+		"id": 1688374696,
+		"city_ascii": "Belgrade",
+		"country": "Serbia",
+		"lat": 44.8178,
+		"lng": 20.4569
+	},
+	{
+		"id": 1634459660,
+		"city_ascii": "Doha",
+		"country": "Qatar",
+		"lat": 25.2867,
+		"lng": 51.5333
+	},
+	{
+		"id": 1434201852,
+		"city_ascii": "Tripoli",
+		"country": "Libya",
+		"lat": 32.8872,
+		"lng": 13.1914
+	},
+	{
+		"id": 1104838105,
+		"city_ascii": "Nay Pyi Taw",
+		"country": "Burma",
+		"lat": 19.7475,
+		"lng": 96.115
+	},
+	{
+		"id": 1340344059,
+		"city_ascii": "Tegucigalpa",
+		"country": "Honduras",
+		"lat": 14.1057,
+		"lng": -87.204
+	},
+	{
+		"id": 1646923541,
+		"city_ascii": "Kigali",
+		"country": "Rwanda",
+		"lat": -1.9536,
+		"lng": 30.0606
+	},
+	{
+		"id": 1417191971,
+		"city_ascii": "Bishkek",
+		"country": "Kyrgyzstan",
+		"lat": 42.8667,
+		"lng": 74.5667
+	},
+	{
+		"id": 1108101689,
+		"city_ascii": "Bujumbura",
+		"country": "Burundi",
+		"lat": -3.3833,
+		"lng": 29.3667
+	},
+	{
+		"id": 1508074843,
+		"city_ascii": "Maputo",
+		"country": "Mozambique",
+		"lat": -25.9153,
+		"lng": 32.5764
+	},
+	{
+		"id": 1214636202,
+		"city_ascii": "Santo Domingo",
+		"country": "Dominican Republic",
+		"lat": 18.4764,
+		"lng": -69.8933
+	},
+	{
+		"id": 1268203191,
+		"city_ascii": "Tbilisi",
+		"country": "Georgia",
+		"lat": 41.7225,
+		"lng": 44.7925
+	},
+	{
+		"id": 1051074169,
+		"city_ascii": "Yerevan",
+		"country": "Armenia",
+		"lat": 40.1814,
+		"lng": 44.5144
+	},
+	{
+		"id": 1398516045,
+		"city_ascii": "Astana",
+		"country": "Kazakhstan",
+		"lat": 51.1472,
+		"lng": 71.4222
+	},
+	{
+		"id": 1478414984,
+		"city_ascii": "Nouakchott",
+		"country": "Mauritania",
+		"lat": 18.0858,
+		"lng": -15.9785
+	},
+	{
+		"id": 1124399363,
+		"city_ascii": "Ottawa",
+		"country": "Canada",
+		"lat": 45.4247,
+		"lng": -75.695
+	},
+	{
+		"id": 1558296252,
+		"city_ascii": "Managua",
+		"country": "Nicaragua",
+		"lat": 12.1364,
+		"lng": -86.2514
+	},
+	{
+		"id": 1795049992,
+		"city_ascii": "Ashgabat",
+		"country": "Turkmenistan",
+		"lat": 37.9375,
+		"lng": 58.38
+	},
+	{
+		"id": 1430477826,
+		"city_ascii": "Monrovia",
+		"country": "Liberia",
+		"lat": 6.3133,
+		"lng": -10.8014
+	},
+	{
+		"id": 1586306717,
+		"city_ascii": "Islamabad",
+		"country": "Pakistan",
+		"lat": 33.6931,
+		"lng": 73.0639
+	},
+	{
+		"id": 1752425602,
+		"city_ascii": "Stockholm",
+		"country": "Sweden",
+		"lat": 59.3275,
+		"lng": 18.0547
+	},
+	{
+		"id": 1454688499,
+		"city_ascii": "Lilongwe",
+		"country": "Malawi",
+		"lat": -13.9669,
+		"lng": 33.7873
+	},
+	{
+		"id": 1332401940,
+		"city_ascii": "Port-au-Prince",
+		"country": "Haiti",
+		"lat": 18.5425,
+		"lng": -72.3386
+	},
+	{
+		"id": 1232791236,
+		"city_ascii": "Asmara",
+		"country": "Eritrea",
+		"lat": 15.3358,
+		"lng": 38.9411
+	},
+	{
+		"id": 1694085071,
+		"city_ascii": "Freetown",
+		"country": "Sierra Leone",
+		"lat": 8.4833,
+		"lng": -13.2331
+	},
+	{
+		"id": 1418732714,
+		"city_ascii": "Vientiane",
+		"country": "Laos",
+		"lat": 17.98,
+		"lng": 102.63
+	},
+	{
+		"id": 1376261644,
+		"city_ascii": "Jerusalem",
+		"country": "Israel",
+		"lat": 31.7789,
+		"lng": 35.2256
+	},
+	{
+		"id": 1140080881,
+		"city_ascii": "Bangui",
+		"country": "Central African Republic",
+		"lat": 4.3733,
+		"lng": 18.5628
+	},
+	{
+		"id": 1591672475,
+		"city_ascii": "Panama City",
+		"country": "Panama",
+		"lat": 8.9711,
+		"lng": -79.5347
+	},
+	{
+		"id": 1524589448,
+		"city_ascii": "Kathmandu",
+		"country": "Nepal",
+		"lat": 27.71,
+		"lng": 85.32
+	},
+	{
+		"id": 1148708596,
+		"city_ascii": "N'Djamena",
+		"country": "Chad",
+		"lat": 12.1053,
+		"lng": 15.0447
+	},
+	{
+		"id": 1266952885,
+		"city_ascii": "Libreville",
+		"country": "Gabon",
+		"lat": 0.3901,
+		"lng": 9.4544
+	},
+	{
+		"id": 1191233290,
+		"city_ascii": "Zagreb",
+		"country": "Croatia",
+		"lat": 45.8131,
+		"lng": 15.9772
+	},
+	{
+		"id": 1834288497,
+		"city_ascii": "Dodoma",
+		"country": "Tanzania",
+		"lat": -6.1731,
+		"lng": 35.7419
+	},
+	{
+		"id": 1144251314,
+		"city_ascii": "Colombo",
+		"country": "Sri Lanka",
+		"lat": 6.9167,
+		"lng": 79.8333
+	},
+	{
+		"id": 1048989486,
+		"city_ascii": "Manama",
+		"country": "Bahrain",
+		"lat": 26.2233,
+		"lng": 50.5875
+	},
+	{
+		"id": 1578324706,
+		"city_ascii": "Oslo",
+		"country": "Norway",
+		"lat": 59.9133,
+		"lng": 10.7389
+	},
+	{
+		"id": 1204955174,
+		"city_ascii": "Cotonou",
+		"country": "Benin",
+		"lat": 6.3667,
+		"lng": 2.4333
+	},
+	{
+		"id": 1498011437,
+		"city_ascii": "Chisinau",
+		"country": "Moldova",
+		"lat": 47.0228,
+		"lng": 28.8353
+	},
+	{
+		"id": 1233260021,
+		"city_ascii": "Tallinn",
+		"country": "Estonia",
+		"lat": 59.4372,
+		"lng": 24.7453
+	},
+	{
+		"id": 1428586192,
+		"city_ascii": "Riga",
+		"country": "Latvia",
+		"lat": 56.9475,
+		"lng": 24.1069
+	},
+	{
+		"id": 1262028958,
+		"city_ascii": "Djibouti",
+		"country": "Djibouti",
+		"lat": 11.5944,
+		"lng": 43.1481
+	},
+	{
+		"id": 1788742103,
+		"city_ascii": "Tunis",
+		"country": "Tunisia",
+		"lat": 36.8064,
+		"lng": 10.1817
+	},
+	{
+		"id": 1372595407,
+		"city_ascii": "Dublin",
+		"country": "Ireland",
+		"lat": 53.3497,
+		"lng": -6.2603
+	},
+	{
+		"id": 1916116052,
+		"city_ascii": "Gaza",
+		"country": "Gaza Strip",
+		"lat": 31.5069,
+		"lng": 34.456
+	},
+	{
+		"id": 1440887149,
+		"city_ascii": "Vilnius",
+		"country": "Lithuania",
+		"lat": 54.6872,
+		"lng": 25.28
+	},
+	{
+		"id": 1388709177,
+		"city_ascii": "Kingston",
+		"country": "Jamaica",
+		"lat": 17.9714,
+		"lng": -76.7931
+	},
+	{
+		"id": 1504023252,
+		"city_ascii": "Rabat",
+		"country": "Morocco",
+		"lat": 34.0209,
+		"lng": -6.8416
+	},
+	{
+		"id": 1620619017,
+		"city_ascii": "Lisbon",
+		"country": "Portugal",
+		"lat": 38.7122,
+		"lng": -9.134
+	},
+	{
+		"id": 1528799905,
+		"city_ascii": "The Hague",
+		"country": "Netherlands",
+		"lat": 52.08,
+		"lng": 4.31
+	},
+	{
+		"id": 1624168850,
+		"city_ascii": "Bissau",
+		"country": "Guinea-Bissau",
+		"lat": 11.85,
+		"lng": -15.5667
+	},
+	{
+		"id": 1288299415,
+		"city_ascii": "Accra",
+		"country": "Ghana",
+		"lat": 5.5461,
+		"lng": -0.2067
+	},
+	{
+		"id": 1470574399,
+		"city_ascii": "Valletta",
+		"country": "Malta",
+		"lat": 35.8983,
+		"lng": 14.5125
+	},
+	{
+		"id": 1600057911,
+		"city_ascii": "Asuncion",
+		"country": "Paraguay",
+		"lat": -25.2945,
+		"lng": -57.6435
+	},
+	{
+		"id": 1703195001,
+		"city_ascii": "Bratislava",
+		"country": "Slovakia",
+		"lat": 48.1447,
+		"lng": 17.1128
+	},
+	{
+		"id": 1728444337,
+		"city_ascii": "Juba",
+		"country": "South Sudan",
+		"lat": 4.83,
+		"lng": 31.58
+	},
+	{
+		"id": 1516802003,
+		"city_ascii": "Windhoek",
+		"country": "Namibia",
+		"lat": -22.57,
+		"lng": 17.0836
+	},
+	{
+		"id": 1807600615,
+		"city_ascii": "Skopje",
+		"country": "North Macedonia",
+		"lat": 41.9961,
+		"lng": 21.4317
+	},
+	{
+		"id": 1008162156,
+		"city_ascii": "Tirana",
+		"country": "Albania",
+		"lat": 41.3272,
+		"lng": 19.8186
+	},
+	{
+		"id": 1270723713,
+		"city_ascii": "Banjul",
+		"country": "Gambia, The",
+		"lat": 13.4581,
+		"lng": -16.5786
+	},
+	{
+		"id": 1036142029,
+		"city_ascii": "Canberra",
+		"country": "Australia",
+		"lat": -35.2931,
+		"lng": 149.1269
+	},
+	{
+		"id": 1426977668,
+		"city_ascii": "Maseru",
+		"country": "Lesotho",
+		"lat": -29.31,
+		"lng": 27.48
+	},
+	{
+		"id": 1384683557,
+		"city_ascii": "Yamoussoukro",
+		"country": "Côte d’Ivoire",
+		"lat": 6.8161,
+		"lng": -5.2742
+	},
+	{
+		"id": 1196944155,
+		"city_ascii": "Nicosia",
+		"country": "Cyprus",
+		"lat": 35.1725,
+		"lng": 33.365
+	},
+	{
+		"id": 1068000064,
+		"city_ascii": "La Paz",
+		"country": "Bolivia",
+		"lat": -16.4958,
+		"lng": -68.1333
+	},
+	{
+		"id": 1638024662,
+		"city_ascii": "Saint-Denis",
+		"country": "Reunion",
+		"lat": -20.8789,
+		"lng": 55.4481
+	},
+	{
+		"id": 1598685395,
+		"city_ascii": "Port Moresby",
+		"country": "Papua New Guinea",
+		"lat": -9.4789,
+		"lng": 147.1494
+	},
+	{
+		"id": 1068823873,
+		"city_ascii": "Sucre",
+		"country": "Bolivia",
+		"lat": -19.0475,
+		"lng": -65.26
+	},
+	{
+		"id": 1226861333,
+		"city_ascii": "Malabo",
+		"country": "Equatorial Guinea",
+		"lat": 3.7456,
+		"lng": 8.7744
+	},
+	{
+		"id": 1705917455,
+		"city_ascii": "Ljubljana",
+		"country": "Slovenia",
+		"lat": 46.0514,
+		"lng": 14.5061
+	},
+	{
+		"id": 1044318561,
+		"city_ascii": "Nassau",
+		"country": "Bahamas, The",
+		"lat": 25.0442,
+		"lng": -77.3503
+	},
+	{
+		"id": 1710495933,
+		"city_ascii": "Bloemfontein",
+		"country": "South Africa",
+		"lat": -29.1167,
+		"lng": 26.2167
+	},
+	{
+		"id": 1474969110,
+		"city_ascii": "Fort-de-France",
+		"country": "Martinique",
+		"lat": 14.6,
+		"lng": -61.0667
+	},
+	{
+		"id": 1356215164,
+		"city_ascii": "New Delhi",
+		"country": "India",
+		"lat": 28.6139,
+		"lng": 77.2089
+	},
+	{
+		"id": 1070966777,
+		"city_ascii": "Sarajevo",
+		"country": "Bosnia and Herzegovina",
+		"lat": 43.8564,
+		"lng": 18.4131
+	},
+	{
+		"id": 1740518660,
+		"city_ascii": "Paramaribo",
+		"country": "Suriname",
+		"lat": 5.8522,
+		"lng": -55.2039
+	},
+	{
+		"id": 1072756768,
+		"city_ascii": "Gaborone",
+		"country": "Botswana",
+		"lat": -24.6569,
+		"lng": 25.9086
+	},
+	{
+		"id": 1328160906,
+		"city_ascii": "Georgetown",
+		"country": "Guyana",
+		"lat": 6.8011,
+		"lng": -58.155
+	},
+	{
+		"id": 1626308942,
+		"city_ascii": "Dili",
+		"country": "Timor-Leste",
+		"lat": -8.5594,
+		"lng": 125.5795
+	},
+	{
+		"id": 1554772152,
+		"city_ascii": "Wellington",
+		"country": "New Zealand",
+		"lat": -41.2889,
+		"lng": 174.7772
+	},
+	{
+		"id": 1901760068,
+		"city_ascii": "Pristina",
+		"country": "Kosovo",
+		"lat": 42.6666,
+		"lng": 21.1724
+	},
+	{
+		"id": 1540958092,
+		"city_ascii": "Noumea",
+		"country": "New Caledonia",
+		"lat": -22.2625,
+		"lng": 166.4443
+	},
+	{
+		"id": 1499454516,
+		"city_ascii": "Podgorica",
+		"country": "Montenegro",
+		"lat": 42.4414,
+		"lng": 19.2628
+	},
+	{
+		"id": 1531000000,
+		"city_ascii": "Willemstad",
+		"country": "Curaçao",
+		"lat": 12.108,
+		"lng": -68.935
+	},
+	{
+		"id": 1480131261,
+		"city_ascii": "Port Louis",
+		"country": "Mauritius",
+		"lat": -20.1644,
+		"lng": 57.5042
+	},
+	{
+		"id": 1076144436,
+		"city_ascii": "Brasilia",
+		"country": "Brazil",
+		"lat": -15.7939,
+		"lng": -47.8828
+	},
+	{
+		"id": 1352327190,
+		"city_ascii": "Reykjavik",
+		"country": "Iceland",
+		"lat": 64.1458,
+		"lng": -21.9425
+	},
+	{
+		"id": 1108778000,
+		"city_ascii": "Gitega",
+		"country": "Burundi",
+		"lat": -3.4283,
+		"lng": 29.925
+	},
+	{
+		"id": 1756374318,
+		"city_ascii": "Bern",
+		"country": "Switzerland",
+		"lat": 46.948,
+		"lng": 7.4474
+	},
+	{
+		"id": 1204172060,
+		"city_ascii": "Porto-Novo",
+		"country": "Benin",
+		"lat": 6.4972,
+		"lng": 2.605
+	},
+	{
+		"id": 1462441685,
+		"city_ascii": "Male",
+		"country": "Maldives",
+		"lat": 4.1753,
+		"lng": 73.5089
+	},
+	{
+		"id": 1442262731,
+		"city_ascii": "Luxembourg",
+		"country": "Luxembourg",
+		"lat": 49.6117,
+		"lng": 6.1319
+	},
+	{
+		"id": 1258907380,
+		"city_ascii": "Papeete",
+		"country": "French Polynesia",
+		"lat": -17.5334,
+		"lng": -149.5667
+	},
+	{
+		"id": 1144239330,
+		"city_ascii": "Sri Jayewardenepura Kotte",
+		"country": "Sri Lanka",
+		"lat": 6.9,
+		"lng": 79.9164
+	},
+	{
+		"id": 1064010361,
+		"city_ascii": "Thimphu",
+		"country": "Bhutan",
+		"lat": 27.4722,
+		"lng": 89.6361
+	},
+	{
+		"id": 1052274244,
+		"city_ascii": "Bridgetown",
+		"country": "Barbados",
+		"lat": 13.0969,
+		"lng": -59.6131
+	},
+	{
+		"id": 1242615095,
+		"city_ascii": "Suva",
+		"country": "Fiji",
+		"lat": -18.1333,
+		"lng": 178.4333
+	},
+	{
+		"id": 1090737486,
+		"city_ascii": "Honiara",
+		"country": "Solomon Islands",
+		"lat": -9.4333,
+		"lng": 159.95
+	},
+	{
+		"id": 1780670676,
+		"city_ascii": "Port of Spain",
+		"country": "Trinidad and Tobago",
+		"lat": 10.6667,
+		"lng": -61.5167
+	},
+	{
+		"id": 1678301324,
+		"city_ascii": "Sao Tome",
+		"country": "Sao Tome and Principe",
+		"lat": 0.3361,
+		"lng": 6.7306
+	},
+	{
+		"id": 1175099654,
+		"city_ascii": "Mamoudzou",
+		"country": "Mayotte",
+		"lat": -12.7806,
+		"lng": 45.2278
+	},
+	{
+		"id": 1662922505,
+		"city_ascii": "Castries",
+		"country": "Saint Lucia",
+		"lat": 14.0108,
+		"lng": -60.9894
+	},
+	{
+		"id": 1458000206,
+		"city_ascii": "Putrajaya",
+		"country": "Malaysia",
+		"lat": 2.914,
+		"lng": 101.7019
+	},
+	{
+		"id": 1132398770,
+		"city_ascii": "Praia",
+		"country": "Cabo Verde",
+		"lat": 14.9177,
+		"lng": -23.5092
+	},
+	{
+		"id": 1254304969,
+		"city_ascii": "Cayenne",
+		"country": "French Guiana",
+		"lat": 4.933,
+		"lng": -52.33
+	},
+	{
+		"id": 1748811945,
+		"city_ascii": "Mbabane",
+		"country": "Eswatini",
+		"lat": -26.3167,
+		"lng": 31.1333
+	},
+	{
+		"id": 1096465895,
+		"city_ascii": "Bandar Seri Begawan",
+		"country": "Brunei",
+		"lat": 4.8903,
+		"lng": 114.9422
+	},
+	{
+		"id": 1548805075,
+		"city_ascii": "Port-Vila",
+		"country": "Vanuatu",
+		"lat": -17.7333,
+		"lng": 168.3167
+	},
+	{
+		"id": 1492854256,
+		"city_ascii": "Monaco",
+		"country": "Monaco",
+		"lat": 43.7333,
+		"lng": 7.4167
+	},
+	{
+		"id": 1882489296,
+		"city_ascii": "Apia",
+		"country": "Samoa",
+		"lat": -13.8333,
+		"lng": -171.75
+	},
+	{
+		"id": 1292385245,
+		"city_ascii": "Gibraltar",
+		"country": "Gibraltar",
+		"lat": 36.14,
+		"lng": -5.35
+	},
+	{
+		"id": 1308891766,
+		"city_ascii": "Saint George's",
+		"country": "Grenada",
+		"lat": 12.05,
+		"lng": -61.75
+	},
+	{
+		"id": 1832490253,
+		"city_ascii": "Saint Helier",
+		"country": "Jersey",
+		"lat": 49.1858,
+		"lng": -2.11
+	},
+	{
+		"id": 1584000000,
+		"city_ascii": "Majuro",
+		"country": "Marshall Islands",
+		"lat": 7.0833,
+		"lng": 171.3833
+	},
+	{
+		"id": 1296152641,
+		"city_ascii": "Tarawa",
+		"country": "Kiribati",
+		"lat": 1.3382,
+		"lng": 173.0176
+	},
+	{
+		"id": 1533513057,
+		"city_ascii": "Oranjestad",
+		"country": "Aruba",
+		"lat": 12.5186,
+		"lng": -70.0358
+	},
+	{
+		"id": 1833688345,
+		"city_ascii": "Douglas",
+		"country": "Isle of Man",
+		"lat": 54.15,
+		"lng": -4.4775
+	},
+	{
+		"id": 1136159124,
+		"city_ascii": "George Town",
+		"country": "Cayman Islands",
+		"lat": 19.295,
+		"lng": -81.3811
+	},
+	{
+		"id": 1776737461,
+		"city_ascii": "Nuku`alofa",
+		"country": "Tonga",
+		"lat": -21.1333,
+		"lng": -175.2
+	},
+	{
+		"id": 1690193579,
+		"city_ascii": "Victoria",
+		"country": "Seychelles",
+		"lat": -4.6231,
+		"lng": 55.4525
+	},
+	{
+		"id": 1020828846,
+		"city_ascii": "Andorra la Vella",
+		"country": "Andorra",
+		"lat": 42.5,
+		"lng": 1.5
+	},
+	{
+		"id": 1028912067,
+		"city_ascii": "Saint John's",
+		"country": "Antigua and Barbuda",
+		"lat": 17.1167,
+		"lng": -61.85
+	},
+	{
+		"id": 1831991870,
+		"city_ascii": "Saint Peter Port",
+		"country": "Guernsey",
+		"lat": 49.4555,
+		"lng": -2.5368
+	},
+	{
+		"id": 1304028354,
+		"city_ascii": "Nuuk",
+		"country": "Greenland",
+		"lat": 64.1767,
+		"lng": -51.7361
+	},
+	{
+		"id": 1174793581,
+		"city_ascii": "Moroni",
+		"country": "Comoros",
+		"lat": -11.699,
+		"lng": 43.256
+	},
+	{
+		"id": 1212060440,
+		"city_ascii": "Roseau",
+		"country": "Dominica",
+		"lat": 15.3014,
+		"lng": -61.3883
+	},
+	{
+		"id": 1234904517,
+		"city_ascii": "Torshavn",
+		"country": "Faroe Islands",
+		"lat": 62,
+		"lng": -6.7833
+	},
+	{
+		"id": 1659198919,
+		"city_ascii": "Basseterre",
+		"country": "Saint Kitts and Nevis",
+		"lat": 17.3,
+		"lng": -62.7333
+	},
+	{
+		"id": 1670376659,
+		"city_ascii": "Kingstown",
+		"country": "Saint Vincent and the Grenadines",
+		"lat": 13.1578,
+		"lng": -61.225
+	},
+	{
+		"id": 1092732412,
+		"city_ascii": "Road Town",
+		"country": "Virgin Islands, British",
+		"lat": 18.4167,
+		"lng": -64.6167
+	},
+	{
+		"id": 1016976740,
+		"city_ascii": "Pago Pago",
+		"country": "American Samoa",
+		"lat": -14.274,
+		"lng": -170.7046
+	},
+	{
+		"id": 1798251391,
+		"city_ascii": "Funafuti",
+		"country": "Tuvalu",
+		"lat": -8.5167,
+		"lng": 179.2
+	},
+	{
+		"id": 1583008885,
+		"city_ascii": "Palikir",
+		"country": "Micronesia, Federated States of",
+		"lat": 6.9172,
+		"lng": 158.1589
+	},
+	{
+		"id": 1748963140,
+		"city_ascii": "Lobamba",
+		"country": "Eswatini",
+		"lat": -26.4667,
+		"lng": 31.2
+	},
+	{
+		"id": 1663133172,
+		"city_ascii": "Marigot",
+		"country": "Saint Martin",
+		"lat": 18.0706,
+		"lng": -63.0847
+	},
+	{
+		"id": 1438317747,
+		"city_ascii": "Vaduz",
+		"country": "Liechtenstein",
+		"lat": 47.1406,
+		"lng": 9.5222
+	},
+	{
+		"id": 1666340272,
+		"city_ascii": "Saint-Pierre",
+		"country": "Saint Pierre and Miquelon",
+		"lat": 46.7817,
+		"lng": -56.1736
+	},
+	{
+		"id": 1674741947,
+		"city_ascii": "San Marino",
+		"country": "San Marino",
+		"lat": 43.9346,
+		"lng": 12.4473
+	},
+	{
+		"id": 1184217570,
+		"city_ascii": "Avarua",
+		"country": "Cook Islands",
+		"lat": -21.207,
+		"lng": -159.771
+	},
+	{
+		"id": 1084586375,
+		"city_ascii": "Belmopan",
+		"country": "Belize",
+		"lat": 17.2522,
+		"lng": -88.7639
+	},
+	{
+		"id": 1796965313,
+		"city_ascii": "Grand Turk",
+		"country": "Turks and Caicos Islands",
+		"lat": 21.459,
+		"lng": -71.139
+	},
+	{
+		"id": 1660698387,
+		"city_ascii": "The Valley",
+		"country": "Anguilla",
+		"lat": 18.2208,
+		"lng": -63.0517
+	},
+	{
+		"id": 1504999990,
+		"city_ascii": "Tifariti",
+		"country": "Morocco",
+		"lat": 26.158,
+		"lng": -10.567
+	},
+	{
+		"id": 1580556972,
+		"city_ascii": "Capitol Hill",
+		"country": "Northern Mariana Islands",
+		"lat": 15.2137,
+		"lng": 145.7546
+	},
+	{
+		"id": 1652681565,
+		"city_ascii": "Gustavia",
+		"country": "Saint Barthelemy",
+		"lat": 17.8979,
+		"lng": -62.8506
+	},
+	{
+		"id": 1238780509,
+		"city_ascii": "Stanley",
+		"country": "Falkland Islands (Islas Malvinas)",
+		"lat": -51.7,
+		"lng": -57.85
+	},
+	{
+		"id": 1534859858,
+		"city_ascii": "Philipsburg",
+		"country": "Sint Maarten",
+		"lat": 18.0237,
+		"lng": -63.0458
+	},
+	{
+		"id": 1930654114,
+		"city_ascii": "Longyearbyen",
+		"country": "Svalbard",
+		"lat": 78.2167,
+		"lng": 15.6333
+	},
+	{
+		"id": 1162889600,
+		"city_ascii": "Flying Fish Cove",
+		"country": "Christmas Island",
+		"lat": -10.4261,
+		"lng": 105.6728
+	},
+	{
+		"id": 1316937540,
+		"city_ascii": "Hagta",
+		"country": "Guam",
+		"lat": 13.4745,
+		"lng": 144.7504
+	},
+	{
+		"id": 1876784844,
+		"city_ascii": "Mata-Utu",
+		"country": "Wallis and Futuna",
+		"lat": -13.2825,
+		"lng": -176.1736
+	},
+	{
+		"id": 1060000000,
+		"city_ascii": "Hamilton",
+		"country": "Bermuda",
+		"lat": 32.2942,
+		"lng": -64.7819
+	},
+	{
+		"id": 1336000000,
+		"city_ascii": "Vatican City",
+		"country": "Vatican City",
+		"lat": 41.904,
+		"lng": 12.453
+	},
+	{
+		"id": 1520790128,
+		"city_ascii": "Yaren",
+		"country": "Nauru",
+		"lat": -0.5456,
+		"lng": 166.925
+	},
+	{
+		"id": 1654761576,
+		"city_ascii": "Jamestown",
+		"country": "Saint Helena, Ascension, and Tristan da Cunha",
+		"lat": -15.9251,
+		"lng": -5.7179
+	},
+	{
+		"id": 1570882835,
+		"city_ascii": "Alofi",
+		"country": "Niue",
+		"lat": -19.056,
+		"lng": -169.921
+	},
+	{
+		"id": 1500971198,
+		"city_ascii": "Brades",
+		"country": "Montserrat",
+		"lat": 16.7928,
+		"lng": -62.2106
+	},
+	{
+		"id": 1574121434,
+		"city_ascii": "Kingston",
+		"country": "Norfolk Island",
+		"lat": -29.0606,
+		"lng": 167.9619
+	},
+	{
+		"id": 1312938008,
+		"city_ascii": "Basse-Terre",
+		"country": "Guadeloupe",
+		"lat": 16.0104,
+		"lng": -61.7055
+	},
+	{
+		"id": 1585525081,
+		"city_ascii": "Ngerulmud",
+		"country": "Palau",
+		"lat": 7.5006,
+		"lng": 134.6242
+	},
+	{
+		"id": 1612000000,
+		"city_ascii": "Adamstown",
+		"country": "Pitcairn Islands",
+		"lat": -25.0667,
+		"lng": -130.0833
+	},
+	{
+		"id": 1239048838,
+		"city_ascii": "King Edward Point",
+		"country": "South Georgia And South Sandwich Islands",
+		"lat": -54.2833,
+		"lng": -36.5
+	},
+	{
+		"id": 1500711935,
+		"city_ascii": "Plymouth",
+		"country": "Montserrat",
+		"lat": 16.7064,
+		"lng": -62.2158
+	},
+	{
+		"id": 1850037473,
+		"city_ascii": "Charlotte Amalie",
+		"country": "U.S. Virgin Islands",
+		"lat": 18.342,
+		"lng": -64.9331
+	}
+]

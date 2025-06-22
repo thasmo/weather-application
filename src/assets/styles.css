@@ -1,0 +1,29 @@
+:root {
+	--bg-light: #f0f9ff;
+	--bg-dark: #111827;
+	--text-light: #1f2937;
+	--text-dark: #f3f4f6;
+}
+
+html {
+	background-color: #eff6ff; /* blue-50 */
+	color: #1f2937; /* gray-800 */
+	transition:
+		background-color 0.3s ease,
+		color 0.3s ease;
+}
+
+html.dark {
+	background-color: #111827; /* gray-900 */
+	color: #f3f4f6; /* gray-100 */
+}
+
+body {
+	min-height: 100vh;
+	line-height: 1.6;
+	font-size: 15px;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: transparent;
+}
