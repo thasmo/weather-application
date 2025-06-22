@@ -75,7 +75,6 @@ const formatWindSpeed = (speed: number | undefined): string => {
 			unitSymbol = 'm/s';
 			break;
 		}
-		case 'kmh':
 		default: {
 			convertedSpeed = speed;
 			unitSymbol = 'km/h';
@@ -101,7 +100,6 @@ const formatPrecipitation = (precipitation: number | undefined): string => {
 			unitSymbol = 'inches';
 			break;
 		}
-		case 'mm':
 		default: {
 			convertedPrecipitation = precipitation;
 			unitSymbol = 'mm';
@@ -127,7 +125,6 @@ const formatAirPressure = (pressure: number | undefined): string => {
 			unitSymbol = 'inHg';
 			break;
 		}
-		case 'hpa':
 		default: {
 			convertedPressure = pressure;
 			unitSymbol = 'hPa';

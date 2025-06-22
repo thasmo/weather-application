@@ -3,10 +3,10 @@ import { useMediaQuery } from '@vueuse/core';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import Drawer from './drawer.vue';
 import LanguageSwitcher from './language-switcher.vue';
-import Popover from './popover.vue';
 import SelectDropdown from './select-dropdown.vue';
+import SettingsDrawer from './settings-drawer.vue';
+import SettingsPopover from './settings-popover.vue';
 import ThemeSwitcher from './theme-switcher.vue';
 
 interface SettingsMenuProperties {
@@ -94,7 +94,7 @@ const closeSettings = (): void => {
 <template>
 	<div>
 		<!-- Mobile: Drawer from bottom -->
-		<Drawer
+		<SettingsDrawer
 			v-if="isMobile"
 			:is-open="isOpen"
 			position="bottom"
@@ -208,7 +208,7 @@ const closeSettings = (): void => {
 					</div>
 				</div>
 			</div>
-		</Drawer>
+		</SettingsDrawer>
 
 		<!-- Mobile: Settings button -->
 		<button
@@ -221,7 +221,7 @@ const closeSettings = (): void => {
 		</button>
 
 		<!-- Desktop: Popover -->
-		<Popover
+		<SettingsPopover
 			v-if="!isMobile"
 			:is-open="isOpen"
 			placement="bottom-start"
@@ -330,6 +330,6 @@ const closeSettings = (): void => {
 					</div>
 				</div>
 			</div>
-		</Popover>
+		</SettingsPopover>
 	</div>
 </template>

@@ -58,7 +58,7 @@ const emit = defineEmits<{
 }>();
 
 const isMobile = ref(false);
-const drawerRef = ref<HTMLDivElement | null>(null);
+const drawerReference = ref<HTMLDivElement>();
 
 const updateIsMobile = (): void => {
 	isMobile.value = window.innerWidth < 768;
@@ -75,8 +75,8 @@ const handleOutsideClick = (event: MouseEvent): void => {
 		properties.closeOnOutsideClick &&
 		!properties.disableClose &&
 		properties.isOpen &&
-		drawerRef.value &&
-		!drawerRef.value.contains(event.target as Node)
+		drawerReference.value &&
+		!drawerReference.value.contains(event.target as Node)
 	) {
 		emit('close');
 	}
@@ -136,7 +136,7 @@ onBeforeUnmount(() => {
 
 		<!-- Drawer panel -->
 		<div
-			ref="drawerRef"
+			ref="drawerReference"
 			class="bg-white shadow-lg transition-transform duration-300 ease-in-out fixed z-50 overflow-auto dark:bg-gray-800"
 			:class="[drawerClasses.position, drawerClasses.size, drawerClasses.transform, isOpen ? 'visible' : 'invisible']">
 			<div class="p-4">
