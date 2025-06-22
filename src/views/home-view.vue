@@ -23,12 +23,30 @@ const advancedForecastView = ref(false); // Set simple view as default
 const { currentWeather, error, fetchWeatherData, loading, loadingLocation, location, useCurrentLocation } =
 	useWeather();
 
+// Determine if it's currently daytime based on current hour
+const isDaytime = computed((): boolean => {
+	if (!currentWeather.value?.current?.is_day) {
+		// If is_day is available from API, use it
+		return currentWeather.value?.current?.is_day === 1;
+	}
+
+	// Fallback: assume daytime between 6 AM and 6 PM
+	const currentHour = new Date().getHours();
+	return currentHour >= 6 && currentHour < 18;
+});
+
+// Check if a specific hour is daytime (for hourly forecast)
+const isHourDaytime = (hourDate: Date): boolean => {
+	const hour = hourDate.getHours();
+	return hour >= 6 && hour < 18;
+};
+
 // Weather icon mapping
-const weatherCodeToIcon = (code: number): string => {
+const weatherCodeToIcon = (code: number, isDay: boolean): string => {
 	// WMO Weather interpretation codes (WW)
 	// https://open-meteo.com/en/docs
-	if (code === 0) return 'i-custom-clear-day'; // Clear sky
-	if (code === 1) return 'i-custom-partly-cloudy-day'; // Mainly clear
+	if (code === 0) return isDay ? 'i-custom-clear-day' : 'i-custom-clear-night'; // Clear sky
+	if (code === 1) return isDay ? 'i-custom-partly-cloudy-day' : 'i-custom-partly-cloudy-night'; // Mainly clear
 	if (code >= 2 && code <= 3) return 'i-custom-cloudy'; // Partly cloudy, overcast
 	if (code >= 45 && code <= 48) return 'i-custom-fog'; // Fog
 	if (code >= 51 && code <= 55) return 'i-custom-drizzle'; // Drizzle
@@ -177,31 +195,33 @@ const selectedDayDate = computed((): string => {
 
 // Get hourly forecast for selected day
 const selectedDayHourlyForecast = computed(() => {
-	if (!currentWeather.value) return [];
+	if (!currentWeather.value?.hourly) return [];
 
-	const selectedDate = currentWeather.value.daily.time[selectedDayIndex.value];
+	const selectedDate = new Date(currentWeather.value.daily.time[selectedDayIndex.value]);
 	const startOfDay = new Date(selectedDate);
 	startOfDay.setHours(0, 0, 0, 0);
-
 	const endOfDay = new Date(selectedDate);
 	endOfDay.setHours(23, 59, 59, 999);
 
-	// Filter hourly forecast for the selected day
-	const hourlyData = currentWeather.value.hourly;
-	const filteredHourlyData = hourlyData.time
-		.map((time, index) => ({
-			airPressure: hourlyData.pressure_msl?.[index],
-			humidity: hourlyData.relative_humidity_2m[index],
-			precipitation: hourlyData.precipitation[index],
-			precipitationProbability: hourlyData.precipitation_probability[index],
-			temperature: hourlyData.temperature_2m[index],
-			time,
-			weatherCode: hourlyData.weather_code[index],
-			windSpeed: hourlyData.wind_speed_10m[index],
-		}))
-		.filter((item) => item.time >= startOfDay && item.time <= endOfDay);
-
-	return filteredHourlyData;
+	return currentWeather.value.hourly.time
+		.map((time, index) => {
+			const hourDate = new Date(time);
+			if (hourDate >= startOfDay && hourDate <= endOfDay) {
+				return {
+					airPressure: currentWeather.value.hourly.pressure_msl?.[index],
+					humidity: currentWeather.value.hourly.relative_humidity_2m[index],
+					isDay: currentWeather.value.hourly.is_day?.[index] === 1 || isHourDaytime(hourDate),
+					precipitation: currentWeather.value.hourly.precipitation[index],
+					precipitationProbability: currentWeather.value.hourly.precipitation_probability[index],
+					temperature: currentWeather.value.hourly.temperature_2m[index],
+					time: hourDate,
+					weatherCode: currentWeather.value.hourly.weather_code[index],
+					windSpeed: currentWeather.value.hourly.wind_speed_10m[index],
+				};
+			}
+			return null;
+		})
+		.filter(Boolean);
 });
 
 // Select a day
@@ -309,9 +329,10 @@ onMounted(async () => {
 								{{ formatTemperature(currentWeather.current.apparent_temperature) }}
 							</span>
 						</div>
-						<div
-							:class="weatherCodeToIcon(currentWeather.current.weather_code)"
-							class="text-6xl text-primary-500 sm:text-7xl dark:text-primary-400"></div>
+						<ForecastTile
+							:weather-code="currentWeather.current.weather_code"
+							:is-day="isDaytime"
+							class="!p-0 !rounded-none !bg-transparent" />
 					</div>
 
 					<p class="text-xl text-gray-700 font-medium mt-4 dark:text-gray-300">
@@ -388,6 +409,7 @@ onMounted(async () => {
 											:min-temperature="formatTemperature(currentWeather.daily.temperature_2m_min[index])"
 											:weather-code="currentWeather.daily.weather_code[index]"
 											:is-active="selectedDayIndex === index"
+											:is-day="true"
 											:details="
 												advancedForecastView
 													? [
