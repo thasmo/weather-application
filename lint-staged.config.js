@@ -1,4 +1,4 @@
 export default {
-	'**/*.{js,jsx,ts,tsx}': ['eslint'],
+	'**/*.{js,ts,vue}': ['eslint'],
 	'**/*.{md,json,yml,yaml,css}': ['prettier --check', 'cspell --no-progress --no-must-find-files'],
 };
