@@ -4,11 +4,16 @@ export default {
 		language: {
 			de: 'Deutsch',
 			en: 'Englisch',
+			title: 'Sprache',
 		},
 		loading: 'Wetterdaten werden geladen...',
 		location: {
 			button: 'Meinen Standort verwenden',
 			loading: 'Standort wird ermittelt...',
+		},
+		settings: {
+			button: 'Einstellungen',
+			title: 'Einstellungen',
 		},
 		temperature: {
 			celsius: 'Celsius (°C)',

@@ -5,9 +5,7 @@ import { useI18n } from 'vue-i18n';
 
 import ForecastCard from '../components/forecast-card.vue';
 import ForecastTile from '../components/forecast-tile.vue';
-import LanguageSwitcher from '../components/language-switcher.vue';
-import SelectDropdown from '../components/select-dropdown.vue';
-import ThemeSwitcher from '../components/theme-switcher.vue';
+import SettingsMenu from '../components/settings-menu.vue';
 import ToggleSwitch from '../components/toggle-switch.vue';
 import VerticalForecast from '../components/vertical-forecast.vue';
 import { useWeather } from '../composables/use-weather';
@@ -142,7 +140,7 @@ onMounted(async () => {
 		class="bg-gradient-to-b flex flex-col min-h-screen from-primary-50 to-primary-100 sm:h-screen md:overflow-hidden dark:from-gray-900 dark:to-gray-800">
 		<!-- Header with controls -->
 		<header
-			class="p-4 border-b border-primary-100 flex flex-col gap-4 items-start justify-between sm:p-5 dark:border-gray-700 sm:flex-row sm:items-center">
+			class="p-4 border-b border-primary-100 flex flex-row gap-4 items-start items-center justify-between sm:p-5 dark:border-gray-700">
 			<div>
 				<h1 class="text-3xl text-gray-800 font-bold leading-tight md:text-5xl sm:text-4xl dark:text-gray-100">{{
 					t('app.title')
@@ -150,27 +148,12 @@ onMounted(async () => {
 			</div>
 
 			<div class="flex flex-wrap gap-2 items-center sm:gap-3">
-				<!-- Time format selector -->
-				<SelectDropdown
-					:aria-label="t('app.timeFormat.title')"
-					:model-value="timeFormat"
-					:options="[
-						{ value: 'twentyFourHour', label: t('app.timeFormat.twentyFourHour') },
-						{ value: 'twelveHour', label: t('app.timeFormat.twelveHour') },
-					]"
-					@update:model-value="(value) => (timeFormat = value as 'twentyFourHour' | 'twelveHour')" />
-
-				<!-- Temperature unit selector -->
-				<SelectDropdown
-					:aria-label="t('app.temperature.title')"
-					:model-value="temperatureUnit"
-					:options="[
-						{ value: 'celsius', label: t('app.temperature.celsius').split(' ')[0] },
-						{ value: 'fahrenheit', label: t('app.temperature.fahrenheit').split(' ')[0] },
-					]"
-					@update:model-value="(value) => (temperatureUnit = value as 'celsius' | 'fahrenheit')" />
-				<ThemeSwitcher />
-				<LanguageSwitcher />
+				<!-- Settings menu -->
+				<SettingsMenu
+					:time-format="timeFormat"
+					:temperature-unit="temperatureUnit"
+					@update-time-format="(value) => (timeFormat = value)"
+					@update-temperature-unit="(value) => (temperatureUnit = value)" />
 			</div>
 		</header>
 
