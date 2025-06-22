@@ -139,15 +139,17 @@ onMounted(async () => {
 
 <template>
 	<main
-		class="bg-gradient-to-b flex flex-col h-screen min-h-screen overflow-hidden from-primary-50 to-primary-100 dark:from-gray-900 dark:to-gray-800">
+		class="bg-gradient-to-b flex flex-col min-h-screen from-primary-50 to-primary-100 sm:h-screen md:overflow-hidden dark:from-gray-900 dark:to-gray-800">
 		<!-- Header with controls -->
-		<header class="p-5 border-b border-primary-100 flex items-center justify-between dark:border-gray-700">
+		<header
+			class="p-4 border-b border-primary-100 flex flex-col gap-4 items-start justify-between sm:p-5 dark:border-gray-700 sm:flex-row sm:items-center">
 			<div>
-				<h1 class="text-4xl text-gray-800 font-bold leading-tight md:text-5xl dark:text-gray-100">{{
+				<h1 class="text-3xl text-gray-800 font-bold leading-tight md:text-5xl sm:text-4xl dark:text-gray-100">{{
 					t('app.title')
 				}}</h1>
 			</div>
-			<div class="flex gap-3 items-center">
+
+			<div class="flex flex-wrap gap-2 items-center sm:gap-3">
 				<!-- Time format selector -->
 				<SelectDropdown
 					:aria-label="t('app.timeFormat.title')"
@@ -188,9 +190,9 @@ onMounted(async () => {
 		</div>
 
 		<!-- Initial state - no weather data -->
-		<div v-else-if="!currentWeather" class="flex flex-1 flex-col items-center justify-center">
-			<div class="p-8 text-center rounded-2xl bg-white max-w-md dark:bg-gray-800">
-				<h1 class="text-4xl text-gray-800 font-bold mb-6 dark:text-gray-100">{{ t('app.title') }}</h1>
+		<div v-else-if="!currentWeather" class="p-4 flex flex-1 flex-col items-center justify-center">
+			<div class="p-6 text-center rounded-2xl bg-white max-w-md sm:p-8 dark:bg-gray-800">
+				<h1 class="text-3xl text-gray-800 font-bold mb-6 sm:text-4xl dark:text-gray-100">{{ t('app.title') }}</h1>
 				<button
 					@click="useCurrentLocation"
 					class="text-lg text-white font-medium mx-auto mt-4 px-6 py-3 rounded-lg bg-primary-600 flex transition-colors items-center hover:bg-primary-700"
@@ -203,12 +205,12 @@ onMounted(async () => {
 		</div>
 
 		<!-- Dashboard layout with left sidebar -->
-		<div v-else-if="currentWeather" class="flex flex-1 overflow-hidden">
+		<div v-else-if="currentWeather" class="flex flex-1 flex-col overflow-auto md:flex-row md:overflow-hidden">
 			<!-- Left sidebar with location and current weather -->
 			<aside
-				class="border-r border-primary-100 bg-white flex flex-col max-w-xs w-full overflow-auto dark:border-gray-700 dark:bg-gray-800">
+				class="border-b border-primary-100 bg-white flex flex-col w-full md:border-b-0 md:border-r dark:border-gray-700 dark:bg-gray-800 md:max-w-xs md:overflow-auto">
 				<!-- Location information -->
-				<div class="p-5 border-b border-primary-100 dark:border-gray-700">
+				<div class="p-4 border-b border-primary-100 sm:p-5 dark:border-gray-700">
 					<h2 class="text-2xl text-gray-800 font-medium dark:text-gray-100">{{ location.name }}</h2>
 					<p class="text-base text-gray-600 mt-1 dark:text-gray-400">{{ currentDateTime }}</p>
 					<button
@@ -222,10 +224,10 @@ onMounted(async () => {
 				</div>
 
 				<!-- Current weather -->
-				<div class="p-5 flex flex-1 flex-col">
+				<div class="p-4 flex flex-col sm:p-5">
 					<div class="flex items-center justify-between">
 						<div class="flex flex-col">
-							<span class="text-5xl text-gray-800 font-bold font-serif dark:text-gray-100">
+							<span class="text-4xl text-gray-800 font-bold font-serif sm:text-5xl dark:text-gray-100">
 								{{ formatTemperature(currentWeather.current.temperature_2m) }}
 							</span>
 							<span class="text-base text-gray-600 font-serif mt-1 dark:text-gray-400">
@@ -235,7 +237,7 @@ onMounted(async () => {
 						</div>
 						<div
 							:class="weatherCodeToIcon(currentWeather.current.weather_code)"
-							class="text-7xl text-primary-500 dark:text-primary-400"></div>
+							class="text-6xl text-primary-500 sm:text-7xl dark:text-primary-400"></div>
 					</div>
 
 					<p class="text-xl text-gray-700 font-medium mt-4 dark:text-gray-300">
@@ -284,7 +286,7 @@ onMounted(async () => {
 			</aside>
 
 			<!-- Main content area -->
-			<div class="p-6 flex-1 overflow-auto">
+			<div class="p-4 flex-1 overflow-auto sm:p-6">
 				<div class="flex flex-col gap-6 h-full">
 					<!-- Daily forecast -->
 					<div class="flex-shrink-0">
@@ -299,7 +301,7 @@ onMounted(async () => {
 							</template>
 							<div class="pb-2 flex relative overflow-x-auto">
 								<template v-for="(day, index) in currentWeather.daily.time" :key="index">
-									<div class="mx-2 flex-1 flex-shrink-0 min-w-[180px] relative first:ml-0 last:mr-0">
+									<div class="mx-2 flex-1 flex-shrink-0 min-w-[140px] relative first:ml-0 last:mr-0 sm:min-w-[180px]">
 										<!-- Separator between tiles except adjacent to selected tile -->
 										<div
 											v-if="index > 0 && selectedDayIndex !== index && selectedDayIndex !== index - 1"
@@ -345,8 +347,8 @@ onMounted(async () => {
 					</div>
 
 					<!-- Vertical hourly forecast for selected day -->
-					<div class="flex flex-1 flex-col min-h-0">
-						<ForecastCard :title="selectedDayDate" class="flex flex-col h-full">
+					<div class="flex flex-col md:flex-1 md:min-h-0">
+						<ForecastCard :title="selectedDayDate" class="flex flex-col md:h-full">
 							<div class="flex-1 overflow-auto">
 								<VerticalForecast
 									:hourly-data="selectedDayHourlyForecast"

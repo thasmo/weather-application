@@ -45,34 +45,36 @@ const weatherIcon = computed((): string => {
 
 <template>
 	<div
-		class="p-4 rounded-lg flex flex-col"
+		class="p-3 rounded-lg flex flex-col sm:p-4"
 		:class="{
 			'bg-primary-50 dark:bg-primary-900/20': isActive,
 			'hover:bg-gray-50 dark:hover:bg-gray-700/50': !isActive,
 		}">
 		<!-- Title (day name or time) -->
-		<div class="text-lg text-gray-800 font-medium mb-3 text-center dark:text-gray-200">
+		<div class="text-base text-gray-800 font-medium mb-2 text-center sm:text-lg dark:text-gray-200 sm:mb-3">
 			{{ title }}
 		</div>
 
 		<!-- Main weather info -->
-		<div class="mb-4 flex items-center justify-between">
+		<div class="mb-3 flex items-center justify-between sm:mb-4">
 			<div class="flex flex-col">
-				<span class="text-xl text-gray-800 font-medium font-serif dark:text-gray-200">
+				<span class="text-lg text-gray-800 font-medium font-serif sm:text-xl dark:text-gray-200">
 					{{ temperature }}
 				</span>
-				<span v-if="minTemperature !== undefined" class="text-base text-gray-500 font-serif dark:text-gray-400">
+				<span
+					v-if="minTemperature !== undefined"
+					class="text-sm text-gray-500 font-serif sm:text-base dark:text-gray-400">
 					{{ minTemperature }}
 				</span>
 			</div>
-			<div :class="weatherIcon" class="text-5xl text-primary-500 dark:text-primary-400"></div>
+			<div :class="weatherIcon" class="text-4xl text-primary-500 sm:text-5xl dark:text-primary-400"></div>
 		</div>
 
 		<!-- Weather details -->
-		<div class="text-sm space-y-2">
+		<div class="text-xs space-y-1 sm:text-sm sm:space-y-2">
 			<div v-for="(detail, index) in details" :key="index" class="flex items-center justify-between">
 				<div class="flex items-center">
-					<div :class="`${detail.icon} text-base text-primary-500 mr-1 dark:text-primary-400`"></div>
+					<div :class="`${detail.icon} text-sm sm:text-base text-primary-500 mr-1 dark:text-primary-400`"></div>
 					<span class="text-gray-600 dark:text-gray-400">{{ detail.label }}</span>
 				</div>
 				<span class="text-gray-800 font-medium dark:text-gray-300"> {{ detail.value }}{{ detail.unit || '' }} </span>
