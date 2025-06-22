@@ -29,6 +29,7 @@ interface DailyForecast {
 }
 
 interface HourlyForecast {
+	is_day: number[];
 	precipitation: number[];
 	precipitation_probability: number[];
 	relative_humidity_2m: number[];
@@ -36,7 +37,6 @@ interface HourlyForecast {
 	time: Date[];
 	weather_code: number[];
 	wind_speed_10m: number[];
-	is_day: number[];
 }
 
 interface LocationData {
@@ -199,8 +199,8 @@ export function useWeather() {
 				relative_humidity_2m_min: [...(daily.variables(5)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
-				sunrise: [...(daily.variables(7)?.valuesArray() || [])].map(Number).map(processTime),
-				sunset: [...(daily.variables(8)?.valuesArray() || [])].map(Number).map(processTime),
+				sunrise: [...(daily.variables(7)?.valuesArray() || [])].map(Number).map((timeValue) => processTime(timeValue)),
+				sunset: [...(daily.variables(8)?.valuesArray() || [])].map(Number).map((timeValue) => processTime(timeValue)),
 				temperature_2m_max: [...(daily.variables(1)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
@@ -220,6 +220,7 @@ export function useWeather() {
 			);
 
 			const hourlyForecast: HourlyForecast = {
+				is_day: [...(hourly.variables(6)?.valuesArray() || [])].map(Number),
 				precipitation: [...(hourly.variables(2)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
@@ -237,7 +238,6 @@ export function useWeather() {
 				wind_speed_10m: [...(hourly.variables(5)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
-				is_day: [...(hourly.variables(6)?.valuesArray() || [])].map(Number),
 			};
 
 			// Update the reactive state

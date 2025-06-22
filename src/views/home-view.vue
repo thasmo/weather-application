@@ -249,7 +249,7 @@ const selectedDayHourlyForecast = computed(() => {
 					windSpeed: currentWeather.value.hourly.wind_speed_10m[index],
 				};
 			}
-			return null;
+			return;
 		})
 		.filter(Boolean);
 });
