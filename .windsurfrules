@@ -3,9 +3,7 @@
 - Always declare the type of each variable and function (parameters and return value).
 - Avoid using any.
 - Create necessary types.
-- Use JSDoc to document public classes and methods.
 - Don't leave blank lines within a function.
-- One export per file.
 
 # Naming Conventions
 - Use PascalCase for classes.
@@ -36,9 +34,7 @@
 - Use Vite.
 - Use Vue.
 - Use TypeScript.
-- Use UnoCSS.
-
-# Application Specific
-- Use the openmeteo API to fetch weather data.
-- Use the openmeteo npmjs package to fetch weather data.
-- Look up the documentation for the openmeteo JS API at https://www.npmjs.com/package/openmeteo.
+- Use UnoCSS. https://unocss.dev/
+- Use Ark UI for Vue. https://ark-ui.com/llms-vue.txt
+- Use OpenMeteo API. https://open-meteo.com/en/docs
+- Use OpenMeteo JS package. https://www.npmjs.com/package/openmeteo
