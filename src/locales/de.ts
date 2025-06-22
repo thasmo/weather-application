@@ -1,14 +1,29 @@
 export default {
 	app: {
+		airPressure: {
+			hpa: 'Hektopascal (hPa)',
+			inHg: 'Zoll Quecksilber (inHg)',
+			title: 'Luftdruckeinheit',
+		},
 		error: 'Fehler',
 		language: {
 			de: 'Deutsch',
 			en: 'Englisch',
+			title: 'Sprache',
 		},
 		loading: 'Wetterdaten werden geladen...',
 		location: {
 			button: 'Meinen Standort verwenden',
 			loading: 'Standort wird ermittelt...',
+		},
+		precipitation: {
+			inches: 'Zoll (in)',
+			mm: 'Millimeter (mm)',
+			title: 'Niederschlagseinheit',
+		},
+		settings: {
+			button: 'Einstellungen',
+			title: 'Einstellungen',
 		},
 		temperature: {
 			celsius: 'Celsius (°C)',
@@ -27,6 +42,12 @@ export default {
 			twentyFourHour: '24-Stunden',
 		},
 		title: 'Wetter App',
+		windSpeed: {
+			kmh: 'Kilometer pro Stunde (km/h)',
+			mph: 'Meilen pro Stunde (mph)',
+			ms: 'Meter pro Sekunde (m/s)',
+			title: 'Windgeschwindigkeitseinheit',
+		},
 	},
 	weather: {
 		codes: {

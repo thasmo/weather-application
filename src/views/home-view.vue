@@ -5,17 +5,18 @@ import { useI18n } from 'vue-i18n';
 
 import ForecastCard from '../components/forecast-card.vue';
 import ForecastTile from '../components/forecast-tile.vue';
-import LanguageSwitcher from '../components/language-switcher.vue';
-import SelectDropdown from '../components/select-dropdown.vue';
-import ThemeSwitcher from '../components/theme-switcher.vue';
+import SettingsMenu from '../components/settings-menu.vue';
 import ToggleSwitch from '../components/toggle-switch.vue';
 import VerticalForecast from '../components/vertical-forecast.vue';
 import { useWeather } from '../composables/use-weather';
 
 // State variables
 const selectedDayIndex = ref(0); // Add selected day index state
+const airPressureUnit = ref<'hpa' | 'inHg'>('hpa'); // Add air pressure unit state
 const temperatureUnit = ref<'celsius' | 'fahrenheit'>('celsius'); // Add temperature unit state
 const timeFormat = ref<'twelveHour' | 'twentyFourHour'>('twentyFourHour'); // Add time format state
+const windSpeedUnit = ref<'kmh' | 'mph' | 'ms'>('kmh'); // Add wind speed unit state
+const precipitationUnit = ref<'inches' | 'mm'>('mm'); // Add precipitation unit state
 const advancedForecastView = ref(false); // Set simple view as default
 
 // Initialize weather composable
@@ -51,6 +52,87 @@ const formatTemperature = (temperature: number | undefined): string => {
 	// Format with the appropriate unit symbol
 	const unitSymbol = temperatureUnit.value === 'fahrenheit' ? '°F' : '°C';
 	return `${Math.round(temporaryValue)}${unitSymbol}`;
+};
+
+// Format wind speed
+const formatWindSpeed = (speed: number | undefined): string => {
+	if (speed === undefined) return 'N/A';
+
+	let convertedSpeed: number;
+	let unitSymbol: string;
+
+	// Convert from km/h to the selected unit
+	switch (windSpeedUnit.value) {
+		case 'mph': {
+			// Convert km/h to mph (1 km/h = 0.621371 mph)
+			convertedSpeed = speed * 0.621_371;
+			unitSymbol = 'mph';
+			break;
+		}
+		case 'ms': {
+			// Convert km/h to m/s (1 km/h = 0.277778 m/s)
+			convertedSpeed = speed * 0.277_778;
+			unitSymbol = 'm/s';
+			break;
+		}
+		default: {
+			convertedSpeed = speed;
+			unitSymbol = 'km/h';
+			break;
+		}
+	}
+
+	return `${Math.round(convertedSpeed * 10) / 10} ${unitSymbol}`;
+};
+
+// Format precipitation
+const formatPrecipitation = (precipitation: number | undefined): string => {
+	if (precipitation === undefined) return 'N/A';
+
+	let convertedPrecipitation: number;
+	let unitSymbol: string;
+
+	// Convert from mm to the selected unit
+	switch (precipitationUnit.value) {
+		case 'inches': {
+			// Convert mm to inches (1 mm = 0.0393701 inches)
+			convertedPrecipitation = precipitation * 0.039_370_1;
+			unitSymbol = 'inches';
+			break;
+		}
+		default: {
+			convertedPrecipitation = precipitation;
+			unitSymbol = 'mm';
+			break;
+		}
+	}
+
+	return `${Math.round(convertedPrecipitation * 10) / 10} ${unitSymbol}`;
+};
+
+// Format air pressure
+const formatAirPressure = (pressure: number | undefined): string => {
+	if (pressure === undefined) return 'N/A';
+
+	let convertedPressure: number;
+	let unitSymbol: string;
+
+	// Convert from hPa to the selected unit
+	switch (airPressureUnit.value) {
+		case 'inHg': {
+			// Convert hPa to inHg (1 hPa = 0.0295301 inHg)
+			convertedPressure = pressure * 0.029_530_1;
+			unitSymbol = 'inHg';
+			break;
+		}
+		default: {
+			convertedPressure = pressure;
+			unitSymbol = 'hPa';
+			break;
+		}
+	}
+
+	return `${Math.round(convertedPressure * 10) / 10} ${unitSymbol}`;
 };
 
 // Get weather description
@@ -108,6 +190,7 @@ const selectedDayHourlyForecast = computed(() => {
 	const hourlyData = currentWeather.value.hourly;
 	const filteredHourlyData = hourlyData.time
 		.map((time, index) => ({
+			airPressure: hourlyData.pressure_msl?.[index],
 			humidity: hourlyData.relative_humidity_2m[index],
 			precipitation: hourlyData.precipitation[index],
 			precipitationProbability: hourlyData.precipitation_probability[index],
@@ -142,7 +225,7 @@ onMounted(async () => {
 		class="bg-gradient-to-b flex flex-col min-h-screen from-primary-50 to-primary-100 sm:h-screen md:overflow-hidden dark:from-gray-900 dark:to-gray-800">
 		<!-- Header with controls -->
 		<header
-			class="p-4 border-b border-primary-100 flex flex-col gap-4 items-start justify-between sm:p-5 dark:border-gray-700 sm:flex-row sm:items-center">
+			class="p-4 border-b border-primary-100 flex flex-row gap-4 items-start items-center justify-between sm:p-5 dark:border-gray-700">
 			<div>
 				<h1 class="text-3xl text-gray-800 font-bold leading-tight md:text-5xl sm:text-4xl dark:text-gray-100">{{
 					t('app.title')
@@ -150,27 +233,18 @@ onMounted(async () => {
 			</div>
 
 			<div class="flex flex-wrap gap-2 items-center sm:gap-3">
-				<!-- Time format selector -->
-				<SelectDropdown
-					:aria-label="t('app.timeFormat.title')"
-					:model-value="timeFormat"
-					:options="[
-						{ value: 'twentyFourHour', label: t('app.timeFormat.twentyFourHour') },
-						{ value: 'twelveHour', label: t('app.timeFormat.twelveHour') },
-					]"
-					@update:model-value="(value) => (timeFormat = value as 'twentyFourHour' | 'twelveHour')" />
-
-				<!-- Temperature unit selector -->
-				<SelectDropdown
-					:aria-label="t('app.temperature.title')"
-					:model-value="temperatureUnit"
-					:options="[
-						{ value: 'celsius', label: t('app.temperature.celsius').split(' ')[0] },
-						{ value: 'fahrenheit', label: t('app.temperature.fahrenheit').split(' ')[0] },
-					]"
-					@update:model-value="(value) => (temperatureUnit = value as 'celsius' | 'fahrenheit')" />
-				<ThemeSwitcher />
-				<LanguageSwitcher />
+				<!-- Settings menu -->
+				<SettingsMenu
+					:time-format="timeFormat"
+					:temperature-unit="temperatureUnit"
+					:wind-speed-unit="windSpeedUnit"
+					:precipitation-unit="precipitationUnit"
+					:air-pressure-unit="airPressureUnit"
+					@update-time-format="(value) => (timeFormat = value)"
+					@update-temperature-unit="(value) => (temperatureUnit = value)"
+					@update-wind-speed-unit="(value) => (windSpeedUnit = value)"
+					@update-precipitation-unit="(value) => (precipitationUnit = value)"
+					@update-air-pressure-unit="(value) => (airPressureUnit = value)" />
 			</div>
 		</header>
 
@@ -259,7 +333,7 @@ onMounted(async () => {
 							<div>
 								<div class="text-base text-gray-600 dark:text-gray-400">{{ t('weather.wind') }}</div>
 								<div class="text-lg text-gray-800 font-medium font-serif dark:text-gray-200">
-									{{ currentWeather.current.wind_speed_10m }} km/h
+									{{ formatWindSpeed(currentWeather.current.wind_speed_10m) }}
 								</div>
 							</div>
 						</div>
@@ -268,7 +342,7 @@ onMounted(async () => {
 							<div>
 								<div class="text-base text-gray-600 dark:text-gray-400">{{ t('weather.pressure') }}</div>
 								<div class="text-lg text-gray-800 font-medium font-serif dark:text-gray-200">
-									{{ currentWeather.current.pressure_msl }} hPa
+									{{ formatAirPressure(currentWeather.current.pressure_msl) }}
 								</div>
 							</div>
 						</div>
@@ -277,7 +351,7 @@ onMounted(async () => {
 							<div>
 								<div class="text-base text-gray-600 dark:text-gray-400">{{ t('weather.precipitation') }}</div>
 								<div class="text-lg text-gray-800 font-medium font-serif dark:text-gray-200">
-									{{ currentWeather.current.precipitation }} mm
+									{{ formatPrecipitation(currentWeather.current.precipitation) }}
 								</div>
 							</div>
 						</div>
@@ -318,23 +392,33 @@ onMounted(async () => {
 												advancedForecastView
 													? [
 															{
-																icon: 'i-custom-precipitation',
-																label: t('weather.precipitation'),
-																value: currentWeather.daily.precipitation_sum[index],
-																unit: ' mm',
+																icon: 'i-custom-temperature',
+																label: t('weather.temperature'),
+																value: formatTemperature(currentWeather.daily.temperature_2m_max[index]),
+																unit: '',
 															},
 															{
-																icon: '',
-																label: t('weather.humidity'),
-																value: currentWeather.daily.relative_humidity_2m_max[index],
-																unit: '%',
+																icon: 'i-custom-precipitation',
+																label: t('weather.precipitation'),
+																value: formatPrecipitation(currentWeather.daily.precipitation_sum[index]),
+																unit: '',
 															},
 															{
 																icon: '',
 																label: t('weather.wind'),
-																value: currentWeather.daily.wind_speed_10m_max[index],
-																unit: ' km/h',
+																value: formatWindSpeed(currentWeather.daily.wind_speed_10m_max[index]),
+																unit: '',
 															},
+															...(currentWeather.daily.pressure_msl_mean
+																? [
+																		{
+																			icon: '',
+																			label: t('weather.pressure'),
+																			value: formatAirPressure(currentWeather.daily.pressure_msl_mean[index]),
+																			unit: '',
+																		},
+																	]
+																: []),
 														]
 													: []
 											"
@@ -356,6 +440,9 @@ onMounted(async () => {
 									:time-formatter="formatTime"
 									:temperature-formatter="formatTemperature"
 									:weather-code-to-icon="weatherCodeToIcon"
+									:wind-speed-formatter="formatWindSpeed"
+									:precipitation-formatter="formatPrecipitation"
+									:air-pressure-formatter="formatAirPressure"
 									:translation-function="t" />
 							</div>
 						</ForecastCard>
