@@ -33,10 +33,28 @@ const isDaytime = computed((): boolean => {
 	const now = new Date();
 	const currentDate = now.toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
 
+	// Method 1: Check if we have is_day data in the hourly forecast for the current hour
+	if (currentWeather.value.hourly?.is_day) {
+		// Find the closest hourly data point to current time
+		const currentHour = now.getHours();
+		const hourlyTimes = currentWeather.value.hourly.time;
+
+		for (const [index, hourTime] of hourlyTimes.entries()) {
+			const hourDate = hourTime instanceof Date ? hourTime : new Date(hourTime);
+
+			if (hourDate.getDate() === now.getDate() && hourDate.getHours() === currentHour) {
+				// Found the current hour's data - use the is_day flag
+				return currentWeather.value.hourly.is_day[index] === 1;
+			}
+		}
+	}
+
+	// Method 2: Compare with sunrise/sunset times if hourly data isn't available
 	// Find today's sunrise and sunset times
-	const todayIndex = currentWeather.value.daily.time.findIndex(
-		(date) => date.toISOString().split('T')[0] === currentDate,
-	);
+	const todayIndex = currentWeather.value.daily.time.findIndex((date) => {
+		const dateString = date instanceof Date ? date.toISOString().split('T')[0] : String(date).split('T')[0];
+		return dateString === currentDate;
+	});
 
 	if (todayIndex === -1) {
 		// Fallback: assume daytime between 6 AM and 6 PM
@@ -47,8 +65,12 @@ const isDaytime = computed((): boolean => {
 	const sunrise = currentWeather.value.daily.sunrise[todayIndex];
 	const sunset = currentWeather.value.daily.sunset[todayIndex];
 
+	// Make sure sunrise and sunset are Date objects
+	const sunriseDate = sunrise instanceof Date ? sunrise : new Date(sunrise);
+	const sunsetDate = sunset instanceof Date ? sunset : new Date(sunset);
+
 	// Check if current time is between sunrise and sunset
-	return now >= sunrise && now < sunset;
+	return now >= sunriseDate && now < sunsetDate;
 });
 
 // Determine if a specific day is currently in daytime
@@ -75,18 +97,65 @@ const isDayForDailyForecast = (dayIndex: number): boolean => {
 const weatherCodeToIcon = (code: number, isDay: boolean): string => {
 	// WMO Weather interpretation codes (WW)
 	// https://open-meteo.com/en/docs
-	if (code === 0) return isDay ? 'i-custom-clear-day' : 'i-custom-clear-night'; // Clear sky
-	if (code === 1) return isDay ? 'i-custom-partly-cloudy-day' : 'i-custom-partly-cloudy-night'; // Mainly clear
-	if (code >= 2 && code <= 3) return 'i-custom-cloudy'; // Partly cloudy, overcast
-	if (code >= 45 && code <= 48) return 'i-custom-fog'; // Fog
-	if (code >= 51 && code <= 55) return 'i-custom-drizzle'; // Drizzle
-	if (code >= 56 && code <= 57) return 'i-custom-sleet'; // Freezing Drizzle
-	if (code >= 61 && code <= 65) return 'i-custom-rain'; // Rain
-	if (code >= 66 && code <= 67) return 'i-custom-sleet'; // Freezing Rain
-	if (code >= 71 && code <= 77) return 'i-custom-snow'; // Snow
-	if (code >= 80 && code <= 82) return 'i-custom-rain'; // Rain showers
-	if (code >= 85 && code <= 86) return 'i-custom-snow'; // Snow showers
-	if (code >= 95 && code <= 99) return 'i-custom-thunderstorms'; // Thunderstorm
+
+	// Clear sky
+	if (code === 0) return isDay ? 'i-custom-clear-day' : 'i-custom-clear-night';
+
+	// Mainly clear, partly cloudy
+	if (code === 1 || code === 2) return isDay ? 'i-custom-partly-cloudy-day' : 'i-custom-partly-cloudy-night';
+
+	// Overcast
+	if (code === 3) return isDay ? 'i-custom-overcast-day' : 'i-custom-overcast-night';
+
+	// Fog
+	if (code >= 45 && code <= 48) return isDay ? 'i-custom-fog-day' : 'i-custom-fog-night';
+
+	// Drizzle: Light, moderate, dense
+	if (code >= 51 && code <= 55) {
+		if (code === 51) return isDay ? 'i-custom-partly-cloudy-day-drizzle' : 'i-custom-partly-cloudy-night-drizzle';
+		return 'i-custom-drizzle';
+	}
+
+	// Freezing Drizzle: Light, dense
+	if (code >= 56 && code <= 57) return 'i-custom-sleet';
+
+	// Rain: Slight, moderate, heavy
+	if (code >= 61 && code <= 65) {
+		if (code === 61) return isDay ? 'i-custom-partly-cloudy-day-rain' : 'i-custom-partly-cloudy-night-rain';
+		return 'i-custom-rain';
+	}
+
+	// Freezing Rain: Light, heavy
+	if (code >= 66 && code <= 67) return 'i-custom-sleet';
+
+	// Snow: Slight, moderate, heavy
+	if (code >= 71 && code <= 75) {
+		if (code === 71) return isDay ? 'i-custom-partly-cloudy-day-snow' : 'i-custom-partly-cloudy-night-snow';
+		return 'i-custom-snow';
+	}
+
+	// Snow grains
+	if (code === 77) return 'i-custom-snow';
+
+	// Rain showers: Slight, moderate, violent
+	if (code >= 80 && code <= 82) {
+		if (code === 80) return isDay ? 'i-custom-partly-cloudy-day-rain' : 'i-custom-partly-cloudy-night-rain';
+		return 'i-custom-rain';
+	}
+
+	// Snow showers: Slight, heavy
+	if (code >= 85 && code <= 86) {
+		if (code === 85) return isDay ? 'i-custom-partly-cloudy-day-snow' : 'i-custom-partly-cloudy-night-snow';
+		return 'i-custom-snow';
+	}
+
+	// Thunderstorm: Slight/moderate, with hail
+	if (code >= 95 && code <= 99) {
+		if (code === 95) return isDay ? 'i-custom-thunderstorms-day' : 'i-custom-thunderstorms-night';
+		if (code === 96 || code === 99) return isDay ? 'i-custom-thunderstorms-day' : 'i-custom-thunderstorms-night';
+		return 'i-custom-thunderstorms';
+	}
+
 	return 'i-custom-not-available';
 };
 
