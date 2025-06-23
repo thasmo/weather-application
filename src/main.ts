@@ -1,14 +1,14 @@
 import 'virtual:uno.css';
 import '@unocss/reset/tailwind-compat.css';
 
-import './assets/styles.css';
+import '@/assets/styles.css';
 
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
 
-import ApplicationRoot from './application-root.vue';
-import { type Locale, messages, type MessageSchema } from './locales';
-import router from './router';
+import ApplicationRoot from '@/application-root.vue';
+import { type Locale, messages, type MessageSchema } from '@/locales';
+import router from '@/router';
 
 // Detect browser language
 const getSavedLocale = (): Locale | null => {

@@ -3,11 +3,11 @@ import { useMediaQuery } from '@vueuse/core';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import LanguageSwitcher from './language-switcher.vue';
-import SelectDropdown from './select-dropdown.vue';
-import SettingsDrawer from './settings-drawer.vue';
-import SettingsPopover from './settings-popover.vue';
-import ThemeSwitcher from './theme-switcher.vue';
+import LanguageSwitcher from '@/components/language-switcher.vue';
+import SelectDropdown from '@/components/select-dropdown.vue';
+import SettingsDrawer from '@/components/settings-drawer.vue';
+import SettingsPopover from '@/components/settings-popover.vue';
+import ThemeSwitcher from '@/components/theme-switcher.vue';
 
 interface SettingsMenuProperties {
 	/**

@@ -2,13 +2,13 @@
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import CurrentWeatherDisplay from '../components/current-weather-display.vue';
-import DailyForecast from '../components/daily-forecast.vue';
-import HourlyForecastContainer from '../components/hourly-forecast-container.vue';
-import LocationDisplay from '../components/location-display.vue';
-import SettingsMenu from '../components/settings-menu.vue';
-import { useFormat } from '../composables/use-format';
-import { useWeather } from '../composables/use-weather';
+import CurrentWeatherDisplay from '@/components/current-weather-display.vue';
+import DailyForecast from '@/components/daily-forecast.vue';
+import HourlyForecastContainer from '@/components/hourly-forecast-container.vue';
+import LocationDisplay from '@/components/location-display.vue';
+import SettingsMenu from '@/components/settings-menu.vue';
+import { useFormat } from '@/composables/use-format';
+import { useWeather } from '@/composables/use-weather';
 
 // Get i18n
 const { t } = useI18n();

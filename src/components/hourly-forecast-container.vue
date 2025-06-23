@@ -3,13 +3,15 @@ import { useDateFormat } from '@vueuse/core';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { useFormat } from '../composables/use-format';
-import { weatherCodeToIcon } from '../utils/weather-icon-mapper';
-import ForecastCard from './forecast-card.vue';
-import VerticalForecast from './vertical-forecast.vue';
+import type { CurrentWeather } from '@/composables/use-weather.ts';
+
+import ForecastCard from '@/components/forecast-card.vue';
+import VerticalForecast from '@/components/vertical-forecast.vue';
+import { useFormat } from '@/composables/use-format';
+import { weatherCodeToIcon } from '@/utils/weather-icon-mapper';
 
 interface HourlyForecastContainerProperties {
-	currentWeather: any;
+	currentWeather: CurrentWeather;
 	isAdvancedView: boolean;
 	selectedDayIndex: number;
 }

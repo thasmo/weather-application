@@ -2,22 +2,24 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { useFormat } from '../composables/use-format';
-import ForecastCard from './forecast-card.vue';
-import ForecastTile from './forecast-tile.vue';
-import ToggleSwitch from './toggle-switch.vue';
+import type { CurrentWeather } from '@/composables/use-weather.ts';
+
+import ForecastCard from '@/components/forecast-card.vue';
+import ForecastTile from '@/components/forecast-tile.vue';
+import ToggleSwitch from '@/components/toggle-switch.vue';
+import { useFormat } from '@/composables/use-format';
 
 interface DailyForecastProperties {
 	advancedView: boolean;
-	currentWeather: any;
+	currentWeather: CurrentWeather;
 	selectedDayIndex: number;
 }
 
 const properties = defineProps<DailyForecastProperties>();
 
 const emit = defineEmits<{
-	(e: 'selectDay', index: number): void;
-	(e: 'toggleView', value: boolean): void;
+	(event: 'selectDay', index: number): void;
+	(event: 'toggleView', value: boolean): void;
 }>();
 
 const { t } = useI18n();

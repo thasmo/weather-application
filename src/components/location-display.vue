@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 
-import { useFormat } from '../composables/use-format';
+import { useFormat } from '@/composables/use-format';
 
 interface LocationDisplayProperties {
 	isLoading: boolean;
@@ -9,7 +9,7 @@ interface LocationDisplayProperties {
 	onRefreshLocation: () => void;
 }
 
-const properties = defineProps<LocationDisplayProperties>();
+defineProps<LocationDisplayProperties>();
 
 const { t } = useI18n();
 const { currentDateTime } = useFormat();

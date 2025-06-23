@@ -1,7 +1,7 @@
 import { fetchWeatherApi } from 'openmeteo';
 import { ref } from 'vue';
 
-interface CurrentWeather {
+export interface CurrentWeather {
 	apparent_temperature: number;
 	cloud_cover: number;
 	is_day: boolean;

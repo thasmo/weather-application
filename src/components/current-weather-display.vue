@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 
-import { useFormat } from '../composables/use-format';
-import ForecastTile from './forecast-tile.vue';
+import type { CurrentWeather } from '@/composables/use-weather.ts';
+
+import ForecastTile from '@/components/forecast-tile.vue';
+import { useFormat } from '@/composables/use-format';
 
 interface CurrentWeatherProperties {
-	currentWeather: any;
+	currentWeather: CurrentWeather;
 }
 
 defineProps<CurrentWeatherProperties>();
