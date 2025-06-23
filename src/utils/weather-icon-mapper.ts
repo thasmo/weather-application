@@ -1,67 +1,68 @@
-/**
- * Maps weather codes to icon classes based on day/night conditions
- * Using WMO Weather interpretation codes (WW)
- * https://open-meteo.com/en/docs
- */
+type WeatherIconMap = Record<number, string>;
+
+const dayIcons: WeatherIconMap = {
+	0: 'i-custom-clear-day', // Clear sky
+	1: 'i-custom-partly-cloudy-day', // Mainly clear
+	2: 'i-custom-partly-cloudy-day', // Partly cloudy
+	3: 'i-custom-overcast-day', // Overcast
+	45: 'i-custom-fog-day', // Fog
+	48: 'i-custom-fog-day', // Depositing rime fog
+	51: 'i-custom-partly-cloudy-day-drizzle', // Drizzle: Light
+	53: 'i-custom-drizzle', // Drizzle: Moderate
+	55: 'i-custom-drizzle', // Drizzle: Dense
+	56: 'i-custom-sleet', // Freezing Drizzle: Light
+	57: 'i-custom-sleet', // Freezing Drizzle: Dense
+	61: 'i-custom-partly-cloudy-day-rain', // Rain: Slight
+	63: 'i-custom-rain', // Rain: Moderate
+	65: 'i-custom-rain', // Rain: Heavy
+	66: 'i-custom-sleet', // Freezing Rain: Light
+	67: 'i-custom-sleet', // Freezing Rain: Heavy
+	71: 'i-custom-partly-cloudy-day-snow', // Snow fall: Slight
+	73: 'i-custom-snow', // Snow fall: Moderate
+	75: 'i-custom-snow', // Snow fall: Heavy
+	77: 'i-custom-snow', // Snow grains
+	80: 'i-custom-partly-cloudy-day-rain', // Rain showers: Slight
+	81: 'i-custom-rain', // Rain showers: Moderate
+	82: 'i-custom-rain', // Rain showers: Violent
+	85: 'i-custom-partly-cloudy-day-snow', // Snow showers: Slight
+	86: 'i-custom-snow', // Snow showers: Heavy
+	95: 'i-custom-thunderstorms-day', // Thunderstorm: Slight or moderate
+	96: 'i-custom-thunderstorms-day', // Thunderstorm with slight hail
+	99: 'i-custom-thunderstorms-day', // Thunderstorm with heavy hail
+};
+
+const nightIcons: WeatherIconMap = {
+	0: 'i-custom-clear-night', // Clear sky
+	1: 'i-custom-partly-cloudy-night', // Mainly clear
+	2: 'i-custom-partly-cloudy-night', // Partly cloudy
+	3: 'i-custom-overcast-night', // Overcast
+	45: 'i-custom-fog-night', // Fog
+	48: 'i-custom-fog-night', // Depositing rime fog
+	51: 'i-custom-partly-cloudy-night-drizzle', // Drizzle: Light
+	53: 'i-custom-drizzle', // Drizzle: Moderate
+	55: 'i-custom-drizzle', // Drizzle: Dense
+	56: 'i-custom-sleet', // Freezing Drizzle: Light
+	57: 'i-custom-sleet', // Freezing Drizzle: Dense
+	61: 'i-custom-partly-cloudy-night-rain', // Rain: Slight
+	63: 'i-custom-rain', // Rain: Moderate
+	65: 'i-custom-rain', // Rain: Heavy
+	66: 'i-custom-sleet', // Freezing Rain: Light
+	67: 'i-custom-sleet', // Freezing Rain: Heavy
+	71: 'i-custom-partly-cloudy-night-snow', // Snow fall: Slight
+	73: 'i-custom-snow', // Snow fall: Moderate
+	75: 'i-custom-snow', // Snow fall: Heavy
+	77: 'i-custom-snow', // Snow grains
+	80: 'i-custom-partly-cloudy-night-rain', // Rain showers: Slight
+	81: 'i-custom-rain', // Rain showers: Moderate
+	82: 'i-custom-rain', // Rain showers: Violent
+	85: 'i-custom-partly-cloudy-night-snow', // Snow showers: Slight
+	86: 'i-custom-snow', // Snow showers: Heavy
+	95: 'i-custom-thunderstorms-night', // Thunderstorm: Slight or moderate
+	96: 'i-custom-thunderstorms-night', // Thunderstorm with slight hail
+	99: 'i-custom-thunderstorms-night', // Thunderstorm with heavy hail
+};
 
 export const weatherCodeToIcon = (code: number, isDay: boolean): string => {
-	// Clear sky
-	if (code === 0) return isDay ? 'i-custom-clear-day' : 'i-custom-clear-night';
-
-	// Mainly clear, partly cloudy
-	if (code === 1 || code === 2) return isDay ? 'i-custom-partly-cloudy-day' : 'i-custom-partly-cloudy-night';
-
-	// Overcast
-	if (code === 3) return isDay ? 'i-custom-overcast-day' : 'i-custom-overcast-night';
-
-	// Fog
-	if (code >= 45 && code <= 48) return isDay ? 'i-custom-fog-day' : 'i-custom-fog-night';
-
-	// Drizzle: Light, moderate, dense
-	if (code >= 51 && code <= 55) {
-		if (code === 51) return isDay ? 'i-custom-partly-cloudy-day-drizzle' : 'i-custom-partly-cloudy-night-drizzle';
-		return 'i-custom-drizzle';
-	}
-
-	// Freezing Drizzle: Light, dense
-	if (code >= 56 && code <= 57) return 'i-custom-sleet';
-
-	// Rain: Slight, moderate, heavy
-	if (code >= 61 && code <= 65) {
-		if (code === 61) return isDay ? 'i-custom-partly-cloudy-day-rain' : 'i-custom-partly-cloudy-night-rain';
-		return 'i-custom-rain';
-	}
-
-	// Freezing Rain: Light, heavy
-	if (code >= 66 && code <= 67) return 'i-custom-sleet';
-
-	// Snow: Slight, moderate, heavy
-	if (code >= 71 && code <= 75) {
-		if (code === 71) return isDay ? 'i-custom-partly-cloudy-day-snow' : 'i-custom-partly-cloudy-night-snow';
-		return 'i-custom-snow';
-	}
-
-	// Snow grains
-	if (code === 77) return 'i-custom-snow';
-
-	// Rain showers: Slight, moderate, violent
-	if (code >= 80 && code <= 82) {
-		if (code === 80) return isDay ? 'i-custom-partly-cloudy-day-rain' : 'i-custom-partly-cloudy-night-rain';
-		return 'i-custom-rain';
-	}
-
-	// Snow showers: Slight, heavy
-	if (code >= 85 && code <= 86) {
-		if (code === 85) return isDay ? 'i-custom-partly-cloudy-day-snow' : 'i-custom-partly-cloudy-night-snow';
-		return 'i-custom-snow';
-	}
-
-	// Thunderstorm: Slight/moderate, with hail
-	if (code >= 95 && code <= 99) {
-		if (code === 95) return isDay ? 'i-custom-thunderstorms-day' : 'i-custom-thunderstorms-night';
-		if (code === 96 || code === 99) return isDay ? 'i-custom-thunderstorms-day' : 'i-custom-thunderstorms-night';
-		return 'i-custom-thunderstorms';
-	}
-
-	return 'i-custom-not-available';
+	const iconMap = isDay ? dayIcons : nightIcons;
+	return iconMap[code] || 'i-custom-not-available';
 };
