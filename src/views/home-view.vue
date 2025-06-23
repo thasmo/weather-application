@@ -1,268 +1,28 @@
 <script setup lang="ts">
-import { useDateFormat } from '@vueuse/core';
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import ForecastCard from '../components/forecast-card.vue';
-import ForecastTile from '../components/forecast-tile.vue';
-import SettingsMenu from '../components/settings-menu.vue';
-import ToggleSwitch from '../components/toggle-switch.vue';
-import VerticalForecast from '../components/vertical-forecast.vue';
-import { useWeather } from '../composables/use-weather';
+import CurrentWeatherDisplay from '@/components/current-weather-display.vue';
+import DailyForecast from '@/components/daily-forecast.vue';
+import HourlyForecastContainer from '@/components/hourly-forecast-container.vue';
+import LocationDisplay from '@/components/location-display.vue';
+import SettingsMenu from '@/components/settings-menu.vue';
+import { useFormat } from '@/composables/use-format';
+import { useWeather } from '@/composables/use-weather';
+
+// Get i18n
+const { t } = useI18n();
 
 // State variables
-const selectedDayIndex = ref(0); // Add selected day index state
-const airPressureUnit = ref<'hpa' | 'inHg'>('hpa'); // Add air pressure unit state
-const temperatureUnit = ref<'celsius' | 'fahrenheit'>('celsius'); // Add temperature unit state
-const timeFormat = ref<'twelveHour' | 'twentyFourHour'>('twentyFourHour'); // Add time format state
-const windSpeedUnit = ref<'kmh' | 'mph' | 'ms'>('kmh'); // Add wind speed unit state
-const precipitationUnit = ref<'inches' | 'mm'>('mm'); // Add precipitation unit state
+const selectedDayIndex = ref(0);
 const advancedForecastView = ref(false); // Set simple view as default
+
+// Initialize format composable with default values
+const { airPressureUnit, precipitationUnit, temperatureUnit, timeFormat, windSpeedUnit } = useFormat();
 
 // Initialize weather composable
 const { currentWeather, error, fetchWeatherData, loading, loadingLocation, location, useCurrentLocation } =
 	useWeather();
-
-// Determine if it's currently daytime based on sunrise and sunset times
-const isDaytime = computed((): boolean => {
-	if (!currentWeather.value?.current) {
-		return false;
-	}
-
-	// Get current date and time
-	const now = new Date();
-	const currentDate = now.toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
-
-	// Find today's sunrise and sunset times
-	const todayIndex = currentWeather.value.daily.time.findIndex(
-		(date) => date.toISOString().split('T')[0] === currentDate,
-	);
-
-	if (todayIndex === -1) {
-		// Fallback: assume daytime between 6 AM and 6 PM
-		const currentHour = now.getHours();
-		return currentHour >= 6 && currentHour < 18;
-	}
-
-	const sunrise = currentWeather.value.daily.sunrise[todayIndex];
-	const sunset = currentWeather.value.daily.sunset[todayIndex];
-
-	// Check if current time is between sunrise and sunset
-	return now >= sunrise && now < sunset;
-});
-
-// Determine if a specific day is currently in daytime
-const isDayForDailyForecast = (dayIndex: number): boolean => {
-	if (!currentWeather.value?.daily) {
-		return true; // Default to day if no data
-	}
-
-	// For today, use current time to determine day/night
-	const now = new Date();
-	const today = now.toISOString().split('T')[0];
-	const forecastDay = currentWeather.value.daily.time[dayIndex].toISOString().split('T')[0];
-
-	// If it's today, use current time to check if it's daytime
-	if (forecastDay === today) {
-		return isDaytime.value;
-	}
-
-	// For future days, use midday (12:00) as the reference time for the icon
-	return true;
-};
-
-// Weather icon mapping
-const weatherCodeToIcon = (code: number, isDay: boolean): string => {
-	// WMO Weather interpretation codes (WW)
-	// https://open-meteo.com/en/docs
-	if (code === 0) return isDay ? 'i-custom-clear-day' : 'i-custom-clear-night'; // Clear sky
-	if (code === 1) return isDay ? 'i-custom-partly-cloudy-day' : 'i-custom-partly-cloudy-night'; // Mainly clear
-	if (code >= 2 && code <= 3) return 'i-custom-cloudy'; // Partly cloudy, overcast
-	if (code >= 45 && code <= 48) return 'i-custom-fog'; // Fog
-	if (code >= 51 && code <= 55) return 'i-custom-drizzle'; // Drizzle
-	if (code >= 56 && code <= 57) return 'i-custom-sleet'; // Freezing Drizzle
-	if (code >= 61 && code <= 65) return 'i-custom-rain'; // Rain
-	if (code >= 66 && code <= 67) return 'i-custom-sleet'; // Freezing Rain
-	if (code >= 71 && code <= 77) return 'i-custom-snow'; // Snow
-	if (code >= 80 && code <= 82) return 'i-custom-rain'; // Rain showers
-	if (code >= 85 && code <= 86) return 'i-custom-snow'; // Snow showers
-	if (code >= 95 && code <= 99) return 'i-custom-thunderstorms'; // Thunderstorm
-	return 'i-custom-not-available';
-};
-
-// Format temperature
-const formatTemperature = (temperature: number | undefined): string => {
-	if (temperature === undefined) return 'N/A';
-
-	// Convert to Fahrenheit if needed
-	const temporaryValue = temperatureUnit.value === 'fahrenheit' ? (temperature * 9) / 5 + 32 : temperature;
-
-	// Format with the appropriate unit symbol
-	const unitSymbol = temperatureUnit.value === 'fahrenheit' ? '°F' : '°C';
-	return `${Math.round(temporaryValue)}${unitSymbol}`;
-};
-
-// Format wind speed
-const formatWindSpeed = (speed: number | undefined): string => {
-	if (speed === undefined) return 'N/A';
-
-	let convertedSpeed: number;
-	let unitSymbol: string;
-
-	// Convert from km/h to the selected unit
-	switch (windSpeedUnit.value) {
-		case 'mph': {
-			// Convert km/h to mph (1 km/h = 0.621371 mph)
-			convertedSpeed = speed * 0.621_371;
-			unitSymbol = 'mph';
-			break;
-		}
-		case 'ms': {
-			// Convert km/h to m/s (1 km/h = 0.277778 m/s)
-			convertedSpeed = speed * 0.277_778;
-			unitSymbol = 'm/s';
-			break;
-		}
-		default: {
-			convertedSpeed = speed;
-			unitSymbol = 'km/h';
-			break;
-		}
-	}
-
-	return `${Math.round(convertedSpeed * 10) / 10} ${unitSymbol}`;
-};
-
-// Format precipitation
-const formatPrecipitation = (precipitation: number | undefined): string => {
-	if (precipitation === undefined) return 'N/A';
-
-	let convertedPrecipitation: number;
-	let unitSymbol: string;
-
-	// Convert from mm to the selected unit
-	switch (precipitationUnit.value) {
-		case 'inches': {
-			// Convert mm to inches (1 mm = 0.0393701 inches)
-			convertedPrecipitation = precipitation * 0.039_370_1;
-			unitSymbol = 'inches';
-			break;
-		}
-		default: {
-			convertedPrecipitation = precipitation;
-			unitSymbol = 'mm';
-			break;
-		}
-	}
-
-	return `${Math.round(convertedPrecipitation * 10) / 10} ${unitSymbol}`;
-};
-
-// Format air pressure
-const formatAirPressure = (pressure: number | undefined): string => {
-	if (pressure === undefined) return 'N/A';
-
-	let convertedPressure: number;
-	let unitSymbol: string;
-
-	// Convert from hPa to the selected unit
-	switch (airPressureUnit.value) {
-		case 'inHg': {
-			// Convert hPa to inHg (1 hPa = 0.0295301 inHg)
-			convertedPressure = pressure * 0.029_530_1;
-			unitSymbol = 'inHg';
-			break;
-		}
-		default: {
-			convertedPressure = pressure;
-			unitSymbol = 'hPa';
-			break;
-		}
-	}
-
-	return `${Math.round(convertedPressure * 10) / 10} ${unitSymbol}`;
-};
-
-// Get weather description
-const { locale, t } = useI18n();
-const getWeatherDescription = (code: number): string => {
-	return t(`weather.codes.${code}`) || t('weather.na');
-};
-
-// Format time based on selected format
-const formatTime = (date: Date): string => {
-	if (timeFormat.value === 'twentyFourHour') {
-		return useDateFormat(date, 'HH:mm', { locales: locale.value }).value;
-	} else {
-		// For 12-hour format
-		const formatString = locale.value.startsWith('de') ? 'h A' : 'h A';
-		return useDateFormat(date, formatString, { locales: locale.value }).value;
-	}
-};
-
-// Format weekday name
-const formatWeekday = (date: Date, format: 'long' | 'short' = 'short'): string => {
-	const formatString = format === 'long' ? 'dddd' : 'ddd';
-	return useDateFormat(date, formatString, { locales: locale.value }).value;
-};
-
-// Get current date and time
-const currentDateTime = computed(() => {
-	const now = new Date();
-	const dateFormatted = useDateFormat(now, 'dddd, D MMMM YYYY', { locales: locale.value }).value;
-	return `${dateFormatted}, ${formatTime(now)}`;
-});
-
-// Get formatted date for selected day
-const selectedDayDate = computed((): string => {
-	if (!currentWeather.value || !currentWeather.value.daily.time[selectedDayIndex.value]) {
-		return '';
-	}
-
-	const date = currentWeather.value.daily.time[selectedDayIndex.value];
-	return useDateFormat(date, 'dddd, D MMMM YYYY', { locales: locale.value }).value;
-});
-
-// Get hourly forecast for selected day
-const selectedDayHourlyForecast = computed(() => {
-	if (!currentWeather.value?.hourly) return [];
-
-	const selectedDate = new Date(currentWeather.value.daily.time[selectedDayIndex.value]);
-	const startOfDay = new Date(selectedDate);
-	startOfDay.setHours(0, 0, 0, 0);
-	const endOfDay = new Date(selectedDate);
-	endOfDay.setHours(23, 59, 59, 999);
-
-	return currentWeather.value.hourly.time
-		.map((time, index) => {
-			const hourDate = new Date(time);
-			if (hourDate >= startOfDay && hourDate <= endOfDay) {
-				return {
-					airPressure: currentWeather.value.hourly.pressure_msl?.[index],
-					humidity: currentWeather.value.hourly.relative_humidity_2m[index],
-					isDay: currentWeather.value.hourly.is_day?.[index] === 1,
-					precipitation: currentWeather.value.hourly.precipitation[index],
-					precipitationProbability: currentWeather.value.hourly.precipitation_probability[index],
-					temperature: currentWeather.value.hourly.temperature_2m[index],
-					time: hourDate,
-					weatherCode: currentWeather.value.hourly.weather_code[index],
-					windSpeed: currentWeather.value.hourly.wind_speed_10m[index],
-				};
-			}
-			return;
-		})
-		.filter(Boolean);
-});
-
-// Select a day
-const selectDay = (index: number): void => {
-	selectedDayIndex.value = index;
-};
-
-// Get the label for the forecast view toggle based on current state
-const forecastViewLabel = computed((): string => {
-	return advancedForecastView.value ? t('weather.forecast.advancedView') : t('weather.forecast.simpleView');
-});
 
 // Initialize with default location
 onMounted(async () => {
@@ -334,171 +94,31 @@ onMounted(async () => {
 			<aside
 				class="border-b border-primary-100 bg-white flex flex-col w-full md:border-b-0 md:border-r dark:border-gray-700 dark:bg-gray-800 md:max-w-xs md:overflow-auto">
 				<!-- Location information -->
-				<div class="p-4 border-b border-primary-100 sm:p-5 dark:border-gray-700">
-					<h2 class="text-2xl text-gray-800 font-medium dark:text-gray-100">{{ location.name }}</h2>
-					<p class="text-base text-gray-600 mt-1 dark:text-gray-400">{{ currentDateTime }}</p>
-					<button
-						v-if="!loadingLocation"
-						@click="useCurrentLocation"
-						class="text-base text-white font-medium mt-4 px-4 py-2 rounded-lg bg-primary-600 flex transition-colors items-center hover:bg-primary-700"
-						:disabled="loadingLocation">
-						<div class="i-custom-compass text-xl mr-2"></div>
-						<span>{{ t('app.location.button') }}</span>
-					</button>
-				</div>
+				<LocationDisplay
+					:location-name="location.name"
+					:is-loading="loadingLocation"
+					:on-refresh-location="useCurrentLocation" />
 
 				<!-- Current weather -->
-				<div class="p-4 flex flex-col sm:p-5">
-					<div class="flex items-center justify-between">
-						<div class="flex flex-col">
-							<span class="text-4xl text-gray-800 font-bold font-serif sm:text-5xl dark:text-gray-100">
-								{{ formatTemperature(currentWeather.current.temperature_2m) }}
-							</span>
-							<span class="text-base text-gray-600 font-serif mt-1 dark:text-gray-400">
-								{{ t('weather.feels_like') }}
-								{{ formatTemperature(currentWeather.current.apparent_temperature) }}
-							</span>
-						</div>
-						<ForecastTile
-							:weather-code="currentWeather.current.weather_code"
-							:is-day="isDaytime"
-							class="!p-0 !rounded-none !bg-transparent" />
-					</div>
-
-					<p class="text-xl text-gray-700 font-medium mt-4 dark:text-gray-300">
-						{{ getWeatherDescription(currentWeather.current.weather_code) }}
-					</p>
-
-					<!-- Weather details -->
-					<div class="mt-6 space-y-5">
-						<div class="flex items-center">
-							<div>
-								<div class="text-base text-gray-600 dark:text-gray-400">{{ t('weather.humidity') }}</div>
-								<div class="text-lg text-gray-800 font-medium font-serif dark:text-gray-200">
-									{{ currentWeather.current.relative_humidity_2m }}%
-								</div>
-							</div>
-						</div>
-
-						<div class="flex items-center">
-							<div>
-								<div class="text-base text-gray-600 dark:text-gray-400">{{ t('weather.wind') }}</div>
-								<div class="text-lg text-gray-800 font-medium font-serif dark:text-gray-200">
-									{{ formatWindSpeed(currentWeather.current.wind_speed_10m) }}
-								</div>
-							</div>
-						</div>
-
-						<div class="flex items-center">
-							<div>
-								<div class="text-base text-gray-600 dark:text-gray-400">{{ t('weather.pressure') }}</div>
-								<div class="text-lg text-gray-800 font-medium font-serif dark:text-gray-200">
-									{{ formatAirPressure(currentWeather.current.pressure_msl) }}
-								</div>
-							</div>
-						</div>
-
-						<div class="flex items-center">
-							<div>
-								<div class="text-base text-gray-600 dark:text-gray-400">{{ t('weather.precipitation') }}</div>
-								<div class="text-lg text-gray-800 font-medium font-serif dark:text-gray-200">
-									{{ formatPrecipitation(currentWeather.current.precipitation) }}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<CurrentWeatherDisplay :current-weather="currentWeather" />
 			</aside>
 
 			<!-- Main content area -->
 			<div class="p-4 flex-1 overflow-auto sm:p-6">
 				<div class="flex flex-col gap-6 h-full">
 					<!-- Daily forecast -->
-					<div class="flex-shrink-0">
-						<ForecastCard :title="t('weather.forecast.daily')">
-							<template #header-actions>
-								<div class="flex gap-2 items-center">
-									<ToggleSwitch
-										v-model="advancedForecastView"
-										:label="forecastViewLabel"
-										:aria-label="t('weather.forecast.toggleView')" />
-								</div>
-							</template>
-							<div class="pb-2 flex gap-4 relative overflow-x-auto">
-								<template v-for="(day, index) in currentWeather.daily.time" :key="index">
-									<div class="flex-1 flex-shrink-0 min-w-[140px] relative sm:min-w-[180px]">
-										<!-- Separator between tiles except adjacent to selected tile -->
-										<div
-											v-if="index > 0 && selectedDayIndex !== index && selectedDayIndex !== index - 1"
-											class="bg-gray-200 h-[100%] w-[1px] left-[-8px] absolute dark:bg-gray-700">
-										</div>
-
-										<ForecastTile
-											:title="formatWeekday(day, 'long')"
-											:temperature="formatTemperature(currentWeather.daily.temperature_2m_max[index])"
-											:min-temperature="formatTemperature(currentWeather.daily.temperature_2m_min[index])"
-											:weather-code="currentWeather.daily.weather_code[index]"
-											:is-active="selectedDayIndex === index"
-											:is-day="isDayForDailyForecast(index)"
-											:details="
-												advancedForecastView
-													? [
-															{
-																icon: 'i-custom-temperature',
-																label: t('weather.temperature'),
-																value: formatTemperature(currentWeather.daily.temperature_2m_max[index]),
-																unit: '',
-															},
-															{
-																icon: 'i-custom-precipitation',
-																label: t('weather.precipitation'),
-																value: formatPrecipitation(currentWeather.daily.precipitation_sum[index]),
-																unit: '',
-															},
-															{
-																icon: '',
-																label: t('weather.wind'),
-																value: formatWindSpeed(currentWeather.daily.wind_speed_10m_max[index]),
-																unit: '',
-															},
-															...(currentWeather.daily.pressure_msl_mean
-																? [
-																		{
-																			icon: '',
-																			label: t('weather.pressure'),
-																			value: formatAirPressure(currentWeather.daily.pressure_msl_mean[index]),
-																			unit: '',
-																		},
-																	]
-																: []),
-														]
-													: []
-											"
-											class="cursor-pointer transition-all"
-											@click="selectDay(index)" />
-									</div>
-								</template>
-							</div>
-						</ForecastCard>
-					</div>
+					<DailyForecast
+						:current-weather="currentWeather"
+						:selected-day-index="selectedDayIndex"
+						:advanced-view="advancedForecastView"
+						@select-day="(index) => (selectedDayIndex = index)"
+						@toggle-view="(value) => (advancedForecastView = value)" />
 
 					<!-- Vertical hourly forecast for selected day -->
-					<div class="flex flex-col md:flex-1 md:min-h-0">
-						<ForecastCard :title="selectedDayDate" class="flex flex-col md:h-full">
-							<div class="flex-1 overflow-auto">
-								<VerticalForecast
-									:hourly-data="selectedDayHourlyForecast"
-									:is-advanced-view="advancedForecastView"
-									:time-formatter="formatTime"
-									:temperature-formatter="formatTemperature"
-									:weather-code-to-icon="weatherCodeToIcon"
-									:wind-speed-formatter="formatWindSpeed"
-									:precipitation-formatter="formatPrecipitation"
-									:air-pressure-formatter="formatAirPressure"
-									:translation-function="t" />
-							</div>
-						</ForecastCard>
-					</div>
+					<HourlyForecastContainer
+						:current-weather="currentWeather"
+						:selected-day-index="selectedDayIndex"
+						:is-advanced-view="advancedForecastView" />
 				</div>
 			</div>
 		</div>

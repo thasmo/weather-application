@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
 interface HourlyForecastItem {
 	airPressure: number;
 	humidity: number;
@@ -18,12 +20,13 @@ interface VerticalForecastProperties {
 	precipitationFormatter: (precipitation: number) => string;
 	temperatureFormatter: (temperature: number) => string;
 	timeFormatter: (date: Date) => string;
-	translationFunction: (key: string) => string;
 	weatherCodeToIcon: (code: number, isDay: boolean) => string;
 	windSpeedFormatter: (speed: number) => string;
 }
 
 defineProps<VerticalForecastProperties>();
+
+const { t } = useI18n();
 
 // Determine if an hour is the current hour
 const isCurrentHour = (time: Date): boolean => {
@@ -39,33 +42,33 @@ const isCurrentHour = (time: Date): boolean => {
 				<thead class="bg-white top-0 sticky dark:bg-gray-800">
 					<tr class="border-b border-gray-200 dark:border-gray-700">
 						<th class="text-gray-700 font-medium px-2 py-3 text-left dark:text-gray-300 sm:px-4">
-							{{ translationFunction('weather.time') }}
+							{{ t('weather.time') }}
 						</th>
 						<th class="text-gray-700 font-medium px-2 py-3 text-center dark:text-gray-300 sm:px-4">
-							{{ translationFunction('weather.temperature_short') }}
+							{{ t('weather.temperature_short') }}
 						</th>
 						<th class="text-gray-700 font-medium px-2 py-3 text-center dark:text-gray-300 sm:px-4">
-							{{ translationFunction('weather.condition') }}
+							{{ t('weather.condition') }}
 						</th>
 						<th
 							v-if="isAdvancedView"
 							class="text-gray-700 font-medium px-2 py-3 text-center dark:text-gray-300 sm:px-4">
-							{{ translationFunction('weather.precipitation_short') }}
+							{{ t('weather.precipitation_short') }}
 						</th>
 						<th
 							v-if="isAdvancedView"
 							class="text-gray-700 font-medium px-2 py-3 text-center dark:text-gray-300 sm:px-4">
-							{{ translationFunction('weather.humidity_short') }}
+							{{ t('weather.humidity_short') }}
 						</th>
 						<th
 							v-if="isAdvancedView"
 							class="text-gray-700 font-medium px-2 py-3 text-center dark:text-gray-300 sm:px-4">
-							{{ translationFunction('weather.wind_short') }}
+							{{ t('weather.wind_short') }}
 						</th>
 						<th
 							v-if="isAdvancedView"
 							class="text-gray-700 font-medium px-2 py-3 text-center dark:text-gray-300 sm:px-4">
-							{{ translationFunction('weather.pressure_short') }}
+							{{ t('weather.pressure_short') }}
 						</th>
 					</tr>
 				</thead>
@@ -88,7 +91,7 @@ const isCurrentHour = (time: Date): boolean => {
 						</td>
 						<td class="px-2 py-2 text-center sm:px-4 sm:py-3">
 							<div
-								:class="weatherCodeToIcon(hour.weatherCode, hour.isDay !== false)"
+								:class="weatherCodeToIcon(hour.weatherCode, hour.isDay)"
 								class="text-2xl text-primary-500 mx-auto sm:text-3xl dark:text-primary-400"></div>
 						</td>
 						<td

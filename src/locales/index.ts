@@ -1,5 +1,5 @@
-import de from './de';
-import en from './en';
+import de from '@/locales/de';
+import en from '@/locales/en';
 
 export type MessageSchema = typeof en;
 

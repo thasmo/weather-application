@@ -1,5 +1,11 @@
 import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders';
+import { readdirSync } from 'node:fs';
 import { defineConfig, presetIcons, presetWebFonts, presetWind4, transformerVariantGroup } from 'unocss';
+
+const iconFiles = readdirSync('./src/assets/icons/').map((file) => {
+	const name = file.replace('.svg', '');
+	return `i-custom-${name}`;
+});
 
 export default defineConfig({
 	presets: [
@@ -51,7 +57,7 @@ export default defineConfig({
 			},
 		],
 	],
-	safelist: [],
+	safelist: [...iconFiles],
 	theme: {
 		breakpoints: {
 			lg: '1024px',
