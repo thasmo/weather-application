@@ -6,10 +6,9 @@ import ForecastTile from './forecast-tile.vue';
 
 interface CurrentWeatherProperties {
 	currentWeather: any;
-	isDaytime: boolean;
 }
 
-const properties = defineProps<CurrentWeatherProperties>();
+defineProps<CurrentWeatherProperties>();
 
 const { t } = useI18n();
 const { formatAirPressure, formatPrecipitation, formatTemperature, formatWindSpeed } = useFormat();
@@ -27,14 +26,16 @@ const getWeatherDescription = (code: number): string => {
 				<span class="text-4xl text-gray-800 font-bold font-serif sm:text-5xl dark:text-gray-100">
 					{{ formatTemperature(currentWeather.current.temperature_2m) }}
 				</span>
+
 				<span class="text-base text-gray-600 font-serif mt-1 dark:text-gray-400">
 					{{ t('weather.feels_like') }}
 					{{ formatTemperature(currentWeather.current.apparent_temperature) }}
 				</span>
 			</div>
+
 			<ForecastTile
 				:weather-code="currentWeather.current.weather_code"
-				:is-day="isDaytime"
+				:is-day="currentWeather.current.is_day"
 				class="!p-0 !rounded-none !bg-transparent" />
 		</div>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import CurrentWeatherDisplay from '../components/current-weather-display.vue';
@@ -9,7 +9,6 @@ import LocationDisplay from '../components/location-display.vue';
 import SettingsMenu from '../components/settings-menu.vue';
 import { useFormat } from '../composables/use-format';
 import { useWeather } from '../composables/use-weather';
-import { isDaytimeFromWeatherData } from '../utils/weather-utils';
 
 // Get i18n
 const { t } = useI18n();
@@ -24,11 +23,6 @@ const { airPressureUnit, precipitationUnit, temperatureUnit, timeFormat, windSpe
 // Initialize weather composable
 const { currentWeather, error, fetchWeatherData, loading, loadingLocation, location, useCurrentLocation } =
 	useWeather();
-
-// Determine if it's currently daytime based on sunrise and sunset times
-const isDaytime = computed((): boolean => {
-	return isDaytimeFromWeatherData(currentWeather.value);
-});
 
 // Initialize with default location
 onMounted(async () => {
@@ -106,7 +100,7 @@ onMounted(async () => {
 					:on-refresh-location="useCurrentLocation" />
 
 				<!-- Current weather -->
-				<CurrentWeatherDisplay :current-weather="currentWeather" :is-daytime="isDaytime" />
+				<CurrentWeatherDisplay :current-weather="currentWeather" />
 			</aside>
 
 			<!-- Main content area -->
@@ -116,7 +110,6 @@ onMounted(async () => {
 					<DailyForecast
 						:current-weather="currentWeather"
 						:selected-day-index="selectedDayIndex"
-						:is-daytime="isDaytime"
 						:advanced-view="advancedForecastView"
 						@select-day="(index) => (selectedDayIndex = index)"
 						@toggle-view="(value) => (advancedForecastView = value)" />

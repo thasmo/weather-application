@@ -4,6 +4,7 @@ import { ref } from 'vue';
 interface CurrentWeather {
 	apparent_temperature: number;
 	cloud_cover: number;
+	is_day: boolean;
 	precipitation: number;
 	pressure_msl: number;
 	rain: number;
@@ -29,7 +30,7 @@ interface DailyForecast {
 }
 
 interface HourlyForecast {
-	is_day: number[];
+	is_day: boolean[];
 	precipitation: number[];
 	precipitation_probability: number[];
 	relative_humidity_2m: number[];
@@ -131,7 +132,7 @@ export function useWeather() {
 			const url = 'https://api.open-meteo.com/v1/forecast';
 			const parameters = {
 				current:
-					'temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,rain,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,pressure_msl',
+					'temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,rain,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,pressure_msl,is_day',
 				daily:
 					'weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,relative_humidity_2m_max,relative_humidity_2m_min,wind_speed_10m_max,sunrise,sunset',
 				forecast_days: 7,
@@ -166,6 +167,7 @@ export function useWeather() {
 
 			// Helper to process time values
 			const processTime = (timeValue: number): Date => {
+				// Convert directly to local time using the provided UTC offset
 				return new Date((timeValue + utcOffsetSeconds) * 1000);
 			};
 
@@ -173,6 +175,7 @@ export function useWeather() {
 			const currentWeatherData: CurrentWeather = {
 				apparent_temperature: roundToOneDecimal(current.variables(2)?.value() || 0),
 				cloud_cover: roundToOneDecimal(current.variables(6)?.value() || 0),
+				is_day: Boolean(current.variables(10)?.value() || 0),
 				precipitation: roundToOneDecimal(current.variables(3)?.value() || 0),
 				pressure_msl: roundToOneDecimal(current.variables(9)?.value() || 0),
 				rain: roundToOneDecimal(current.variables(4)?.value() || 0),
@@ -220,7 +223,7 @@ export function useWeather() {
 			);
 
 			const hourlyForecast: HourlyForecast = {
-				is_day: [...(hourly.variables(6)?.valuesArray() || [])].map(Number),
+				is_day: [...(hourly.variables(6)?.valuesArray() || [])].map(Number).map((value) => value === 1),
 				precipitation: [...(hourly.variables(2)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),

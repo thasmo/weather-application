@@ -16,7 +16,7 @@ interface HourlyForecastContainerProperties {
 
 const properties = defineProps<HourlyForecastContainerProperties>();
 
-const { locale, t } = useI18n();
+const { locale } = useI18n();
 const { formatAirPressure, formatPrecipitation, formatTemperature, formatTime, formatWindSpeed } = useFormat();
 
 // Get formatted date for selected day
@@ -46,7 +46,7 @@ const hourlyForecastData = computed(() => {
 				return {
 					airPressure: properties.currentWeather.hourly.pressure_msl?.[index],
 					humidity: properties.currentWeather.hourly.relative_humidity_2m[index],
-					isDay: properties.currentWeather.hourly.is_day?.[index] === 1,
+					isDay: properties.currentWeather.hourly.is_day?.[index],
 					precipitation: properties.currentWeather.hourly.precipitation[index],
 					precipitationProbability: properties.currentWeather.hourly.precipitation_probability[index],
 					temperature: properties.currentWeather.hourly.temperature_2m[index],

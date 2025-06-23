@@ -91,7 +91,7 @@ const isCurrentHour = (time: Date): boolean => {
 						</td>
 						<td class="px-2 py-2 text-center sm:px-4 sm:py-3">
 							<div
-								:class="weatherCodeToIcon(hour.weatherCode, hour.isDay === true)"
+								:class="weatherCodeToIcon(hour.weatherCode, hour.isDay)"
 								class="text-2xl text-primary-500 mx-auto sm:text-3xl dark:text-primary-400"></div>
 						</td>
 						<td

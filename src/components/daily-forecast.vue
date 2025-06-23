@@ -3,7 +3,6 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { useFormat } from '../composables/use-format';
-import { isDayForDailyForecast } from '../utils/weather-utils';
 import ForecastCard from './forecast-card.vue';
 import ForecastTile from './forecast-tile.vue';
 import ToggleSwitch from './toggle-switch.vue';
@@ -11,7 +10,6 @@ import ToggleSwitch from './toggle-switch.vue';
 interface DailyForecastProperties {
 	advancedView: boolean;
 	currentWeather: any;
-	isDaytime: boolean;
 	selectedDayIndex: number;
 }
 
@@ -66,7 +64,7 @@ const toggleAdvancedView = (value: boolean): void => {
 							:min-temperature="formatTemperature(currentWeather.daily.temperature_2m_min[index])"
 							:weather-code="currentWeather.daily.weather_code[index]"
 							:is-active="selectedDayIndex === index"
-							:is-day="isDayForDailyForecast(currentWeather, index, isDaytime)"
+							:is-day="true"
 							:details="
 								advancedView
 									? [
