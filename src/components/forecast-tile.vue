@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
+import { useFormat } from '@/composables/use-format';
 import { weatherCodeToIcon } from '@/utils/weather-icon-mapper';
 
 interface ForecastTileProperties {
@@ -21,6 +22,7 @@ interface WeatherDetail {
 }
 
 const properties = defineProps<ForecastTileProperties>();
+const { formatTemperature } = useFormat();
 
 const weatherIcon = computed((): string => {
 	return weatherCodeToIcon(properties.weatherCode, properties.isDay ?? true);
@@ -43,12 +45,12 @@ const weatherIcon = computed((): string => {
 		<div class="flex items-center justify-between">
 			<div class="flex flex-col">
 				<span class="text-lg text-gray-800 font-medium font-serif sm:text-xl dark:text-gray-200">
-					{{ temperature }}
+					{{ formatTemperature(temperature) }}
 				</span>
 				<span
 					v-if="minTemperature !== undefined"
 					class="text-sm text-gray-500 font-serif sm:text-base dark:text-gray-400">
-					{{ minTemperature }}
+					{{ formatTemperature(minTemperature) }}
 				</span>
 			</div>
 

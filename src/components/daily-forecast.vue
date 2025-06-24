@@ -62,8 +62,8 @@ const toggleAdvancedView = (value: boolean): void => {
 
 						<ForecastTile
 							:title="formatWeekday(day, 'long')"
-							:temperature="formatTemperature(currentWeather.daily.temperature_2m_max[index])"
-							:min-temperature="formatTemperature(currentWeather.daily.temperature_2m_min[index])"
+							:temperature="currentWeather.daily.temperature_2m_max[index]"
+							:min-temperature="currentWeather.daily.temperature_2m_min[index]"
 							:weather-code="currentWeather.daily.weather_code[index]"
 							:is-active="selectedDayIndex === index"
 							:is-day="true"
