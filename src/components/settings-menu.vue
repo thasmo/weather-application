@@ -8,6 +8,7 @@ import SelectDropdown from '@/components/select-dropdown.vue';
 import SettingsDrawer from '@/components/settings-drawer.vue';
 import SettingsPopover from '@/components/settings-popover.vue';
 import ThemeSwitcher from '@/components/theme-switcher.vue';
+import ToggleSwitch from '@/components/toggle-switch.vue';
 import { useSettingsStore } from '@/stores/settings-store';
 
 const settingsStore = useSettingsStore();
@@ -34,6 +35,10 @@ const handleTimeFormatChange = (value: string): void => {
 
 const handleWindSpeedUnitChange = (value: string): void => {
 	settingsStore.updateWindSpeedUnit(value as 'kmh' | 'mph' | 'ms');
+};
+
+const handleAdvancedViewChange = (value: boolean): void => {
+	settingsStore.updateAdvancedView(value);
 };
 
 const toggleSettings = (): void => {
@@ -100,6 +105,19 @@ const closeSettings = (): void => {
 									{ value: 'fahrenheit', label: t('app.temperature.fahrenheit').split(' ')[0] },
 								]"
 								@update:model-value="handleTemperatureUnitChange" />
+						</div>
+
+						<div class="flex flex-col gap-1">
+							<label class="text-sm text-gray-600 dark:(text-gray-400)">
+								{{ t('weather.forecast.viewMode') }}
+							</label>
+							<ToggleSwitch
+								:model-value="settingsStore.advancedView"
+								:label="
+									settingsStore.advancedView ? t('weather.forecast.advancedView') : t('weather.forecast.simpleView')
+								"
+								:aria-label="t('weather.forecast.toggleView')"
+								@update:model-value="handleAdvancedViewChange" />
 						</div>
 
 						<div class="flex flex-col gap-1">
@@ -220,6 +238,19 @@ const closeSettings = (): void => {
 								{ value: 'fahrenheit', label: t('app.temperature.fahrenheit').split(' ')[0] },
 							]"
 							@update:model-value="handleTemperatureUnitChange" />
+					</div>
+
+					<div class="flex flex-col gap-1">
+						<label class="text-sm text-gray-600 dark:(text-gray-400)">
+							{{ t('weather.forecast.viewMode') }}
+						</label>
+						<ToggleSwitch
+							:model-value="settingsStore.advancedView"
+							:label="
+								settingsStore.advancedView ? t('weather.forecast.advancedView') : t('weather.forecast.simpleView')
+							"
+							:aria-label="t('weather.forecast.toggleView')"
+							@update:model-value="handleAdvancedViewChange" />
 					</div>
 
 					<div class="flex flex-col gap-1">

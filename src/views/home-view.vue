@@ -9,11 +9,12 @@ import LocationDisplay from '@/components/location-display.vue';
 import SettingsMenu from '@/components/settings-menu.vue';
 import { useLocationService } from '@/composables/use-geolocation';
 import { useWeather } from '@/composables/use-weather';
+import { useSettingsStore } from '@/stores/settings-store';
 
 const { t } = useI18n();
 
 const selectedDayIndex = ref(0);
-const advancedForecastView = ref(false);
+const settingsStore = useSettingsStore();
 
 const { error: locationError, loadingLocation, location, useCurrentLocation } = useLocationService();
 
@@ -89,16 +90,15 @@ const handleLocationUpdate = async (): Promise<void> => {
 					<DailyForecast
 						:daily="daily"
 						:selected-day-index="selectedDayIndex"
-						:advanced-view="advancedForecastView"
-						@select-day="(index) => (selectedDayIndex = index)"
-						@toggle-view="(value) => (advancedForecastView = value)" />
+						:advanced-view="settingsStore.advancedView"
+						@select-day="(index) => (selectedDayIndex = index)" />
 
 					<HourlyForecastContainer
 						:current="current"
 						:daily="daily"
 						:hourly="hourly"
 						:selected-day-index="selectedDayIndex"
-						:is-advanced-view="advancedForecastView" />
+						:is-advanced-view="settingsStore.advancedView" />
 				</div>
 			</div>
 		</div>
