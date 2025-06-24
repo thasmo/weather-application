@@ -7,7 +7,6 @@ import DailyForecast from '@/components/daily-forecast.vue';
 import HourlyForecastContainer from '@/components/hourly-forecast-container.vue';
 import LocationDisplay from '@/components/location-display.vue';
 import SettingsMenu from '@/components/settings-menu.vue';
-import { useFormat } from '@/composables/use-format';
 import { useWeather } from '@/composables/use-weather';
 
 // Get i18n
@@ -16,9 +15,6 @@ const { t } = useI18n();
 // State variables
 const selectedDayIndex = ref(0);
 const advancedForecastView = ref(false); // Set simple view as default
-
-// Initialize format composable with default values
-const { airPressureUnit, precipitationUnit, temperatureUnit, timeFormat, windSpeedUnit } = useFormat();
 
 // Initialize weather composable
 const { currentWeather, error, fetchWeatherData, loading, loadingLocation, location, useCurrentLocation } =
@@ -44,17 +40,7 @@ onMounted(async () => {
 
 			<div class="flex flex-wrap gap-2 items-center sm:gap-3">
 				<!-- Settings menu -->
-				<SettingsMenu
-					:time-format="timeFormat"
-					:temperature-unit="temperatureUnit"
-					:wind-speed-unit="windSpeedUnit"
-					:precipitation-unit="precipitationUnit"
-					:air-pressure-unit="airPressureUnit"
-					@update-time-format="(value) => (timeFormat = value)"
-					@update-temperature-unit="(value) => (temperatureUnit = value)"
-					@update-wind-speed-unit="(value) => (windSpeedUnit = value)"
-					@update-precipitation-unit="(value) => (precipitationUnit = value)"
-					@update-air-pressure-unit="(value) => (airPressureUnit = value)" />
+				<SettingsMenu />
 			</div>
 		</header>
 
