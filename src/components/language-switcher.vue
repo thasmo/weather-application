@@ -30,7 +30,6 @@ watch(
 	{ immediate: true },
 );
 
-// Available locales with their translated labels
 const localeOptions = computed(() => {
 	const availableLocales: Locale[] = ['en', 'de'];
 	return availableLocales.map((localeOption) => ({
@@ -39,7 +38,6 @@ const localeOptions = computed(() => {
 	}));
 });
 
-// Handle locale change
 const updateLocale = (value: string): void => {
 	settingsStore.updateLocale(value);
 	locale.value = value as Locale;

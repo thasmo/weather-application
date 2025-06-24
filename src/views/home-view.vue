@@ -10,20 +10,15 @@ import SettingsMenu from '@/components/settings-menu.vue';
 import { useLocationService } from '@/composables/use-geolocation';
 import { useWeather } from '@/composables/use-weather';
 
-// Get i18n
 const { t } = useI18n();
 
-// State variables
 const selectedDayIndex = ref(0);
-const advancedForecastView = ref(false); // Set simple view as default
+const advancedForecastView = ref(false);
 
-// Initialize location service
 const { error: locationError, loadingLocation, location, useCurrentLocation } = useLocationService();
 
-// Initialize weather composable with location from location service
 const { currentWeather, error: weatherError, loading } = useWeather({ location });
 
-// Handle location update
 const handleLocationUpdate = async (): Promise<void> => {
 	try {
 		await useCurrentLocation();
@@ -86,7 +81,7 @@ const handleLocationUpdate = async (): Promise<void> => {
 					:is-loading="loadingLocation"
 					:on-refresh-location="handleLocationUpdate" />
 
-				<CurrentWeatherDisplay :current-weather="currentWeather" />
+				<CurrentWeatherDisplay :data="currentWeather" />
 			</aside>
 
 			<div class="p-4 flex-1 overflow-auto sm:(p-6)">

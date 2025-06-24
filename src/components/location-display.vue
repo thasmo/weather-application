@@ -3,13 +3,11 @@ import { useI18n } from 'vue-i18n';
 
 import { useFormat } from '@/composables/use-format';
 
-interface LocationDisplayProperties {
+defineProps<{
 	isLoading: boolean;
 	locationName: string;
 	onRefreshLocation: () => void;
-}
-
-defineProps<LocationDisplayProperties>();
+}>();
 
 const { t } = useI18n();
 const { currentDateTime } = useFormat();
@@ -24,7 +22,7 @@ const { currentDateTime } = useFormat();
 			@click="onRefreshLocation"
 			class="text-base text-white font-medium mt-4 px-4 py-2 rounded-lg bg-primary-600 flex transition-colors items-center hover:(bg-primary-700)"
 			:disabled="isLoading">
-			<div class="i-custom-compass text-xl mr-2"></div>
+			<span class="i-custom-compass text-xl mr-2"></span>
 			<span>{{ t('app.location.button') }}</span>
 		</button>
 	</div>

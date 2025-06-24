@@ -2,58 +2,30 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 
 type DrawerPosition = 'bottom' | 'left' | 'right';
-interface DrawerProperties {
-	/**
-	 * Whether to close the drawer when pressing escape key
-	 * @default true
-	 */
-	readonly closeOnEsc?: boolean;
-	/**
-	 * Whether to close the drawer when clicking outside
-	 * @default true
-	 */
-	readonly closeOnOutsideClick?: boolean;
-	/**
-	 * Whether to disable closing the drawer entirely
-	 * @default false
-	 */
-	readonly disableClose?: boolean;
-	/**
-	 * Whether to show an overlay behind the drawer
-	 * @default true
-	 */
-	readonly hasOverlay?: boolean;
-	/**
-	 * Controls the visibility of the drawer
-	 */
-	readonly isOpen: boolean;
-	/**
-	 * Position of the drawer on desktop
-	 * @default 'right'
-	 */
-	readonly position?: DrawerPosition;
-	/**
-	 * Size of the drawer
-	 * @default 'medium'
-	 */
-	readonly size?: DrawerSize;
-}
 
 type DrawerSize = 'large' | 'medium' | 'small';
 
-const properties = withDefaults(defineProps<DrawerProperties>(), {
-	closeOnEsc: true,
-	closeOnOutsideClick: true,
-	disableClose: false,
-	hasOverlay: true,
-	position: 'right',
-	size: 'medium',
-});
+const properties = withDefaults(
+	defineProps<{
+		closeOnEsc?: boolean;
+		closeOnOutsideClick?: boolean;
+		disableClose?: boolean;
+		hasOverlay?: boolean;
+		isOpen: boolean;
+		position?: DrawerPosition;
+		size?: DrawerSize;
+	}>(),
+	{
+		closeOnEsc: true,
+		closeOnOutsideClick: true,
+		disableClose: false,
+		hasOverlay: true,
+		position: 'right',
+		size: 'medium',
+	},
+);
 
 const emit = defineEmits<{
-	/**
-	 * Emitted when the drawer should close
-	 */
 	(event: 'close'): void;
 }>();
 
@@ -90,9 +62,9 @@ const drawerClasses = computed(() => {
 	};
 
 	const sizeClasses = {
-		large: isMobile.value ? 'max-h-[90vh] min-h-[10rem]' : properties.position === 'bottom' ? 'h-2/3' : 'w-96',
-		medium: isMobile.value ? 'max-h-[80vh] min-h-[8rem]' : properties.position === 'bottom' ? 'h-1/2' : 'w-80',
-		small: isMobile.value ? 'max-h-[70vh] min-h-[6rem]' : properties.position === 'bottom' ? 'h-1/3' : 'w-64',
+		large: isMobile.value ? 'max-h-90vh min-h-10rem' : properties.position === 'bottom' ? 'h-2/3' : 'w-96',
+		medium: isMobile.value ? 'max-h-80vh min-h-8rem' : properties.position === 'bottom' ? 'h-1/2' : 'w-80',
+		small: isMobile.value ? 'max-h-70vh min-h-6rem' : properties.position === 'bottom' ? 'h-1/3' : 'w-64',
 	};
 
 	const transformClasses = {
