@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import CurrentWeatherDisplay from '@/components/current-weather-display.vue';
@@ -7,6 +7,7 @@ import DailyForecast from '@/components/daily-forecast.vue';
 import HourlyForecastContainer from '@/components/hourly-forecast-container.vue';
 import LocationDisplay from '@/components/location-display.vue';
 import SettingsMenu from '@/components/settings-menu.vue';
+import { useLocationService } from '@/composables/use-geolocation';
 import { useWeather } from '@/composables/use-weather';
 
 // Get i18n
@@ -16,14 +17,20 @@ const { t } = useI18n();
 const selectedDayIndex = ref(0);
 const advancedForecastView = ref(false); // Set simple view as default
 
-// Initialize weather composable
-const { currentWeather, error, fetchWeatherData, loading, loadingLocation, location, useCurrentLocation } =
-	useWeather();
+// Initialize location service
+const { error: locationError, loadingLocation, location, useCurrentLocation } = useLocationService();
 
-// Initialize with default location
-onMounted(async () => {
-	await fetchWeatherData(location.value.latitude, location.value.longitude);
-});
+// Initialize weather composable with location from location service
+const { currentWeather, error: weatherError, loading } = useWeather({ location });
+
+// Handle location update
+const handleLocationUpdate = async (): Promise<void> => {
+	try {
+		await useCurrentLocation();
+	} catch (error) {
+		console.error('Error updating location:', error);
+	}
+};
 </script>
 
 <template>
@@ -51,12 +58,12 @@ onMounted(async () => {
 		</div>
 
 		<!-- Error state -->
-		<div v-else-if="error" class="m-6 p-6 rounded-xl bg-red-50 dark:bg-red-900/30">
+		<div v-else-if="weatherError || locationError" class="m-6 p-6 rounded-xl bg-red-50 dark:bg-red-900/30">
 			<div class="flex items-center">
 				<div class="i-custom-not-available text-4xl text-red-500 mr-4"></div>
 				<h2 class="text-2xl text-red-800 font-medium dark:text-red-300">{{ t('app.error') }}</h2>
 			</div>
-			<p class="text-lg text-red-700 mt-3 leading-comfortable dark:text-red-300">{{ error }}</p>
+			<p class="text-lg text-red-700 mt-3 leading-comfortable dark:text-red-300">{{ weatherError || locationError }}</p>
 		</div>
 
 		<!-- Initial state - no weather data -->
@@ -64,7 +71,7 @@ onMounted(async () => {
 			<div class="p-6 text-center rounded-2xl bg-white max-w-md sm:p-8 dark:bg-gray-800">
 				<h1 class="text-3xl text-gray-800 font-bold mb-6 sm:text-4xl dark:text-gray-100">{{ t('app.title') }}</h1>
 				<button
-					@click="useCurrentLocation"
+					@click="handleLocationUpdate"
 					class="text-lg text-white font-medium mx-auto mt-4 px-6 py-3 rounded-lg bg-primary-600 flex transition-colors items-center hover:bg-primary-700"
 					:disabled="loadingLocation">
 					<div class="i-custom-compass text-2xl mr-3"></div>
@@ -83,7 +90,7 @@ onMounted(async () => {
 				<LocationDisplay
 					:location-name="location.name"
 					:is-loading="loadingLocation"
-					:on-refresh-location="useCurrentLocation" />
+					:on-refresh-location="handleLocationUpdate" />
 
 				<!-- Current weather -->
 				<CurrentWeatherDisplay :current-weather="currentWeather" />

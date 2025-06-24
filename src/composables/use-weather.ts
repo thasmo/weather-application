@@ -1,5 +1,7 @@
+import type { Ref } from 'vue';
+
 import { fetchWeatherApi } from 'openmeteo';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 export interface CurrentWeather {
 	apparent_temperature: number;
@@ -46,29 +48,15 @@ interface LocationData {
 	name: string;
 }
 
+interface UseWeatherOptions {
+	location: Ref<LocationData>;
+}
+
 interface WeatherData {
 	current: CurrentWeather;
 	daily: DailyForecast;
 	hourly: HourlyForecast;
 }
-
-/**
- * Gets the user's current geolocation
- */
-const getUserLocation = (): Promise<GeolocationPosition> => {
-	return new Promise((resolve, reject) => {
-		if (!navigator.geolocation) {
-			reject(new Error('Geolocation is not supported by your browser'));
-			return;
-		}
-
-		navigator.geolocation.getCurrentPosition(resolve, reject, {
-			enableHighAccuracy: true,
-			maximumAge: 0,
-			timeout: 5000,
-		});
-	});
-};
 
 /**
  * Rounds a number to one decimal place
@@ -77,51 +65,13 @@ const roundToOneDecimal = (value: number): number => {
 	return Math.round(value * 10) / 10;
 };
 
-export function useWeather() {
+export function useWeather(options: UseWeatherOptions) {
+	const { location } = options;
+
 	// State variables
 	const loading = ref(true);
-	const loadingLocation = ref(false);
 	const error = ref<string | undefined>(undefined);
 	const currentWeather = ref<undefined | WeatherData>(undefined);
-	const location = ref<LocationData>({
-		latitude: 47.8095, // Salzburg, Austria coordinates
-		longitude: 13.055,
-		name: 'Salzburg, Austria',
-	});
-
-	// Use current location button handler
-	const useCurrentLocation = async (): Promise<void> => {
-		try {
-			loadingLocation.value = true;
-			const position = await getUserLocation();
-
-			location.value = {
-				latitude: roundToOneDecimal(position.coords.latitude),
-				longitude: roundToOneDecimal(position.coords.longitude),
-				name: 'Your Location',
-			};
-
-			// Try to get location name using reverse geocoding
-			try {
-				const response = await fetch(
-					`https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}&zoom=10`,
-				);
-				const data = await response.json();
-				if (data.address?.city || data.address?.town || data.address?.village) {
-					location.value.name = data.address?.city || data.address?.town || data.address?.village;
-				}
-			} catch (error_) {
-				console.error('Error getting location name:', error_);
-			}
-
-			await fetchWeatherData(position.coords.latitude, position.coords.longitude);
-		} catch (error_) {
-			console.error('Error getting user location:', error_);
-			error.value = error_ instanceof Error ? error_.message : 'Failed to get your location';
-		} finally {
-			loadingLocation.value = false;
-		}
-	};
 
 	// Fetch weather data
 	const fetchWeatherData = async (lat: number, lon: number): Promise<void> => {
@@ -258,13 +208,19 @@ export function useWeather() {
 		}
 	};
 
+	// Watch for location changes and update weather data
+	watch(
+		location,
+		(newLocation) => {
+			fetchWeatherData(newLocation.latitude, newLocation.longitude);
+		},
+		{ immediate: true },
+	);
+
 	return {
 		currentWeather,
 		error,
 		fetchWeatherData,
 		loading,
-		loadingLocation,
-		location,
-		useCurrentLocation,
 	};
 }
