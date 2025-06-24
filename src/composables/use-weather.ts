@@ -18,7 +18,7 @@ export interface CurrentWeather {
 	wind_speed_10m: number;
 }
 
-interface DailyForecast {
+export interface DailyForecast {
 	precipitation_sum: number[];
 	relative_humidity_2m_max: number[];
 	relative_humidity_2m_min: number[];
@@ -31,7 +31,7 @@ interface DailyForecast {
 	wind_speed_10m_max: number[];
 }
 
-interface HourlyForecast {
+export interface HourlyForecast {
 	is_day: boolean[];
 	precipitation: number[];
 	precipitation_probability: number[];
@@ -52,12 +52,6 @@ interface UseWeatherOptions {
 	location: Ref<LocationData>;
 }
 
-interface WeatherData {
-	current: CurrentWeather;
-	daily: DailyForecast;
-	hourly: HourlyForecast;
-}
-
 const roundToOneDecimal = (value: number): number => {
 	return Math.round(value * 10) / 10;
 };
@@ -67,7 +61,9 @@ export function useWeather(options: UseWeatherOptions) {
 
 	const loading = ref(true);
 	const error = ref<string | undefined>(undefined);
-	const currentWeather = ref<undefined | WeatherData>(undefined);
+	const current = ref<CurrentWeather | undefined>(undefined);
+	const daily = ref<DailyForecast | undefined>(undefined);
+	const hourly = ref<HourlyForecast | undefined>(undefined);
 
 	const fetchWeatherData = async (lat: number, lon: number): Promise<void> => {
 		try {
@@ -85,7 +81,7 @@ export function useWeather(options: UseWeatherOptions) {
 					'temperature_2m,precipitation_probability,precipitation,weather_code,relative_humidity_2m,wind_speed_10m,is_day',
 				latitude: [lat],
 				longitude: [lon],
-				timezone: 'auto',
+				timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 			};
 
 			const responses = await fetchWeatherApi(url, parameters);
@@ -98,93 +94,94 @@ export function useWeather(options: UseWeatherOptions) {
 			const range = (start: number, stop: number, step: number): number[] =>
 				Array.from({ length: (stop - start) / step }, (_, index) => start + index * step);
 
-			const utcOffsetSeconds = response.utcOffsetSeconds() || 0;
-			const current = response.current();
-			const daily = response.daily();
-			const hourly = response.hourly();
+			const currentData = response.current();
+			const dailyData = response.daily();
+			const hourlyData = response.hourly();
 
-			if (!current || !daily || !hourly) {
+			if (!currentData || !dailyData || !hourlyData) {
 				throw new Error('Incomplete weather data received');
 			}
 
 			const processTime = (timeValue: number): Date => {
-				return new Date((timeValue + utcOffsetSeconds) * 1000);
+				return new Date(timeValue * 1000);
 			};
 
 			const currentWeatherData: CurrentWeather = {
-				apparent_temperature: roundToOneDecimal(current.variables(2)?.value() || 0),
-				cloud_cover: roundToOneDecimal(current.variables(6)?.value() || 0),
-				is_day: Boolean(current.variables(10)?.value() || 0),
-				precipitation: roundToOneDecimal(current.variables(3)?.value() || 0),
-				pressure_msl: roundToOneDecimal(current.variables(9)?.value() || 0),
-				rain: roundToOneDecimal(current.variables(4)?.value() || 0),
-				relative_humidity_2m: roundToOneDecimal(current.variables(1)?.value() || 0),
-				temperature_2m: roundToOneDecimal(current.variables(0)?.value() || 0),
-				time: processTime(Number(current.time())),
-				weather_code: current.variables(5)?.value() || 0,
-				wind_direction_10m: roundToOneDecimal(current.variables(8)?.value() || 0),
-				wind_speed_10m: roundToOneDecimal(current.variables(7)?.value() || 0),
+				apparent_temperature: roundToOneDecimal(currentData.variables(2)?.value() || 0),
+				cloud_cover: roundToOneDecimal(currentData.variables(6)?.value() || 0),
+				is_day: Boolean(currentData.variables(10)?.value() || 0),
+				precipitation: roundToOneDecimal(currentData.variables(3)?.value() || 0),
+				pressure_msl: roundToOneDecimal(currentData.variables(9)?.value() || 0),
+				rain: roundToOneDecimal(currentData.variables(4)?.value() || 0),
+				relative_humidity_2m: roundToOneDecimal(currentData.variables(1)?.value() || 0),
+				temperature_2m: roundToOneDecimal(currentData.variables(0)?.value() || 0),
+				time: processTime(Number(currentData.time())),
+				weather_code: currentData.variables(5)?.value() || 0,
+				wind_direction_10m: roundToOneDecimal(currentData.variables(8)?.value() || 0),
+				wind_speed_10m: roundToOneDecimal(currentData.variables(7)?.value() || 0),
 			};
 
-			const dailyTimes = range(Number(daily.time()), Number(daily.timeEnd()), daily.interval()).map((t) =>
+			const dailyTimes = range(Number(dailyData.time()), Number(dailyData.timeEnd()), dailyData.interval()).map((t) =>
 				processTime(t),
 			);
 
-			const dailyForecast: DailyForecast = {
-				precipitation_sum: [...(daily.variables(3)?.valuesArray() || [])]
+			const dailyForecastData: DailyForecast = {
+				precipitation_sum: [...(dailyData.variables(3)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
-				relative_humidity_2m_max: [...(daily.variables(4)?.valuesArray() || [])]
+				relative_humidity_2m_max: [...(dailyData.variables(4)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
-				relative_humidity_2m_min: [...(daily.variables(5)?.valuesArray() || [])]
+				relative_humidity_2m_min: [...(dailyData.variables(5)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
-				sunrise: [...(daily.variables(7)?.valuesArray() || [])].map(Number).map((timeValue) => processTime(timeValue)),
-				sunset: [...(daily.variables(8)?.valuesArray() || [])].map(Number).map((timeValue) => processTime(timeValue)),
-				temperature_2m_max: [...(daily.variables(1)?.valuesArray() || [])]
+				sunrise: [...(dailyData.variables(7)?.valuesArray() || [])]
+					.map(Number)
+					.map((timeValue) => processTime(timeValue)),
+				sunset: [...(dailyData.variables(8)?.valuesArray() || [])]
+					.map(Number)
+					.map((timeValue) => processTime(timeValue)),
+				temperature_2m_max: [...(dailyData.variables(1)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
-				temperature_2m_min: [...(daily.variables(2)?.valuesArray() || [])]
+				temperature_2m_min: [...(dailyData.variables(2)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
 				time: dailyTimes,
-				weather_code: [...(daily.variables(0)?.valuesArray() || [])].map(Number),
-				wind_speed_10m_max: [...(daily.variables(6)?.valuesArray() || [])]
+				weather_code: [...(dailyData.variables(0)?.valuesArray() || [])].map(Number),
+				wind_speed_10m_max: [...(dailyData.variables(6)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
 			};
 
-			const hourlyTimes = range(Number(hourly.time()), Number(hourly.timeEnd()), hourly.interval()).map((t) =>
-				processTime(t),
+			const hourlyTimes = range(Number(hourlyData.time()), Number(hourlyData.timeEnd()), hourlyData.interval()).map(
+				(t) => processTime(t),
 			);
 
-			const hourlyForecast: HourlyForecast = {
-				is_day: [...(hourly.variables(6)?.valuesArray() || [])].map(Number).map((value) => value === 1),
-				precipitation: [...(hourly.variables(2)?.valuesArray() || [])]
+			const hourlyForecastData: HourlyForecast = {
+				is_day: [...(hourlyData.variables(6)?.valuesArray() || [])].map(Number).map((value) => value === 1),
+				precipitation: [...(hourlyData.variables(2)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
-				precipitation_probability: [...(hourly.variables(1)?.valuesArray() || [])]
+				precipitation_probability: [...(hourlyData.variables(1)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
-				relative_humidity_2m: [...(hourly.variables(4)?.valuesArray() || [])]
+				relative_humidity_2m: [...(hourlyData.variables(4)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
-				temperature_2m: [...(hourly.variables(0)?.valuesArray() || [])]
+				temperature_2m: [...(hourlyData.variables(0)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
 				time: hourlyTimes,
-				weather_code: [...(hourly.variables(3)?.valuesArray() || [])].map(Number),
-				wind_speed_10m: [...(hourly.variables(5)?.valuesArray() || [])]
+				weather_code: [...(hourlyData.variables(3)?.valuesArray() || [])].map(Number),
+				wind_speed_10m: [...(hourlyData.variables(5)?.valuesArray() || [])]
 					.map(Number)
 					.map((value) => roundToOneDecimal(value)),
 			};
 
-			currentWeather.value = {
-				current: currentWeatherData,
-				daily: dailyForecast,
-				hourly: hourlyForecast,
-			};
+			current.value = currentWeatherData;
+			daily.value = dailyForecastData;
+			hourly.value = hourlyForecastData;
 
 			loading.value = false;
 		} catch (error_) {
@@ -203,9 +200,10 @@ export function useWeather(options: UseWeatherOptions) {
 	);
 
 	return {
-		currentWeather,
+		current,
+		daily,
 		error,
-		fetchWeatherData,
+		hourly,
 		loading,
 	};
 }
