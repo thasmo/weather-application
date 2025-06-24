@@ -58,9 +58,6 @@ interface WeatherData {
 	hourly: HourlyForecast;
 }
 
-/**
- * Rounds a number to one decimal place
- */
 const roundToOneDecimal = (value: number): number => {
 	return Math.round(value * 10) / 10;
 };
@@ -68,12 +65,10 @@ const roundToOneDecimal = (value: number): number => {
 export function useWeather(options: UseWeatherOptions) {
 	const { location } = options;
 
-	// State variables
 	const loading = ref(true);
 	const error = ref<string | undefined>(undefined);
 	const currentWeather = ref<undefined | WeatherData>(undefined);
 
-	// Fetch weather data
 	const fetchWeatherData = async (lat: number, lon: number): Promise<void> => {
 		try {
 			loading.value = true;
@@ -100,28 +95,22 @@ export function useWeather(options: UseWeatherOptions) {
 				throw new Error('No weather data received');
 			}
 
-			// Helper function to create time ranges
 			const range = (start: number, stop: number, step: number): number[] =>
 				Array.from({ length: (stop - start) / step }, (_, index) => start + index * step);
 
-			// Process the response
 			const utcOffsetSeconds = response.utcOffsetSeconds() || 0;
 			const current = response.current();
 			const daily = response.daily();
 			const hourly = response.hourly();
 
-			// Check if required data is available
 			if (!current || !daily || !hourly) {
 				throw new Error('Incomplete weather data received');
 			}
 
-			// Helper to process time values
 			const processTime = (timeValue: number): Date => {
-				// Convert directly to local time using the provided UTC offset
 				return new Date((timeValue + utcOffsetSeconds) * 1000);
 			};
 
-			// Get current weather data - using indices based on the parameters order
 			const currentWeatherData: CurrentWeather = {
 				apparent_temperature: roundToOneDecimal(current.variables(2)?.value() || 0),
 				cloud_cover: roundToOneDecimal(current.variables(6)?.value() || 0),
@@ -137,7 +126,6 @@ export function useWeather(options: UseWeatherOptions) {
 				wind_speed_10m: roundToOneDecimal(current.variables(7)?.value() || 0),
 			};
 
-			// Process daily forecast - using the time range approach from the documentation
 			const dailyTimes = range(Number(daily.time()), Number(daily.timeEnd()), daily.interval()).map((t) =>
 				processTime(t),
 			);
@@ -167,7 +155,6 @@ export function useWeather(options: UseWeatherOptions) {
 					.map((value) => roundToOneDecimal(value)),
 			};
 
-			// Process hourly forecast - using the time range approach from the documentation
 			const hourlyTimes = range(Number(hourly.time()), Number(hourly.timeEnd()), hourly.interval()).map((t) =>
 				processTime(t),
 			);
@@ -193,7 +180,6 @@ export function useWeather(options: UseWeatherOptions) {
 					.map((value) => roundToOneDecimal(value)),
 			};
 
-			// Update the reactive state
 			currentWeather.value = {
 				current: currentWeatherData,
 				daily: dailyForecast,
@@ -208,7 +194,6 @@ export function useWeather(options: UseWeatherOptions) {
 		}
 	};
 
-	// Watch for location changes and update weather data
 	watch(
 		location,
 		(newLocation) => {

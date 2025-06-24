@@ -1,34 +1,27 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 
-interface HourlyForecastItem {
-	airPressure: number;
-	humidity: number;
-	isDay?: boolean;
-	precipitation: number;
-	precipitationProbability: number;
-	temperature: number;
-	time: Date;
-	weatherCode: number;
-	windSpeed: number;
-}
+import { useFormat } from '@/composables/use-format';
+import { weatherCodeToIcon } from '@/utils/weather-icon-mapper';
 
-interface VerticalForecastProperties {
-	airPressureFormatter: (pressure: number) => string;
-	hourlyData: HourlyForecastItem[];
+defineProps<{
+	hourlyData: {
+		airPressure: number;
+		humidity: number;
+		isDay?: boolean;
+		precipitation: number;
+		precipitationProbability: number;
+		temperature: number;
+		time: Date;
+		weatherCode: number;
+		windSpeed: number;
+	}[];
 	isAdvancedView: boolean;
-	precipitationFormatter: (precipitation: number) => string;
-	temperatureFormatter: (temperature: number) => string;
-	timeFormatter: (date: Date) => string;
-	weatherCodeToIcon: (code: number, isDay: boolean) => string;
-	windSpeedFormatter: (speed: number) => string;
-}
-
-defineProps<VerticalForecastProperties>();
+}>();
 
 const { t } = useI18n();
+const { formatAirPressure, formatPrecipitation, formatTemperature, formatTime, formatWindSpeed } = useFormat();
 
-// Determine if an hour is the current hour
 const isCurrentHour = (time: Date): boolean => {
 	const now = new Date();
 	return now.getHours() === time.getHours() && now.toDateString() === time.toDateString();
@@ -72,6 +65,7 @@ const isCurrentHour = (time: Date): boolean => {
 						</th>
 					</tr>
 				</thead>
+
 				<tbody>
 					<tr
 						v-for="(hour, index) in hourlyData"
@@ -82,11 +76,11 @@ const isCurrentHour = (time: Date): boolean => {
 							'hover:(bg-gray-50) dark:hover:(bg-gray-700/50)': !isCurrentHour(hour.time),
 						}">
 						<td class="text-gray-800 font-medium px-2 py-2 dark:(text-gray-200) sm:(px-4 py-3)">
-							{{ timeFormatter(hour.time) }}
+							{{ formatTime(hour.time) }}
 						</td>
 						<td class="px-2 py-2 text-center sm:(px-4 py-3)">
 							<span class="text-gray-800 font-medium font-serif dark:(text-gray-200)">
-								{{ temperatureFormatter(hour.temperature) }}
+								{{ formatTemperature(hour.temperature) }}
 							</span>
 						</td>
 						<td class="px-2 py-2 text-center sm:(px-4 py-3)">
@@ -97,7 +91,7 @@ const isCurrentHour = (time: Date): boolean => {
 						<td
 							v-if="isAdvancedView"
 							class="text-gray-800 font-medium px-2 py-2 text-center dark:(text-gray-300) sm:(px-4 py-3)">
-							{{ precipitationFormatter(hour.precipitation) }} ({{ hour.precipitationProbability }}%)
+							{{ formatPrecipitation(hour.precipitation) }} ({{ hour.precipitationProbability }}%)
 						</td>
 						<td
 							v-if="isAdvancedView"
@@ -107,12 +101,12 @@ const isCurrentHour = (time: Date): boolean => {
 						<td
 							v-if="isAdvancedView"
 							class="text-gray-800 font-medium px-2 py-2 text-center dark:(text-gray-300) sm:(px-4 py-3)">
-							{{ windSpeedFormatter(hour.windSpeed) }}
+							{{ formatWindSpeed(hour.windSpeed) }}
 						</td>
 						<td
 							v-if="isAdvancedView"
 							class="text-gray-800 font-medium px-2 py-2 text-center dark:(text-gray-300) sm:(px-4 py-3)">
-							{{ airPressureFormatter(hour.airPressure) }}
+							{{ formatAirPressure(hour.airPressure) }}
 						</td>
 					</tr>
 				</tbody>

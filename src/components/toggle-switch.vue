@@ -2,57 +2,29 @@
 import { Switch } from '@ark-ui/vue/switch';
 import { computed } from 'vue';
 
-interface Properties {
-	/**
-	 * Optional aria-label for accessibility
-	 */
-	ariaLabel?: string;
-
-	/**
-	 * Whether the switch is disabled
-	 */
-	disabled?: boolean;
-
-	/**
-	 * Optional ID for the switch
-	 */
-	id?: string;
-
-	/**
-	 * The label for the switch
-	 */
-	label?: string;
-
-	/**
-	 * The controlled checked state of the switch
-	 */
-	modelValue: boolean;
-
-	/**
-	 * Optional name for the switch input
-	 */
-	name?: string;
-}
-
-const properties = withDefaults(defineProps<Properties>(), {
-	ariaLabel: undefined,
-	disabled: false,
-	id: undefined,
-	label: undefined,
-	name: undefined,
-});
+const properties = withDefaults(
+	defineProps<{
+		ariaLabel?: string;
+		disabled?: boolean;
+		id?: string;
+		label?: string;
+		modelValue: boolean;
+		name?: string;
+	}>(),
+	{
+		disabled: false,
+	},
+);
 
 const emit = defineEmits<{
 	(event: 'update:modelValue', value: boolean): void;
 }>();
 
-// Create a computed property for the checked state
 const checked = computed({
 	get: () => properties.modelValue,
 	set: (value: boolean) => emit('update:modelValue', value),
 });
 
-// Handle switch change
 const handleChange = (event: { checked: boolean }): void => {
 	emit('update:modelValue', event.checked);
 };

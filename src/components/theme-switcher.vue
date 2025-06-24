@@ -9,7 +9,6 @@ import { useSettingsStore } from '@/stores/settings-store';
 const { t } = useI18n();
 const settingsStore = useSettingsStore();
 
-// Use VueUse's useColorMode directly with configuration
 const colorMode = useColorMode({
 	attribute: 'class',
 	disableTransition: false,
@@ -20,21 +19,18 @@ const colorMode = useColorMode({
 		light: '',
 	},
 	onChanged: (mode, defaultHandler) => {
-		// Call the default handler first
 		defaultHandler(mode);
 
-		// Force a repaint to ensure styles are applied
 		const htmlElement = document.documentElement;
 		const displayValue = htmlElement.style.display;
 		htmlElement.style.display = 'none';
-		void htmlElement.offsetHeight; // Trigger a reflow
+		void htmlElement.offsetHeight;
 		htmlElement.style.display = displayValue;
 	},
 	selector: 'html',
 	storageKey: 'themeMode',
 });
 
-// Convert colorMode value to our theme type and sync with store
 const currentTheme = computed({
 	get() {
 		return settingsStore.theme === 'system' ? 'auto' : settingsStore.theme;
@@ -44,7 +40,6 @@ const currentTheme = computed({
 	},
 });
 
-// Sync colorMode with the store
 watch(
 	currentTheme,
 	(newValue) => {
@@ -53,7 +48,6 @@ watch(
 	{ immediate: true },
 );
 
-// Available themes with their translated labels
 const themeOptions = computed(() => {
 	return [
 		{ label: t('app.theme.auto'), value: 'auto' },
@@ -62,7 +56,6 @@ const themeOptions = computed(() => {
 	];
 });
 
-// Handle theme change
 const updateTheme = (value: string): void => {
 	currentTheme.value = value;
 };

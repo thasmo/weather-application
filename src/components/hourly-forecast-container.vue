@@ -7,21 +7,15 @@ import type { CurrentWeather } from '@/composables/use-weather.ts';
 
 import ForecastCard from '@/components/forecast-card.vue';
 import VerticalForecast from '@/components/vertical-forecast.vue';
-import { useFormat } from '@/composables/use-format';
-import { weatherCodeToIcon } from '@/utils/weather-icon-mapper';
 
-interface HourlyForecastContainerProperties {
+const properties = defineProps<{
 	currentWeather: CurrentWeather;
 	isAdvancedView: boolean;
 	selectedDayIndex: number;
-}
-
-const properties = defineProps<HourlyForecastContainerProperties>();
+}>();
 
 const { locale } = useI18n();
-const { formatAirPressure, formatPrecipitation, formatTemperature, formatTime, formatWindSpeed } = useFormat();
 
-// Get formatted date for selected day
 const selectedDayDate = computed((): string => {
 	if (!properties.currentWeather || !properties.currentWeather.daily.time[properties.selectedDayIndex]) {
 		return '';
@@ -31,7 +25,6 @@ const selectedDayDate = computed((): string => {
 	return useDateFormat(date, 'dddd, D MMMM YYYY', { locales: locale.value }).value;
 });
 
-// Get hourly forecast data from the parent component
 const hourlyForecastData = computed(() => {
 	if (!properties.currentWeather?.hourly) return [];
 
@@ -67,15 +60,7 @@ const hourlyForecastData = computed(() => {
 	<div class="flex flex-col md:(flex-1 min-h-0)">
 		<ForecastCard :title="selectedDayDate" class="flex flex-col md:(h-full)">
 			<div class="flex-1 overflow-auto">
-				<VerticalForecast
-					:hourly-data="hourlyForecastData"
-					:is-advanced-view="isAdvancedView"
-					:time-formatter="formatTime"
-					:temperature-formatter="formatTemperature"
-					:weather-code-to-icon="weatherCodeToIcon"
-					:wind-speed-formatter="formatWindSpeed"
-					:precipitation-formatter="formatPrecipitation"
-					:air-pressure-formatter="formatAirPressure" />
+				<VerticalForecast :hourly-data="hourlyForecastData" :is-advanced-view="isAdvancedView" />
 			</div>
 		</ForecastCard>
 	</div>

@@ -16,66 +16,30 @@ type PopoverPlacement =
 	| 'top-end'
 	| 'top-start';
 
-interface PopoverProperties {
-	/**
-	 * Whether to close the popover when pressing escape key
-	 * @default true
-	 */
-	readonly closeOnEscape?: boolean;
-	/**
-	 * Whether to close the popover when clicking outside
-	 * @default true
-	 */
-	readonly closeOnInteractOutside?: boolean;
-	/**
-	 * The initial open state when uncontrolled
-	 */
-	readonly defaultOpen?: boolean;
-	/**
-	 * Controls the visibility of the popover
-	 */
-	readonly isOpen?: boolean;
-	/**
-	 * Whether the popover should be modal
-	 * @default false
-	 */
-	readonly modal?: boolean;
-	/**
-	 * Offset from the trigger element in pixels
-	 * @default 8
-	 */
-	readonly offset?: number;
-	/**
-	 * Placement of the popover relative to the trigger element
-	 * @default 'bottom'
-	 */
-	readonly placement?: PopoverPlacement;
-	/**
-	 * Whether the popover is portalled
-	 * @default true
-	 */
-	readonly portalled?: boolean;
-	/**
-	 * Whether to show an arrow pointing to the trigger element
-	 * @default false
-	 */
-	readonly showArrow?: boolean;
-}
-
-const properties = withDefaults(defineProps<PopoverProperties>(), {
-	closeOnEscape: true,
-	closeOnInteractOutside: true,
-	modal: false,
-	offset: 8,
-	placement: 'bottom',
-	portalled: true,
-	showArrow: false,
-});
+const properties = withDefaults(
+	defineProps<{
+		closeOnEscape?: boolean;
+		closeOnInteractOutside?: boolean;
+		defaultOpen?: boolean;
+		isOpen?: boolean;
+		modal?: boolean;
+		offset?: number;
+		placement?: PopoverPlacement;
+		portalled?: boolean;
+		showArrow?: boolean;
+	}>(),
+	{
+		closeOnEscape: true,
+		closeOnInteractOutside: true,
+		modal: false,
+		offset: 8,
+		placement: 'bottom',
+		portalled: true,
+		showArrow: false,
+	},
+);
 
 const emit = defineEmits<{
-	/**
-	 * Emitted when the popover opens or closes
-	 */
 	(event: 'openChange', details: { open: boolean }): void;
 }>();
 

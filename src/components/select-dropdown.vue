@@ -2,29 +2,26 @@
 import { createListCollection, Select } from '@ark-ui/vue/select';
 import { computed, ref, watch } from 'vue';
 
-interface Properties {
-	ariaLabel?: string;
-	modelValue: string;
-	options: SelectOption[];
-}
-
-interface SelectOption {
-	label: string;
-	value: string;
-}
-
-const properties = withDefaults(defineProps<Properties>(), {
-	ariaLabel: 'Select an option',
-});
+const properties = withDefaults(
+	defineProps<{
+		ariaLabel?: string;
+		modelValue: string;
+		options: {
+			label: string;
+			value: string;
+		}[];
+	}>(),
+	{
+		ariaLabel: 'Select an option',
+	},
+);
 
 const emit = defineEmits<{
 	(event: 'update:modelValue', value: string): void;
 }>();
 
-// Create a local value to properly handle the selection
 const value = ref<string[]>([properties.modelValue]);
 
-// Update local value when prop changes
 watch(
 	() => properties.modelValue,
 	(newValue) => {
@@ -35,7 +32,6 @@ watch(
 	{ immediate: true },
 );
 
-// Watch for changes in the local value and emit updates
 watch(
 	value,
 	(newValue) => {
@@ -52,13 +48,11 @@ const collection = computed(() => {
 	});
 });
 
-// Map option values to their labels for display
 const getOptionLabel = (value: string): string => {
 	const option = properties.options.find((opt) => opt.value === value);
 	return option ? option.label : '';
 };
 
-// Computed property for the current label to display
 const currentLabel = computed(() => {
 	return getOptionLabel(properties.modelValue);
 });
@@ -80,7 +74,7 @@ const currentLabel = computed(() => {
 		<Teleport to="body">
 			<Select.Positioner>
 				<Select.Content
-					class="mt-1 border border-gray-300 rounded-lg bg-white min-w-[180px] z-50 overflow-hidden dark:(border-gray-600 bg-gray-800)">
+					class="mt-1 border border-gray-300 rounded-lg bg-white min-w-180px z-50 overflow-hidden dark:(border-gray-600 bg-gray-800)">
 					<Select.ItemGroup>
 						<Select.Item
 							v-for="option in properties.options"

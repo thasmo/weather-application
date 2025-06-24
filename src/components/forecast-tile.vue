@@ -4,28 +4,25 @@ import { computed } from 'vue';
 import { useFormat } from '@/composables/use-format';
 import { weatherCodeToIcon } from '@/utils/weather-icon-mapper';
 
-interface ForecastTileProperties {
-	details: WeatherDetail[];
+const properties = defineProps<{
+	details: {
+		icon: string;
+		label: string;
+		unit?: string;
+		value: number | string;
+	}[];
 	isActive?: boolean;
 	isDay?: boolean;
 	minTemperature?: number;
 	temperature: number;
 	title: string;
 	weatherCode: number;
-}
+}>();
 
-interface WeatherDetail {
-	icon: string;
-	label: string;
-	unit?: string;
-	value: number | string;
-}
-
-const properties = defineProps<ForecastTileProperties>();
 const { formatTemperature } = useFormat();
 
-const weatherIcon = computed((): string => {
-	return weatherCodeToIcon(properties.weatherCode, properties.isDay ?? true);
+const icon = computed((): string | undefined => {
+	return weatherCodeToIcon(properties.weatherCode, properties.isDay);
 });
 </script>
 
@@ -52,7 +49,7 @@ const weatherIcon = computed((): string => {
 				</span>
 			</div>
 
-			<div :class="weatherIcon" class="text-4xl text-primary-500 sm:(text-5xl) dark:(text-primary-400)"></div>
+			<div v-if="icon" :class="icon" class="text-4xl text-primary-500 sm:(text-5xl) dark:(text-primary-400)"></div>
 		</div>
 
 		<div v-if="details && details.length > 0" class="text-xs space-y-1 sm:(text-sm space-y-2)">

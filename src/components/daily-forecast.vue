@@ -9,13 +9,11 @@ import ForecastTile from '@/components/forecast-tile.vue';
 import ToggleSwitch from '@/components/toggle-switch.vue';
 import { useFormat } from '@/composables/use-format';
 
-interface DailyForecastProperties {
+const properties = defineProps<{
 	advancedView: boolean;
 	currentWeather: CurrentWeather;
 	selectedDayIndex: number;
-}
-
-const properties = defineProps<DailyForecastProperties>();
+}>();
 
 const emit = defineEmits<{
 	(event: 'selectDay', index: number): void;
@@ -25,7 +23,6 @@ const emit = defineEmits<{
 const { t } = useI18n();
 const { formatAirPressure, formatPrecipitation, formatTemperature, formatWeekday, formatWindSpeed } = useFormat();
 
-// Get the label for the forecast view toggle based on current state
 const forecastViewLabel = computed((): string => {
 	return properties.advancedView ? t('weather.forecast.advancedView') : t('weather.forecast.simpleView');
 });
@@ -53,10 +50,10 @@ const toggleAdvancedView = (value: boolean): void => {
 			</template>
 			<div class="pb-2 flex gap-4 relative overflow-x-auto">
 				<template v-for="(day, index) in currentWeather.daily.time" :key="index">
-					<div class="flex-1 flex-shrink-0 min-w-[140px] relative sm:(min-w-[180px])">
+					<div class="flex-1 flex-shrink-0 min-w-140px relative sm:(min-w-180px)">
 						<div
 							v-if="index > 0 && selectedDayIndex !== index && selectedDayIndex !== index - 1"
-							class="bg-gray-200 h-[100%] w-[1px] left-[-8px] absolute dark:(bg-gray-700)">
+							class="bg-gray-200 h-100% w-1px left--8px absolute dark:(bg-gray-700)">
 						</div>
 
 						<ForecastTile
