@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import type { CurrentWeather } from '@/composables/use-weather.ts';
+import type { DailyForecast } from '@/composables/use-weather.ts';
 
 import ForecastCard from '@/components/forecast-card.vue';
 import ForecastTile from '@/components/forecast-tile.vue';
@@ -11,7 +11,7 @@ import { useFormat } from '@/composables/use-format';
 
 const properties = defineProps<{
 	advancedView: boolean;
-	currentWeather: CurrentWeather;
+	daily: DailyForecast;
 	selectedDayIndex: number;
 }>();
 
@@ -49,7 +49,7 @@ const toggleAdvancedView = (value: boolean): void => {
 				</div>
 			</template>
 			<div class="pb-2 flex gap-4 relative overflow-x-auto">
-				<template v-for="(day, index) in currentWeather.daily.time" :key="index">
+				<template v-for="(day, index) in daily.time" :key="index">
 					<div class="flex-1 flex-shrink-0 min-w-140px relative sm:(min-w-180px)">
 						<div
 							v-if="index > 0 && selectedDayIndex !== index && selectedDayIndex !== index - 1"
@@ -58,9 +58,9 @@ const toggleAdvancedView = (value: boolean): void => {
 
 						<ForecastTile
 							:title="formatWeekday(day, 'long')"
-							:temperature="currentWeather.daily.temperature_2m_max[index]"
-							:min-temperature="currentWeather.daily.temperature_2m_min[index]"
-							:weather-code="currentWeather.daily.weather_code[index]"
+							:temperature="daily.temperature_2m_max[index]"
+							:min-temperature="daily.temperature_2m_min[index]"
+							:weather-code="daily.weather_code[index]"
 							:is-active="selectedDayIndex === index"
 							:is-day="true"
 							:details="
@@ -69,27 +69,27 @@ const toggleAdvancedView = (value: boolean): void => {
 											{
 												icon: 'i-custom-temperature',
 												label: t('weather.temperature'),
-												value: formatTemperature(currentWeather.daily.temperature_2m_max[index]),
+												value: formatTemperature(daily.temperature_2m_max[index]),
 												unit: '',
 											},
 											{
 												icon: 'i-custom-precipitation',
 												label: t('weather.precipitation'),
-												value: formatPrecipitation(currentWeather.daily.precipitation_sum[index]),
+												value: formatPrecipitation(daily.precipitation_sum[index]),
 												unit: '',
 											},
 											{
 												icon: '',
 												label: t('weather.wind'),
-												value: formatWindSpeed(currentWeather.daily.wind_speed_10m_max[index]),
+												value: formatWindSpeed(daily.wind_speed_10m_max[index]),
 												unit: '',
 											},
-											...(currentWeather.daily.pressure_msl_mean
+											...(daily.pressure_msl_mean
 												? [
 														{
 															icon: '',
 															label: t('weather.pressure'),
-															value: formatAirPressure(currentWeather.daily.pressure_msl_mean[index]),
+															value: formatAirPressure(daily.pressure_msl_mean[index]),
 															unit: '',
 														},
 													]

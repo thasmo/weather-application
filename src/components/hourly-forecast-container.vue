@@ -3,13 +3,15 @@ import { useDateFormat } from '@vueuse/core';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import type { CurrentWeather } from '@/composables/use-weather.ts';
+import type { CurrentWeather, DailyForecast, HourlyForecast } from '@/composables/use-weather.ts';
 
 import ForecastCard from '@/components/forecast-card.vue';
 import VerticalForecast from '@/components/vertical-forecast.vue';
 
 const properties = defineProps<{
-	currentWeather: CurrentWeather;
+	current: CurrentWeather;
+	daily: DailyForecast;
+	hourly: HourlyForecast;
 	isAdvancedView: boolean;
 	selectedDayIndex: number;
 }>();
@@ -17,37 +19,37 @@ const properties = defineProps<{
 const { locale } = useI18n();
 
 const selectedDayDate = computed((): string => {
-	if (!properties.currentWeather || !properties.currentWeather.daily.time[properties.selectedDayIndex]) {
+	if (!properties.daily || !properties.daily.time[properties.selectedDayIndex]) {
 		return '';
 	}
 
-	const date = properties.currentWeather.daily.time[properties.selectedDayIndex];
+	const date = properties.daily.time[properties.selectedDayIndex];
 	return useDateFormat(date, 'dddd, D MMMM YYYY', { locales: locale.value }).value;
 });
 
 const hourlyForecastData = computed(() => {
-	if (!properties.currentWeather?.hourly) return [];
+	if (!properties.hourly) return [];
 
-	const selectedDate = new Date(properties.currentWeather.daily.time[properties.selectedDayIndex]);
+	const selectedDate = new Date(properties.daily.time[properties.selectedDayIndex]);
 	const startOfDay = new Date(selectedDate);
 	startOfDay.setHours(0, 0, 0, 0);
 	const endOfDay = new Date(selectedDate);
 	endOfDay.setHours(23, 59, 59, 999);
 
-	return properties.currentWeather.hourly.time
+	return properties.hourly.time
 		.map((time: Date | string, index: number) => {
 			const hourDate = time instanceof Date ? time : new Date(time);
 			if (hourDate >= startOfDay && hourDate <= endOfDay) {
 				return {
-					airPressure: properties.currentWeather.hourly.pressure_msl?.[index],
-					humidity: properties.currentWeather.hourly.relative_humidity_2m[index],
-					isDay: properties.currentWeather.hourly.is_day?.[index],
-					precipitation: properties.currentWeather.hourly.precipitation[index],
-					precipitationProbability: properties.currentWeather.hourly.precipitation_probability[index],
-					temperature: properties.currentWeather.hourly.temperature_2m[index],
+					airPressure: properties.hourly.pressure_msl?.[index],
+					humidity: properties.hourly.relative_humidity_2m[index],
+					isDay: properties.hourly.is_day?.[index],
+					precipitation: properties.hourly.precipitation[index],
+					precipitationProbability: properties.hourly.precipitation_probability[index],
+					temperature: properties.hourly.temperature_2m[index],
 					time: hourDate,
-					weatherCode: properties.currentWeather.hourly.weather_code[index],
-					windSpeed: properties.currentWeather.hourly.wind_speed_10m[index],
+					weatherCode: properties.hourly.weather_code[index],
+					windSpeed: properties.hourly.wind_speed_10m[index],
 				};
 			}
 			return;

@@ -17,7 +17,7 @@ const advancedForecastView = ref(false);
 
 const { error: locationError, loadingLocation, location, useCurrentLocation } = useLocationService();
 
-const { currentWeather, error: weatherError, loading } = useWeather({ location });
+const { current, daily, error: weatherError, hourly, loading } = useWeather({ location });
 
 const handleLocationUpdate = async (): Promise<void> => {
 	try {
@@ -59,7 +59,7 @@ const handleLocationUpdate = async (): Promise<void> => {
 			}}</p>
 		</div>
 
-		<div v-else-if="!currentWeather" class="p-4 flex flex-1 flex-col items-center justify-center">
+		<div v-else-if="!current || !daily || !hourly" class="p-4 flex flex-1 flex-col items-center justify-center">
 			<div class="p-6 text-center rounded-2xl bg-white max-w-md sm:(p-8) dark:(bg-gray-800)">
 				<h1 class="text-3xl text-gray-800 font-bold mb-6 sm:(text-4xl) dark:(text-gray-100)">{{ t('app.title') }}</h1>
 				<button
@@ -73,7 +73,7 @@ const handleLocationUpdate = async (): Promise<void> => {
 			</div>
 		</div>
 
-		<div v-else-if="currentWeather" class="flex flex-1 flex-col overflow-auto md:(flex-row overflow-hidden)">
+		<div v-else class="flex flex-1 flex-col overflow-auto md:(flex-row overflow-hidden)">
 			<aside
 				class="border-b border-primary-100 bg-white flex flex-col w-full md:(border-b-0 border-r max-w-xs overflow-auto) dark:(border-gray-700 bg-gray-800)">
 				<LocationDisplay
@@ -81,20 +81,22 @@ const handleLocationUpdate = async (): Promise<void> => {
 					:is-loading="loadingLocation"
 					:on-refresh-location="handleLocationUpdate" />
 
-				<CurrentWeatherDisplay :data="currentWeather" />
+				<CurrentWeatherDisplay :data="current" />
 			</aside>
 
 			<div class="p-4 flex-1 overflow-auto sm:(p-6)">
 				<div class="flex flex-col gap-6 h-full">
 					<DailyForecast
-						:current-weather="currentWeather"
+						:daily="daily"
 						:selected-day-index="selectedDayIndex"
 						:advanced-view="advancedForecastView"
 						@select-day="(index) => (selectedDayIndex = index)"
 						@toggle-view="(value) => (advancedForecastView = value)" />
 
 					<HourlyForecastContainer
-						:current-weather="currentWeather"
+						:current="current"
+						:daily="daily"
+						:hourly="hourly"
 						:selected-day-index="selectedDayIndex"
 						:is-advanced-view="advancedForecastView" />
 				</div>
