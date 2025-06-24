@@ -64,8 +64,8 @@ const hourlyForecastData = computed(() => {
 </script>
 
 <template>
-	<div class="flex flex-col md:flex-1 md:min-h-0">
-		<ForecastCard :title="selectedDayDate" class="flex flex-col md:h-full">
+	<div class="flex flex-col md:(flex-1 min-h-0)">
+		<ForecastCard :title="selectedDayDate" class="flex flex-col md:(h-full)">
 			<div class="flex-1 overflow-auto">
 				<VerticalForecast
 					:hourly-data="hourlyForecastData"
