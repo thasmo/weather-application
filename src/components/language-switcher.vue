@@ -1,12 +1,34 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import type { Locale } from '@/locales';
 
 import SelectDropdown from '@/components/select-dropdown.vue';
+import { useSettingsStore } from '@/stores/settings-store';
 
 const { locale, t } = useI18n();
+const settingsStore = useSettingsStore();
+
+watch(
+	() => settingsStore.locale,
+	(newLocale) => {
+		if (newLocale && newLocale !== locale.value) {
+			locale.value = newLocale as Locale;
+		}
+	},
+	{ immediate: true },
+);
+
+watch(
+	locale,
+	(newLocale) => {
+		if (newLocale !== settingsStore.locale) {
+			settingsStore.updateLocale(newLocale);
+		}
+	},
+	{ immediate: true },
+);
 
 // Available locales with their translated labels
 const localeOptions = computed(() => {
@@ -19,9 +41,8 @@ const localeOptions = computed(() => {
 
 // Handle locale change
 const updateLocale = (value: string): void => {
+	settingsStore.updateLocale(value);
 	locale.value = value as Locale;
-	// Save to localStorage for persistence
-	localStorage.setItem('userLocale', value);
 };
 </script>
 

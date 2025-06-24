@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useColorMode } from '@vueuse/core';
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import SelectDropdown from '@/components/select-dropdown.vue';
-
-type ThemeMode = 'auto' | 'dark' | 'light';
+import { useSettingsStore } from '@/stores/settings-store';
 
 const { t } = useI18n();
+const settingsStore = useSettingsStore();
 
 // Use VueUse's useColorMode directly with configuration
 const colorMode = useColorMode({
@@ -34,24 +34,37 @@ const colorMode = useColorMode({
 	storageKey: 'themeMode',
 });
 
-// Convert colorMode value to our ThemeMode type
-const currentTheme = computed<ThemeMode>(() => {
-	// Handle the empty string case for light mode
-	return colorMode.value === '' ? 'light' : (colorMode.value as ThemeMode);
+// Convert colorMode value to our theme type and sync with store
+const currentTheme = computed({
+	get() {
+		return settingsStore.theme === 'system' ? 'auto' : settingsStore.theme;
+	},
+	set(value: string) {
+		settingsStore.updateTheme(value === 'auto' ? 'system' : (value as 'dark' | 'light'));
+	},
 });
+
+// Sync colorMode with the store
+watch(
+	currentTheme,
+	(newValue) => {
+		colorMode.value = newValue;
+	},
+	{ immediate: true },
+);
 
 // Available themes with their translated labels
 const themeOptions = computed(() => {
-	const availableThemes: ThemeMode[] = ['auto', 'light', 'dark'];
-	return availableThemes.map((theme) => ({
-		label: t(`app.theme.${theme}`),
-		value: theme,
-	}));
+	return [
+		{ label: t('app.theme.auto'), value: 'auto' },
+		{ label: t('app.theme.light'), value: 'light' },
+		{ label: t('app.theme.dark'), value: 'dark' },
+	];
 });
 
 // Handle theme change
 const updateTheme = (value: string): void => {
-	colorMode.value = value as ThemeMode;
+	currentTheme.value = value;
 };
 </script>
 

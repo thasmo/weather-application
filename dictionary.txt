@@ -5,6 +5,7 @@ openmeteo
 fontshare
 iconify
 meteo
+persistedstate
 
 Hectopascal
 Satoshi
