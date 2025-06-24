@@ -100,6 +100,7 @@ export default {
 			simpleView: 'Simple',
 			today: 'Today',
 			toggleView: 'Toggle between simple and advanced forecast view',
+			viewMode: 'Forecast View Mode',
 		},
 		humidity: 'Humidity',
 		humidity_short: 'Humidity',

@@ -18,6 +18,7 @@ export const useSettingsStore = defineStore(
 		const airPressureUnit = ref<AirPressureUnit>('hpa');
 		const theme = ref<ThemeMode>('system');
 		const locale = ref<string>('en');
+		const advancedView = ref<boolean>(false);
 
 		const updateTimeFormat = (value: TimeFormat): void => {
 			timeFormat.value = value;
@@ -47,13 +48,19 @@ export const useSettingsStore = defineStore(
 			locale.value = value;
 		};
 
+		const updateAdvancedView = (value: boolean): void => {
+			advancedView.value = value;
+		};
+
 		return {
+			advancedView,
 			airPressureUnit,
 			locale,
 			precipitationUnit,
 			temperatureUnit,
 			theme,
 			timeFormat,
+			updateAdvancedView,
 			updateAirPressureUnit,
 			updateLocale,
 			updatePrecipitationUnit,

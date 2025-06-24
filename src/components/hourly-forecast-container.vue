@@ -7,16 +7,17 @@ import type { CurrentWeather, DailyForecast, HourlyForecast } from '@/composable
 
 import ForecastCard from '@/components/forecast-card.vue';
 import VerticalForecast from '@/components/vertical-forecast.vue';
+import { useSettingsStore } from '@/stores/settings-store';
 
 const properties = defineProps<{
 	current: CurrentWeather;
 	daily: DailyForecast;
 	hourly: HourlyForecast;
-	isAdvancedView: boolean;
 	selectedDayIndex: number;
 }>();
 
 const { locale } = useI18n();
+const settingsStore = useSettingsStore();
 
 const selectedDayDate = computed((): string => {
 	if (!properties.daily || !properties.daily.time[properties.selectedDayIndex]) {
@@ -62,7 +63,7 @@ const hourlyForecastData = computed(() => {
 	<div class="flex flex-col md:(flex-1 min-h-0)">
 		<ForecastCard :title="selectedDayDate" class="flex flex-col md:(h-full)">
 			<div class="flex-1 overflow-auto">
-				<VerticalForecast :hourly-data="hourlyForecastData" :is-advanced-view="isAdvancedView" />
+				<VerticalForecast :hourly-data="hourlyForecastData" :is-advanced-view="settingsStore.advancedView" />
 			</div>
 		</ForecastCard>
 	</div>

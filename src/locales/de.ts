@@ -100,6 +100,7 @@ export default {
 			simpleView: 'Einfach',
 			today: 'Heute',
 			toggleView: 'Zwischen einfacher und erweiterter Ansicht umschalten',
+			viewMode: 'Vorhersage-Ansichtsmodus',
 		},
 		humidity: 'Luftfeuchtigkeit',
 		humidity_short: 'Luftfeuchtigkeit',

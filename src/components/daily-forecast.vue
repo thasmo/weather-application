@@ -1,53 +1,34 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import type { DailyForecast } from '@/composables/use-weather.ts';
 
 import ForecastCard from '@/components/forecast-card.vue';
 import ForecastTile from '@/components/forecast-tile.vue';
-import ToggleSwitch from '@/components/toggle-switch.vue';
 import { useFormat } from '@/composables/use-format';
+import { useSettingsStore } from '@/stores/settings-store';
 
-const properties = defineProps<{
-	advancedView: boolean;
+defineProps<{
 	daily: DailyForecast;
 	selectedDayIndex: number;
 }>();
 
 const emit = defineEmits<{
 	(event: 'selectDay', index: number): void;
-	(event: 'toggleView', value: boolean): void;
 }>();
 
 const { t } = useI18n();
+const settingsStore = useSettingsStore();
 const { formatAirPressure, formatPrecipitation, formatTemperature, formatWeekday, formatWindSpeed } = useFormat();
-
-const forecastViewLabel = computed((): string => {
-	return properties.advancedView ? t('weather.forecast.advancedView') : t('weather.forecast.simpleView');
-});
 
 const selectDay = (index: number): void => {
 	emit('selectDay', index);
-};
-
-const toggleAdvancedView = (value: boolean): void => {
-	emit('toggleView', value);
 };
 </script>
 
 <template>
 	<div class="flex-shrink-0">
 		<ForecastCard :title="t('weather.forecast.daily')">
-			<template #header-actions>
-				<div class="flex gap-2 items-center">
-					<ToggleSwitch
-						:model-value="advancedView"
-						:label="forecastViewLabel"
-						:aria-label="t('weather.forecast.toggleView')"
-						@update:model-value="toggleAdvancedView" />
-				</div>
-			</template>
 			<div class="pb-2 flex gap-4 relative overflow-x-auto">
 				<template v-for="(day, index) in daily.time" :key="index">
 					<div class="flex-1 flex-shrink-0 min-w-140px relative sm:(min-w-180px)">
@@ -64,7 +45,7 @@ const toggleAdvancedView = (value: boolean): void => {
 							:is-active="selectedDayIndex === index"
 							:is-day="true"
 							:details="
-								advancedView
+								settingsStore.advancedView
 									? [
 											{
 												icon: 'i-custom-temperature',
