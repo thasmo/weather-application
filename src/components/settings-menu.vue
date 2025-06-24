@@ -47,7 +47,6 @@ const closeSettings = (): void => {
 
 <template>
 	<div>
-		<!-- Mobile: Drawer from bottom -->
 		<SettingsDrawer
 			v-if="isMobile"
 			:is-open="isOpen"
@@ -59,7 +58,7 @@ const closeSettings = (): void => {
 				<div class="flex items-center justify-between">
 					<h2 class="text-xl font-bold">{{ t('app.settings.title') }}</h2>
 					<button
-						class="p-1 rounded-full transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+						class="p-1 rounded-full transition-colors hover:(bg-gray-200) dark:hover:(bg-gray-700)"
 						@click="closeSettings">
 						<div class="i-ri-close-line h-5 w-5"></div>
 					</button>
@@ -69,14 +68,14 @@ const closeSettings = (): void => {
 			<div class="py-4">
 				<div class="flex flex-col gap-4 min-w-60">
 					<div>
-						<h3 class="text-base text-gray-700 font-medium mb-2 dark:text-gray-300">
+						<h3 class="text-base text-gray-700 font-medium mb-2 dark:(text-gray-300)">
 							{{ t('app.settings.title') }}
 						</h3>
 					</div>
 
 					<div class="space-y-4">
 						<div class="flex flex-col gap-1">
-							<label class="text-sm text-gray-600 dark:text-gray-400">
+							<label class="text-sm text-gray-600 dark:(text-gray-400)">
 								{{ t('app.timeFormat.title') }}
 							</label>
 							<SelectDropdown
@@ -90,7 +89,7 @@ const closeSettings = (): void => {
 						</div>
 
 						<div class="flex flex-col gap-1">
-							<label class="text-sm text-gray-600 dark:text-gray-400">
+							<label class="text-sm text-gray-600 dark:(text-gray-400)">
 								{{ t('app.temperature.title') }}
 							</label>
 							<SelectDropdown
@@ -104,7 +103,7 @@ const closeSettings = (): void => {
 						</div>
 
 						<div class="flex flex-col gap-1">
-							<label class="text-sm text-gray-600 dark:text-gray-400">
+							<label class="text-sm text-gray-600 dark:(text-gray-400)">
 								{{ t('app.windSpeed.title') }}
 							</label>
 							<SelectDropdown
@@ -119,7 +118,7 @@ const closeSettings = (): void => {
 						</div>
 
 						<div class="flex flex-col gap-1">
-							<label class="text-sm text-gray-600 dark:text-gray-400">
+							<label class="text-sm text-gray-600 dark:(text-gray-400)">
 								{{ t('app.precipitation.title') }}
 							</label>
 							<SelectDropdown
@@ -133,7 +132,7 @@ const closeSettings = (): void => {
 						</div>
 
 						<div class="flex flex-col gap-1">
-							<label class="text-sm text-gray-600 dark:text-gray-400">
+							<label class="text-sm text-gray-600 dark:(text-gray-400)">
 								{{ t('app.airPressure.title') }}
 							</label>
 							<SelectDropdown
@@ -147,14 +146,14 @@ const closeSettings = (): void => {
 						</div>
 
 						<div class="flex flex-col gap-1">
-							<label class="text-sm text-gray-600 dark:text-gray-400">
+							<label class="text-sm text-gray-600 dark:(text-gray-400)">
 								{{ t('app.theme.title') }}
 							</label>
 							<ThemeSwitcher />
 						</div>
 
 						<div class="flex flex-col gap-1">
-							<label class="text-sm text-gray-600 dark:text-gray-400">
+							<label class="text-sm text-gray-600 dark:(text-gray-400)">
 								{{ t('app.language.title') }}
 							</label>
 							<LanguageSwitcher />
@@ -164,17 +163,15 @@ const closeSettings = (): void => {
 			</div>
 		</SettingsDrawer>
 
-		<!-- Mobile: Settings button -->
 		<button
 			v-if="isMobile"
 			@click="toggleSettings"
-			class="text-sm text-gray-700 font-medium px-3.5 py-2 border border-gray-300 rounded-lg bg-white flex transition-all items-center dark:text-gray-200 focus:outline-none dark:border-gray-600 focus:border-primary-500 hover:border-primary-400 dark:bg-gray-800 focus:ring-3 focus:ring-primary-500/20 dark:hover:border-primary-500"
+			class="text-sm text-gray-700 font-medium px-3.5 py-2 border rounded-lg bg-white flex transition-all items-center dark:(text-gray-200 border-gray-600 bg-gray-800 hover:border-primary-500) focus:(outline-none border-primary-500 ring-3 ring-primary-500/20) hover:(border-primary-400)"
 			:aria-label="t('app.settings.button')">
 			<div class="i-ri-settings-3-line mr-2 h-5 w-5"></div>
 			<span>{{ t('app.settings.button') }}</span>
 		</button>
 
-		<!-- Desktop: Popover -->
 		<SettingsPopover
 			v-if="!isMobile"
 			:is-open="isOpen"
@@ -183,9 +180,8 @@ const closeSettings = (): void => {
 			:show-arrow="true"
 			@open-change="(details) => (isOpen = details.open)">
 			<template #trigger>
-				<!-- Desktop: Settings button inside popover trigger -->
 				<button
-					class="text-sm text-gray-700 font-medium px-3.5 py-2 border border-gray-300 rounded-lg bg-white flex transition-all items-center dark:text-gray-200 focus:outline-none dark:border-gray-600 focus:border-primary-500 hover:border-primary-400 dark:bg-gray-800 focus:ring-3 focus:ring-primary-500/20 dark:hover:border-primary-500"
+					class="text-sm text-gray-700 font-medium px-3.5 py-2 border rounded-lg bg-white flex transition-all items-center dark:(text-gray-200 border-gray-600 bg-gray-800 hover:border-primary-500) focus:(outline-none border-primary-500 ring-3 ring-primary-500/20) hover:(border-primary-400)"
 					:aria-label="t('app.settings.button')">
 					<div class="i-ri-settings-3-line mr-2 h-5 w-5"></div>
 					<span>{{ t('app.settings.button') }}</span>
@@ -199,7 +195,7 @@ const closeSettings = (): void => {
 			<div class="flex flex-col gap-4 min-w-60">
 				<div class="space-y-4">
 					<div class="flex flex-col gap-1">
-						<label class="text-sm text-gray-600 dark:text-gray-400">
+						<label class="text-sm text-gray-600 dark:(text-gray-400)">
 							{{ t('app.timeFormat.title') }}
 						</label>
 						<SelectDropdown
@@ -213,7 +209,7 @@ const closeSettings = (): void => {
 					</div>
 
 					<div class="flex flex-col gap-1">
-						<label class="text-sm text-gray-600 dark:text-gray-400">
+						<label class="text-sm text-gray-600 dark:(text-gray-400)">
 							{{ t('app.temperature.title') }}
 						</label>
 						<SelectDropdown
@@ -227,7 +223,7 @@ const closeSettings = (): void => {
 					</div>
 
 					<div class="flex flex-col gap-1">
-						<label class="text-sm text-gray-600 dark:text-gray-400">
+						<label class="text-sm text-gray-600 dark:(text-gray-400)">
 							{{ t('app.windSpeed.title') }}
 						</label>
 						<SelectDropdown
@@ -242,7 +238,7 @@ const closeSettings = (): void => {
 					</div>
 
 					<div class="flex flex-col gap-1">
-						<label class="text-sm text-gray-600 dark:text-gray-400">
+						<label class="text-sm text-gray-600 dark:(text-gray-400)">
 							{{ t('app.precipitation.title') }}
 						</label>
 						<SelectDropdown
@@ -256,7 +252,7 @@ const closeSettings = (): void => {
 					</div>
 
 					<div class="flex flex-col gap-1">
-						<label class="text-sm text-gray-600 dark:text-gray-400">
+						<label class="text-sm text-gray-600 dark:(text-gray-400)">
 							{{ t('app.airPressure.title') }}
 						</label>
 						<SelectDropdown
@@ -270,14 +266,14 @@ const closeSettings = (): void => {
 					</div>
 
 					<div class="flex flex-col gap-1">
-						<label class="text-sm text-gray-600 dark:text-gray-400">
+						<label class="text-sm text-gray-600 dark:(text-gray-400)">
 							{{ t('app.theme.title') }}
 						</label>
 						<ThemeSwitcher />
 					</div>
 
 					<div class="flex flex-col gap-1">
-						<label class="text-sm text-gray-600 dark:text-gray-400">
+						<label class="text-sm text-gray-600 dark:(text-gray-400)">
 							{{ t('app.language.title') }}
 						</label>
 						<LanguageSwitcher />

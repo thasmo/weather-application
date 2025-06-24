@@ -128,23 +128,23 @@ onBeforeUnmount(() => {
 
 <template>
 	<div class="drawer-container">
-		<!-- Backdrop overlay -->
 		<div
 			v-if="hasOverlay && isOpen"
 			class="bg-black/50 transition-opacity duration-300 inset-0 fixed z-40"
 			:class="{ 'opacity-0': !isOpen, 'opacity-100': isOpen }"></div>
 
-		<!-- Drawer panel -->
 		<div
 			ref="drawerReference"
-			class="bg-white shadow-lg transition-transform duration-300 ease-in-out fixed z-50 overflow-auto dark:bg-gray-800"
+			class="bg-white shadow-lg transition-transform duration-300 ease-in-out fixed z-50 overflow-auto dark:(bg-gray-800)"
 			:class="[drawerClasses.position, drawerClasses.size, drawerClasses.transform, isOpen ? 'visible' : 'invisible']">
 			<div class="p-4">
 				<slot name="header"></slot>
 			</div>
+
 			<div class="px-4 pb-4">
 				<slot></slot>
 			</div>
+
 			<div class="p-4">
 				<slot name="footer"></slot>
 			</div>

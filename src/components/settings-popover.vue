@@ -117,10 +117,10 @@ const positioning = computed(() => ({
 
 		<Popover.Positioner>
 			<Popover.Content
-				class="p-4 border border-gray-200 rounded bg-white shadow-lg z-50 dark:border-gray-700 dark:bg-gray-800">
+				class="p-4 border border-gray-200 rounded bg-white shadow-lg z-50 dark:(border-gray-700 bg-gray-800)">
 				<template v-if="showArrow">
 					<Popover.Arrow>
-						<Popover.ArrowTip class="fill-white dark:fill-gray-800"></Popover.ArrowTip>
+						<Popover.ArrowTip class="fill-white dark:(fill-gray-800)"></Popover.ArrowTip>
 					</Popover.Arrow>
 				</template>
 
@@ -130,7 +130,7 @@ const positioning = computed(() => ({
 					</Popover.Title>
 				</div>
 
-				<div v-if="$slots.description" class="text-sm text-gray-600 mb-3 dark:text-gray-300">
+				<div v-if="$slots.description" class="text-sm text-gray-600 mb-3 dark:(text-gray-300)">
 					<Popover.Description>
 						<slot name="description"></slot>
 					</Popover.Description>
