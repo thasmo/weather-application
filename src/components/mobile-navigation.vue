@@ -39,17 +39,6 @@ const currentRoute = computed((): string => route.name as string);
 			</router-link>
 
 			<router-link
-				to="/history"
-				class="px-4 py-2 rounded-lg flex grow-1 flex-col w-0 transition-colors items-center"
-				:class="{
-					'text-primary-600 bg-primary-50 dark:(text-primary-400 bg-primary-900/20)': currentRoute === 'history',
-					'text-gray-600 hover:(bg-gray-100) dark:(text-gray-300 hover:bg-gray-700)': currentRoute !== 'history',
-				}">
-				<div class="i-ri-history-line text-xl mb-1"></div>
-				<span class="text-xs">{{ t('app.history') }}</span>
-			</router-link>
-
-			<router-link
 				to="/settings"
 				class="px-4 py-2 rounded-lg flex grow-1 flex-col w-0 transition-colors items-center"
 				:class="{

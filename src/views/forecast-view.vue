@@ -22,7 +22,6 @@ const weatherStore = useWeatherStore();
 
 const { error: locationError } = useLocationService();
 
-// Use computed properties to maintain reactivity with the store
 const weatherError = computed(() => weatherStore.error);
 const loading = computed(() => weatherStore.loading);
 const current = computed<CurrentWeather | undefined>(() => weatherStore.current);
