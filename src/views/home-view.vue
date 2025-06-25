@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useMediaQuery } from '@vueuse/core';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -15,6 +16,7 @@ const { t } = useI18n();
 
 const selectedDayIndex = ref(0);
 const settingsStore = useSettingsStore();
+const isMobile = useMediaQuery('(max-width: 767px)');
 
 const { error: locationError, loadingLocation, location, useCurrentLocation } = useLocationService();
 
@@ -86,7 +88,7 @@ const handleLocationUpdate = async (): Promise<void> => {
 			</aside>
 
 			<div class="p-4 pb-24 flex-1 overflow-auto sm:(p-6) md:(pb-6)">
-				<div class="flex flex-col gap-6 h-full">
+				<div v-if="!isMobile" class="flex flex-col gap-6 h-full">
 					<DailyForecast
 						:daily="daily"
 						:selected-day-index="selectedDayIndex"
