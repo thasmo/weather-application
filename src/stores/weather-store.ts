@@ -63,6 +63,7 @@ const roundToOneDecimal = (value: number): number => {
 
 export const useWeatherStore = defineStore('weather', () => {
 	const loading = ref(false);
+	const ready = ref(false);
 	const error = ref<string>();
 	const current = ref<CurrentWeather>();
 	const daily = ref<DailyForecast>();
@@ -187,6 +188,7 @@ export const useWeatherStore = defineStore('weather', () => {
 			hourly.value = hourlyForecastData;
 			lastFetchedLocation.value = { ...location };
 			loading.value = false;
+			ready.value = true;
 		} catch (error_) {
 			console.error('Error fetching weather data:', error_);
 			error.value = error_ instanceof Error ? error_.message : 'Failed to fetch weather data';
@@ -201,5 +203,6 @@ export const useWeatherStore = defineStore('weather', () => {
 		fetch,
 		hourly,
 		loading,
+		ready,
 	};
 });

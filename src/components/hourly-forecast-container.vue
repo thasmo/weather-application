@@ -3,14 +3,13 @@ import { useDateFormat } from '@vueuse/core';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import type { CurrentWeather, DailyForecast, HourlyForecast } from '@/stores/weather-store';
+import type { DailyForecast, HourlyForecast } from '@/stores/weather-store';
 
 import ForecastCard from '@/components/forecast-card.vue';
 import VerticalForecast from '@/components/vertical-forecast.vue';
 import { useSettingsStore } from '@/stores/settings-store';
 
 const properties = defineProps<{
-	current: CurrentWeather;
 	daily: DailyForecast;
 	hourly: HourlyForecast;
 	selectedDayIndex: number;
