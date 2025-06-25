@@ -1,20 +1,33 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+import type {
+	CurrentWeather,
+	DailyForecast as DailyForecastType,
+	HourlyForecast as HourlyForecastType,
+} from '@/stores/weather-store';
 
 import DailyForecast from '@/components/daily-forecast.vue';
 import HourlyForecastContainer from '@/components/hourly-forecast-container.vue';
 import { useLocationService } from '@/composables/use-geolocation';
-import { useWeather } from '@/composables/use-weather';
 import { useSettingsStore } from '@/stores/settings-store';
+import { useWeatherStore } from '@/stores/weather-store';
 
 const { t } = useI18n();
 
 const selectedDayIndex = ref(0);
 const settingsStore = useSettingsStore();
+const weatherStore = useWeatherStore();
 
-const { error: locationError, location } = useLocationService();
-const { current, daily, error: weatherError, hourly, loading } = useWeather({ location });
+const { error: locationError } = useLocationService();
+
+// Use computed properties to maintain reactivity with the store
+const weatherError = computed(() => weatherStore.error);
+const loading = computed(() => weatherStore.loading);
+const current = computed<CurrentWeather | undefined>(() => weatherStore.current);
+const daily = computed<DailyForecastType | undefined>(() => weatherStore.daily);
+const hourly = computed<HourlyForecastType | undefined>(() => weatherStore.hourly);
 </script>
 
 <template>

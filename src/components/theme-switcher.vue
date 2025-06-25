@@ -1,52 +1,12 @@
 <script setup lang="ts">
-import { useColorMode } from '@vueuse/core';
-import { computed, watch } from 'vue';
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import SelectDropdown from '@/components/select-dropdown.vue';
-import { useSettingsStore } from '@/stores/settings-store';
+import { useThemeService } from '@/composables/use-theme';
 
 const { t } = useI18n();
-const settingsStore = useSettingsStore();
-
-const colorMode = useColorMode({
-	attribute: 'class',
-	disableTransition: false,
-	emitAuto: true,
-	modes: {
-		auto: 'auto',
-		dark: 'dark',
-		light: '',
-	},
-	onChanged: (mode, defaultHandler) => {
-		defaultHandler(mode);
-
-		const htmlElement = document.documentElement;
-		const displayValue = htmlElement.style.display;
-		htmlElement.style.display = 'none';
-		void htmlElement.offsetHeight;
-		htmlElement.style.display = displayValue;
-	},
-	selector: 'html',
-	storageKey: 'themeMode',
-});
-
-const currentTheme = computed({
-	get() {
-		return settingsStore.theme === 'system' ? 'auto' : settingsStore.theme;
-	},
-	set(value: string) {
-		settingsStore.updateTheme(value === 'auto' ? 'system' : (value as 'dark' | 'light'));
-	},
-});
-
-watch(
-	currentTheme,
-	(newValue) => {
-		colorMode.value = newValue;
-	},
-	{ immediate: true },
-);
+const { currentTheme, updateTheme } = useThemeService();
 
 const themeOptions = computed(() => {
 	return [
@@ -55,10 +15,6 @@ const themeOptions = computed(() => {
 		{ label: t('app.theme.dark'), value: 'dark' },
 	];
 });
-
-const updateTheme = (value: string): void => {
-	currentTheme.value = value;
-};
 </script>
 
 <template>

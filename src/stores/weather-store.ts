@@ -1,7 +1,6 @@
-import type { Ref } from 'vue';
-
 import { fetchWeatherApi } from 'openmeteo';
-import { ref, watch } from 'vue';
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
 export interface CurrentWeather {
 	apparent_temperature: number;
@@ -48,30 +47,34 @@ interface LocationData {
 	name: string;
 }
 
-interface UseWeatherOptions {
-	location: Ref<LocationData>;
+interface WeatherParameters {
+	current: string;
+	daily: string;
+	forecast_days: number;
+	hourly: string;
+	latitude: number[];
+	longitude: number[];
+	timezone: string;
 }
 
 const roundToOneDecimal = (value: number): number => {
 	return Math.round(value * 10) / 10;
 };
 
-export function useWeather(options: UseWeatherOptions) {
-	const { location } = options;
+export const useWeatherStore = defineStore('weather', () => {
+	const loading = ref(false);
+	const error = ref<string>();
+	const current = ref<CurrentWeather>();
+	const daily = ref<DailyForecast>();
+	const hourly = ref<HourlyForecast>();
+	const lastFetchedLocation = ref<LocationData>();
 
-	const loading = ref(true);
-	const error = ref<string | undefined>(undefined);
-	const current = ref<CurrentWeather | undefined>(undefined);
-	const daily = ref<DailyForecast | undefined>(undefined);
-	const hourly = ref<HourlyForecast | undefined>(undefined);
-
-	const fetchWeatherData = async (lat: number, lon: number): Promise<void> => {
+	const fetch = async (location: LocationData): Promise<void> => {
 		try {
 			loading.value = true;
-			error.value = undefined;
 
 			const url = 'https://api.open-meteo.com/v1/forecast';
-			const parameters = {
+			const parameters: WeatherParameters = {
 				current:
 					'temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,rain,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,pressure_msl,is_day',
 				daily:
@@ -79,8 +82,8 @@ export function useWeather(options: UseWeatherOptions) {
 				forecast_days: 7,
 				hourly:
 					'temperature_2m,precipitation_probability,precipitation,weather_code,relative_humidity_2m,wind_speed_10m,is_day',
-				latitude: [lat],
-				longitude: [lon],
+				latitude: [location.latitude],
+				longitude: [location.longitude],
 				timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 			};
 
@@ -182,7 +185,7 @@ export function useWeather(options: UseWeatherOptions) {
 			current.value = currentWeatherData;
 			daily.value = dailyForecastData;
 			hourly.value = hourlyForecastData;
-
+			lastFetchedLocation.value = { ...location };
 			loading.value = false;
 		} catch (error_) {
 			console.error('Error fetching weather data:', error_);
@@ -191,19 +194,12 @@ export function useWeather(options: UseWeatherOptions) {
 		}
 	};
 
-	watch(
-		location,
-		(newLocation) => {
-			fetchWeatherData(newLocation.latitude, newLocation.longitude);
-		},
-		{ immediate: true },
-	);
-
 	return {
 		current,
 		daily,
 		error,
+		fetch,
 		hourly,
 		loading,
 	};
-}
+});

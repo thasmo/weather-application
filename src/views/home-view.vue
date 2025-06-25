@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { useMediaQuery } from '@vueuse/core';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+import type {
+	CurrentWeather,
+	DailyForecast as DailyForecastType,
+	HourlyForecast as HourlyForecastType,
+} from '@/stores/weather-store';
 
 import CurrentWeatherDisplay from '@/components/current-weather-display.vue';
 import DailyForecast from '@/components/daily-forecast.vue';
@@ -9,18 +15,24 @@ import HourlyForecastContainer from '@/components/hourly-forecast-container.vue'
 import LocationDisplay from '@/components/location-display.vue';
 import SettingsMenu from '@/components/settings-menu.vue';
 import { useLocationService } from '@/composables/use-geolocation';
-import { useWeather } from '@/composables/use-weather';
 import { useSettingsStore } from '@/stores/settings-store';
+import { useWeatherStore } from '@/stores/weather-store';
 
 const { t } = useI18n();
 
 const selectedDayIndex = ref(0);
 const settingsStore = useSettingsStore();
+const weatherStore = useWeatherStore();
 const isMobile = useMediaQuery('(max-width: 767px)');
 
 const { error: locationError, loadingLocation, location, useCurrentLocation } = useLocationService();
 
-const { current, daily, error: weatherError, hourly, loading } = useWeather({ location });
+// Use computed properties to maintain reactivity with the store
+const weatherError = computed(() => weatherStore.error);
+const loading = computed(() => weatherStore.loading);
+const current = computed<CurrentWeather | undefined>(() => weatherStore.current);
+const daily = computed<DailyForecastType | undefined>(() => weatherStore.daily);
+const hourly = computed<HourlyForecastType | undefined>(() => weatherStore.hourly);
 
 const handleLocationUpdate = async (): Promise<void> => {
 	try {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 
-import type { DailyForecast } from '@/composables/use-weather.ts';
+import type { DailyForecast } from '@/stores/weather-store';
 
 import ForecastCard from '@/components/forecast-card.vue';
 import ForecastTile from '@/components/forecast-tile.vue';
