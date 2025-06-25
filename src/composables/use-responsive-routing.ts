@@ -1,13 +1,14 @@
-import { useMediaQuery } from '@vueuse/core';
 import { watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+
+import { useResponsive } from './use-responsive';
 
 interface UseResponsiveRoutingOptions {
 	readonly route: string;
 }
 
 export const useResponsiveRouting = (options: UseResponsiveRoutingOptions): void => {
-	const isMobile = useMediaQuery('(max-width: 767px)');
+	const { isMobile } = useResponsive();
 	const router = useRouter();
 	const route = useRoute();
 

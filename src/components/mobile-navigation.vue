@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { useMediaQuery } from '@vueuse/core';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
-const isMobile = useMediaQuery('(max-width: 767px)');
 const route = useRoute();
 const { t } = useI18n();
 
@@ -13,7 +11,6 @@ const currentRoute = computed((): string => route.name as string);
 
 <template>
 	<nav
-		v-if="isMobile"
 		class="px-2 py-2 border-t border-gray-200 bg-white bottom-0 left-0 right-0 fixed dark:(border-gray-700 bg-gray-800)">
 		<div class="flex gap-2 items-center justify-between">
 			<router-link

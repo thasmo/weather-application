@@ -3,11 +3,13 @@ import { RouterView } from 'vue-router';
 
 import MobileNavigation from '@/components/mobile-navigation.vue';
 import { useLocationService } from '@/composables/use-geolocation';
+import { useResponsive } from '@/composables/use-responsive';
 import { useResponsiveRouting } from '@/composables/use-responsive-routing';
 import { useThemeService } from '@/composables/use-theme';
 import { useWeatherStore } from '@/stores/weather-store';
 
-const { fetch } = useWeatherStore();
+const { isMobile } = useResponsive();
+const weatherStore = useWeatherStore();
 const { location } = useLocationService();
 
 useThemeService();
@@ -16,10 +18,10 @@ useResponsiveRouting({
 	route: 'home',
 });
 
-fetch(location.value);
+weatherStore.fetch(location.value);
 </script>
 
 <template>
-	<RouterView />
-	<MobileNavigation />
+	<RouterView v-if="weatherStore.ready" />
+	<MobileNavigation v-if="isMobile" />
 </template>
