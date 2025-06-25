@@ -24,7 +24,7 @@ const { current, daily, error: weatherError, hourly, loading } = useWeather({ lo
 			class="p-4 border-b border-primary-100 flex flex-row gap-4 items-start items-center justify-between sm:(p-5) dark:(border-gray-700)">
 			<div>
 				<h1 class="text-3xl text-gray-800 font-bold leading-tight md:(text-5xl) sm:(text-4xl) dark:(text-gray-100)">
-					{{ t('app.forecast') || 'Forecast' }}
+					{{ t('app.forecast') }}
 				</h1>
 			</div>
 		</header>
@@ -47,7 +47,7 @@ const { current, daily, error: weatherError, hourly, loading } = useWeather({ lo
 
 			<div v-else-if="!daily || !hourly" class="flex flex-col h-full items-center justify-center">
 				<div class="i-ri-calendar-line text-8xl text-primary-300 mb-4 dark:(text-primary-700)"></div>
-				<p class="text-xl text-gray-600 dark:(text-gray-300)">{{ t('app.noData') || 'No forecast data available' }}</p>
+				<p class="text-xl text-gray-600 dark:(text-gray-300)">{{ t('app.noData') }}</p>
 			</div>
 
 			<div v-else class="flex flex-col gap-6">

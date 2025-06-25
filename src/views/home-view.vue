@@ -78,7 +78,7 @@ const handleLocationUpdate = async (): Promise<void> => {
 
 		<div v-else class="flex flex-1 flex-col overflow-auto md:(flex-row overflow-hidden)">
 			<aside
-				class="border-b border-primary-100 bg-white flex flex-col w-full md:(border-b-0 border-r max-w-xs overflow-auto) dark:(border-gray-700 bg-gray-800)">
+				class="border-primary-100 flex flex-col w-full md:(border-b-0 border-r max-w-xs overflow-auto) dark:(border-gray-700)">
 				<LocationDisplay
 					:location-name="location.name"
 					:is-loading="loadingLocation"
@@ -87,7 +87,7 @@ const handleLocationUpdate = async (): Promise<void> => {
 				<CurrentWeatherDisplay :data="current" />
 			</aside>
 
-			<div class="p-4 pb-24 flex-1 overflow-auto sm:(p-6) md:(pb-6)">
+			<div class="p-4 pb-15 flex-1 overflow-auto sm:(p-6) md:(pb-6)">
 				<div v-if="!isMobile" class="flex flex-col gap-6 h-full">
 					<DailyForecast
 						:daily="daily"
