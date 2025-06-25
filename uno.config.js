@@ -1,4 +1,5 @@
 import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders';
+import { createLocalFontProcessor } from '@unocss/preset-web-fonts/local';
 import { readdirSync } from 'node:fs';
 import { defineConfig, presetIcons, presetWebFonts, presetWind4, transformerVariantGroup } from 'unocss';
 
@@ -21,6 +22,11 @@ export default defineConfig({
 					name: 'Sentient',
 				},
 			},
+			processors: createLocalFontProcessor({
+				cacheDir: 'node_modules/.cache/unocss/fonts/',
+				fontAssetsDir: 'public/assets/fonts/',
+				fontServeBaseUrl: '/assets/fonts/',
+			}),
 			provider: 'fontshare',
 		}),
 		presetIcons({
