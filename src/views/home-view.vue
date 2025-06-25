@@ -40,7 +40,7 @@ const handleLocationUpdate = async (): Promise<void> => {
 				}}</h1>
 			</div>
 
-			<div class="flex flex-wrap gap-2 items-center sm:(gap-3)">
+			<div class="flex-wrap gap-2 hidden items-center md:flex sm:(gap-3)">
 				<SettingsMenu />
 			</div>
 		</header>
@@ -85,7 +85,7 @@ const handleLocationUpdate = async (): Promise<void> => {
 				<CurrentWeatherDisplay :data="current" />
 			</aside>
 
-			<div class="p-4 flex-1 overflow-auto sm:(p-6)">
+			<div class="p-4 pb-24 flex-1 overflow-auto sm:(p-6) md:(pb-6)">
 				<div class="flex flex-col gap-6 h-full">
 					<DailyForecast
 						:daily="daily"
