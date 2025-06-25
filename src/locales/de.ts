@@ -5,7 +5,10 @@ export default {
 			inHg: 'Zoll Quecksilber (inHg)',
 			title: 'Luftdruckeinheit',
 		},
+		currentWeather: 'Aktuelles Wetter',
 		error: 'Fehler',
+		forecast: 'Vorhersage',
+		history: 'Verlauf',
 		language: {
 			de: 'Deutsch',
 			en: 'Englisch',
@@ -16,6 +19,7 @@ export default {
 			button: 'Meinen Standort verwenden',
 			loading: 'Standort wird ermittelt...',
 		},
+		noData: 'Keine Daten verfügbar',
 		precipitation: {
 			inches: 'Zoll (in)',
 			mm: 'Millimeter (mm)',
@@ -42,6 +46,7 @@ export default {
 			twentyFourHour: '24-Stunden',
 		},
 		title: 'Wetter App',
+		viewForecast: 'Vorhersage anzeigen',
 		windSpeed: {
 			kmh: 'Kilometer pro Stunde (km/h)',
 			mph: 'Meilen pro Stunde (mph)',
@@ -87,7 +92,7 @@ export default {
 			feelsLike: 'Gefühlt wie',
 			humidity: 'Luftfeuchtigkeit',
 			pressure: 'Luftdruck',
-			title: 'Aktuelles Wetter',
+			title: 'Aktuell',
 			wind: 'Wind',
 		},
 		feels_like: 'Gefühlt wie',

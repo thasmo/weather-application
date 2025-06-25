@@ -1,6 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { useMediaQuery } from '@vueuse/core';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+import type {
+	CurrentWeather,
+	DailyForecast as DailyForecastType,
+	HourlyForecast as HourlyForecastType,
+} from '@/stores/weather-store';
 
 import CurrentWeatherDisplay from '@/components/current-weather-display.vue';
 import DailyForecast from '@/components/daily-forecast.vue';
@@ -8,17 +15,23 @@ import HourlyForecastContainer from '@/components/hourly-forecast-container.vue'
 import LocationDisplay from '@/components/location-display.vue';
 import SettingsMenu from '@/components/settings-menu.vue';
 import { useLocationService } from '@/composables/use-geolocation';
-import { useWeather } from '@/composables/use-weather';
 import { useSettingsStore } from '@/stores/settings-store';
+import { useWeatherStore } from '@/stores/weather-store';
 
 const { t } = useI18n();
 
 const selectedDayIndex = ref(0);
 const settingsStore = useSettingsStore();
+const weatherStore = useWeatherStore();
+const isMobile = useMediaQuery('(max-width: 767px)');
 
 const { error: locationError, loadingLocation, location, useCurrentLocation } = useLocationService();
 
-const { current, daily, error: weatherError, hourly, loading } = useWeather({ location });
+const weatherError = computed(() => weatherStore.error);
+const loading = computed(() => weatherStore.loading);
+const current = computed<CurrentWeather | undefined>(() => weatherStore.current);
+const daily = computed<DailyForecastType | undefined>(() => weatherStore.daily);
+const hourly = computed<HourlyForecastType | undefined>(() => weatherStore.hourly);
 
 const handleLocationUpdate = async (): Promise<void> => {
 	try {
@@ -40,7 +53,7 @@ const handleLocationUpdate = async (): Promise<void> => {
 				}}</h1>
 			</div>
 
-			<div class="flex flex-wrap gap-2 items-center sm:(gap-3)">
+			<div class="flex-wrap gap-2 hidden items-center md:flex sm:(gap-3)">
 				<SettingsMenu />
 			</div>
 		</header>
@@ -76,7 +89,7 @@ const handleLocationUpdate = async (): Promise<void> => {
 
 		<div v-else class="flex flex-1 flex-col overflow-auto md:(flex-row overflow-hidden)">
 			<aside
-				class="border-b border-primary-100 bg-white flex flex-col w-full md:(border-b-0 border-r max-w-xs overflow-auto) dark:(border-gray-700 bg-gray-800)">
+				class="border-primary-100 flex flex-col w-full md:(border-b-0 border-r max-w-xs overflow-auto) dark:(border-gray-700)">
 				<LocationDisplay
 					:location-name="location.name"
 					:is-loading="loadingLocation"
@@ -85,8 +98,8 @@ const handleLocationUpdate = async (): Promise<void> => {
 				<CurrentWeatherDisplay :data="current" />
 			</aside>
 
-			<div class="p-4 flex-1 overflow-auto sm:(p-6)">
-				<div class="flex flex-col gap-6 h-full">
+			<div class="p-4 pb-15 flex-1 overflow-auto sm:(p-6) md:(pb-6)">
+				<div v-if="!isMobile" class="flex flex-col gap-6 h-full">
 					<DailyForecast
 						:daily="daily"
 						:selected-day-index="selectedDayIndex"

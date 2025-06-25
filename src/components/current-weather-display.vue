@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import type { CurrentWeather } from '@/composables/use-weather.ts';
+import type { CurrentWeather } from '@/stores/weather-store';
 
 import { useFormat } from '@/composables/use-format';
 import { weatherCodeToIcon } from '@/utils/weather-icon-mapper';

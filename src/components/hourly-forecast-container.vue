@@ -3,7 +3,7 @@ import { useDateFormat } from '@vueuse/core';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import type { CurrentWeather, DailyForecast, HourlyForecast } from '@/composables/use-weather.ts';
+import type { CurrentWeather, DailyForecast, HourlyForecast } from '@/stores/weather-store';
 
 import ForecastCard from '@/components/forecast-card.vue';
 import VerticalForecast from '@/components/vertical-forecast.vue';

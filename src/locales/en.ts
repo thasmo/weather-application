@@ -5,7 +5,10 @@ export default {
 			inHg: 'Inches of Mercury (inHg)',
 			title: 'Air Pressure Unit',
 		},
+		currentWeather: 'Current Weather',
 		error: 'Error',
+		forecast: 'Forecast',
+		history: 'History',
 		language: {
 			de: 'German',
 			en: 'English',
@@ -16,6 +19,7 @@ export default {
 			button: 'Use my current location',
 			loading: 'Getting your location...',
 		},
+		noData: 'No data available',
 		precipitation: {
 			inches: 'Inches (in)',
 			mm: 'Millimeters (mm)',
@@ -42,6 +46,7 @@ export default {
 			twentyFourHour: '24-hour',
 		},
 		title: 'Weather',
+		viewForecast: 'View Forecast',
 		windSpeed: {
 			kmh: 'Kilometers per hour (km/h)',
 			mph: 'Miles per hour (mph)',
@@ -87,7 +92,7 @@ export default {
 			feelsLike: 'Feels like',
 			humidity: 'Humidity',
 			pressure: 'Pressure',
-			title: 'Current Weather',
+			title: 'Current',
 			wind: 'Wind',
 		},
 		feels_like: 'Feels like',
