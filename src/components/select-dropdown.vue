@@ -62,7 +62,7 @@ const currentLabel = computed(() => {
 	<Select.Root v-model="value" :collection="collection" :aria-label="ariaLabel">
 		<Select.Control>
 			<Select.Trigger
-				class="text-sm text-gray-700 font-medium px-3.5 py-2 border border-gray-300 rounded-lg bg-white flex w-full cursor-pointer transition-all items-center justify-between dark:(text-gray-200 border-gray-600 bg-gray-800) focus:(outline-none border-primary-500 ring-3 ring-primary-500/20) hover:(border-primary-400) dark:hover:(border-primary-500)">
+				class="text-sm text-gray-700 font-medium px-3.5 py-2 border border-gray-300 rounded-lg bg-white flex w-full cursor-pointer items-center justify-between dark:(text-gray-200 border-gray-600 bg-gray-800) focus:(outline-none border-primary-500 ring-3 ring-primary-500/20) hover:(border-primary-400) dark:hover:(border-primary-500)">
 				<Select.ValueText placeholder="Select an option" class="text-left flex-grow">
 					{{ currentLabel }}
 				</Select.ValueText>

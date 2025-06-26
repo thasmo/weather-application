@@ -44,9 +44,9 @@ const handleChange = (event: { checked: boolean }): void => {
 		</Switch.Label>
 
 		<Switch.Control
-			class="items-centerh-6 p-2px rounded-full bg-gray-200 inline-flex w-11 transition-colors duration-200 ease-in-out relative dark:(bg-gray-700) data-[state=checked]:(bg-primary-600) dark:data-[state=checked]:(bg-primary-500)">
+			class="items-centerh-6 p-2px rounded-full bg-gray-200 inline-flex w-11 ease-in-out relative dark:(bg-gray-700) data-[state=checked]:(bg-primary-600) dark:data-[state=checked]:(bg-primary-500)">
 			<Switch.Thumb
-				class="rounded-full bg-white h-5 w-5 block pointer-events-none ring-0 shadow-md transition-transform duration-200 ease-in-out data-[state=checked]:(translate-x-[22px])" />
+				class="rounded-full bg-white h-5 w-5 block pointer-events-none ring-0 ease-in-out data-[state=checked]:(translate-x-[22px])" />
 		</Switch.Control>
 
 		<Switch.HiddenInput />

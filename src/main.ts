@@ -1,8 +1,5 @@
 import 'virtual:uno.css';
 import '@unocss/reset/tailwind-compat.css';
-
-import '@/assets/styles.css';
-
 import { createPinia } from 'pinia';
 import store from 'pinia-plugin-persistedstate';
 import { createApp } from 'vue';
@@ -15,7 +12,7 @@ import router from '@/router';
 const pinia = createPinia();
 pinia.use(store);
 
-const i18n = createI18n<[MessageSchema], Locale>({
+const internationalization = createI18n<[MessageSchema], Locale>({
 	fallbackLocale: 'en',
 	legacy: false,
 	messages,
@@ -24,5 +21,5 @@ const i18n = createI18n<[MessageSchema], Locale>({
 const application = createApp(ApplicationRoot);
 application.use(router);
 application.use(pinia);
-application.use(i18n);
+application.use(internationalization);
 application.mount('#app');

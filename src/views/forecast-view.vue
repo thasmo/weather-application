@@ -23,7 +23,7 @@ const { daily, hourly } = storeToRefs(weatherStore);
 		<header
 			class="p-4 border-b border-primary-100 flex flex-row gap-4 items-start items-center justify-between sm:(p-5) dark:(border-gray-700)">
 			<div>
-				<h1 class="text-3xl text-gray-800 font-bold leading-tight md:(text-5xl) sm:(text-4xl) dark:(text-gray-100)">
+				<h1 class="text-3xl text-gray-800 font-bold md:(text-5xl) sm:(text-4xl) dark:(text-gray-100)">
 					{{ t('app.forecast') }}
 				</h1>
 			</div>

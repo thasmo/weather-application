@@ -3,7 +3,7 @@ import { createLocalFontProcessor } from '@unocss/preset-web-fonts/local';
 import { readdirSync } from 'node:fs';
 import { defineConfig, presetIcons, presetWebFonts, presetWind4, transformerVariantGroup } from 'unocss';
 
-const iconFiles = readdirSync('./src/assets/icons/').map((file) => {
+const icons = readdirSync('./src/assets/icons/').map((file) => {
 	const name = file.replace('.svg', '');
 	return `i-custom-${name}`;
 });
@@ -37,33 +37,16 @@ export default defineConfig({
 			scale: 1.2,
 		}),
 	],
-	rules: [
-		['text-rendering-optimizeLegibility', { 'text-rendering': 'optimizeLegibility' }],
-		[
-			'antialiased',
-			{
-				'-moz-osx-font-smoothing': 'grayscale',
-				'-webkit-font-smoothing': 'antialiased',
-			},
-		],
-		// Custom line heights
-		['leading-comfortable', { 'line-height': '1.6' }],
-		['leading-tight', { 'line-height': '1.25' }],
-		// Custom shadows
-		['shadow-card', { 'box-shadow': '0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1)' }],
-		['shadow-card-hover', { 'box-shadow': '0 8px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.12)' }],
-		['shadow-card-dark', { 'box-shadow': '0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.4)' }],
-		// Hide scrollbar but keep functionality
-		[
-			'hide-scrollbar',
-			{
-				'&::-webkit-scrollbar': 'display: none',
-				'-ms-overflow-style': 'none',
-				'scrollbar-width': 'none',
-			},
-		],
+	rules: [],
+	safelist: [
+		...icons,
+		'font-sans',
+		'bg-bg-light',
+		'text-text-light',
+		'dark:bg-bg-dark',
+		'dark:text-text-dark',
+		'min-h-screen',
 	],
-	safelist: [...iconFiles],
 	theme: {
 		breakpoints: {
 			lg: '1024px',
@@ -72,6 +55,10 @@ export default defineConfig({
 			xl: '1280px',
 		},
 		colors: {
+			bg: {
+				dark: '#111827',
+				light: '#f0f9ff',
+			},
 			gray: {
 				50: '#f8fafc',
 				100: '#f1f5f9',
@@ -97,6 +84,10 @@ export default defineConfig({
 				800: '#1554bc',
 				900: '#174893',
 				950: '#112d5e',
+			},
+			text: {
+				dark: '#f3f4f6',
+				light: '#1f2937',
 			},
 		},
 	},
