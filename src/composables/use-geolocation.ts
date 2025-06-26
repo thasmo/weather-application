@@ -1,5 +1,7 @@
 import { useGeolocation } from '@vueuse/core';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+
+import { useLocationStore } from '@/stores/location-store';
 
 interface LocationData {
 	latitude: number;
@@ -39,14 +41,20 @@ const getLocationName = async (latitude: number, longitude: number): Promise<str
 };
 
 export function useLocationService() {
-	const location = ref<LocationData>({
-		latitude: 41.891_93,
-		longitude: 12.511_33,
-		name: 'Rome, Italy',
-	});
+	const locationStore = useLocationStore();
+
+	const location = computed<LocationData>(
+		() =>
+			locationStore.location || {
+				latitude: 41.891_93,
+				longitude: 12.511_33,
+				name: 'Rome, Italy',
+			},
+	);
 
 	const loading = ref(false);
 	const error = ref<string | undefined>(undefined);
+	const hasStoredLocation = computed(() => locationStore.hasLocation);
 
 	const { coords, isSupported, locatedAt, resume } = useGeolocation({
 		immediate: false,
@@ -79,13 +87,15 @@ export function useLocationService() {
 
 			const name = await getLocationName(coords.value.latitude, coords.value.longitude);
 
-			location.value = {
+			const newLocation = {
 				latitude: coords.value.latitude,
 				longitude: coords.value.longitude,
 				name: name || 'My Location',
 			};
 
-			return location.value;
+			locationStore.saveLocation(newLocation);
+
+			return newLocation;
 		} catch (error_) {
 			console.error('Error getting user location:', error_);
 			error.value = error_ instanceof Error ? error_.message : 'Failed to get your location';
@@ -95,8 +105,14 @@ export function useLocationService() {
 		}
 	};
 
+	const forgetLocation = (): void => {
+		locationStore.clearLocation();
+	};
+
 	return {
 		error,
+		forgetLocation,
+		hasStoredLocation,
 		loading,
 		location,
 		useCurrentLocation,
