@@ -15,7 +15,7 @@ const currentRoute = computed((): string => route.name as string);
 		<div class="flex gap-2 items-center justify-between">
 			<router-link
 				to="/"
-				class="px-4 py-2 rounded-lg flex grow-1 flex-col w-0 transition-colors items-center"
+				class="px-4 py-2 rounded-lg flex grow-1 flex-col w-0 items-center"
 				:class="{
 					'text-primary-600 bg-primary-50 dark:(text-primary-400 bg-primary-900/20)': currentRoute === 'home',
 					'text-gray-600 hover:(bg-gray-100) dark:(text-gray-300 hover:bg-gray-700)': currentRoute !== 'home',
@@ -26,7 +26,7 @@ const currentRoute = computed((): string => route.name as string);
 
 			<router-link
 				to="/forecast"
-				class="px-4 py-2 rounded-lg flex grow-1 flex-col w-0 transition-colors items-center"
+				class="px-4 py-2 rounded-lg flex grow-1 flex-col w-0 items-center"
 				:class="{
 					'text-primary-600 bg-primary-50 dark:(text-primary-400 bg-primary-900/20)': currentRoute === 'forecast',
 					'text-gray-600 hover:(bg-gray-100) dark:(text-gray-300 hover:bg-gray-700)': currentRoute !== 'forecast',
@@ -37,7 +37,7 @@ const currentRoute = computed((): string => route.name as string);
 
 			<router-link
 				to="/settings"
-				class="px-4 py-2 rounded-lg flex grow-1 flex-col w-0 transition-colors items-center"
+				class="px-4 py-2 rounded-lg flex grow-1 flex-col w-0 items-center"
 				:class="{
 					'text-primary-600 bg-primary-50 dark:(text-primary-400 bg-primary-900/20)': currentRoute === 'settings',
 					'text-gray-600 hover:(bg-gray-100) dark:(text-gray-300 hover:bg-gray-700)': currentRoute !== 'settings',

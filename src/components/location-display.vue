@@ -20,7 +20,7 @@ const { currentDateTime } = useFormat();
 		<button
 			v-if="!isLoading"
 			@click="onRefreshLocation"
-			class="text-base text-white font-medium mt-4 px-4 py-2 rounded-lg bg-primary-600 flex transition-colors items-center hover:(bg-primary-700)"
+			class="text-base text-white font-medium mt-4 px-4 py-2 rounded-lg bg-primary-600 flex items-center hover:(bg-primary-700)"
 			:disabled="isLoading">
 			<span class="i-custom-compass text-xl mr-2"></span>
 			<span>{{ t('app.location.button') }}</span>

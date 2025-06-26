@@ -78,7 +78,7 @@ const selectDay = (index: number): void => {
 										]
 									: []
 							"
-							class="cursor-pointer transition-all"
+							class="cursor-pointer"
 							@click="selectDay(index)" />
 					</div>
 				</template>

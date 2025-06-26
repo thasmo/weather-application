@@ -80,8 +80,7 @@ const positioning = computed(() => ({
 		</Popover.Trigger>
 
 		<Popover.Positioner>
-			<Popover.Content
-				class="p-4 border border-gray-200 rounded bg-white shadow-lg z-50 dark:(border-gray-700 bg-gray-800)">
+			<Popover.Content class="p-4 border border-gray-200 rounded bg-white z-50 dark:(border-gray-700 bg-gray-800)">
 				<template v-if="showArrow">
 					<Popover.Arrow>
 						<Popover.ArrowTip class="fill-white dark:(fill-gray-800)"></Popover.ArrowTip>
