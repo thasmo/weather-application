@@ -21,14 +21,20 @@ const weatherStore = useWeatherStore();
 const { isMobile } = useResponsive();
 
 const { current, daily, hourly } = storeToRefs(weatherStore);
-const { loadingLocation, location, useCurrentLocation } = useLocationService();
+const { forgetLocation, hasStoredLocation, loading, location, useCurrentLocation } = useLocationService();
 
 const handleLocationUpdate = async (): Promise<void> => {
 	try {
-		await useCurrentLocation();
+		const updatedLocation = await useCurrentLocation();
+		await weatherStore.fetch(updatedLocation);
 	} catch (error) {
 		console.error('Error updating location:', error);
 	}
+};
+
+const handleForgetLocation = (): void => {
+	forgetLocation();
+	weatherStore.fetch(location.value);
 };
 </script>
 
@@ -53,8 +59,10 @@ const handleLocationUpdate = async (): Promise<void> => {
 				class="border-primary-100 flex flex-col w-full md:(border-b-0 border-r max-w-xs overflow-auto) dark:(border-gray-700)">
 				<LocationDisplay
 					:location-name="location.name"
-					:is-loading="loadingLocation"
-					:on-refresh-location="handleLocationUpdate" />
+					:is-loading="loading"
+					:has-stored-location="hasStoredLocation"
+					:on-refresh-location="handleLocationUpdate"
+					:on-forget-location="handleForgetLocation" />
 
 				<CurrentWeatherDisplay :data="current" />
 			</aside>

@@ -16,8 +16,9 @@ export default {
 		},
 		loading: 'Wetterdaten werden geladen...',
 		location: {
-			button: 'Meinen Standort verwenden',
+			forget: 'Meinen Standort vergessen',
 			loading: 'Standort wird ermittelt...',
+			use: 'Meinen Standort verwenden',
 		},
 		noData: 'Keine Daten verfügbar',
 		precipitation: {
