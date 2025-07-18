@@ -11,7 +11,8 @@ const currentRoute = computed((): string => route.name as string);
 
 <template>
 	<nav
-		class="px-2 py-2 border-t border-gray-200 bg-white bottom-0 left-0 right-0 fixed dark:(border-gray-700 bg-gray-800)">
+		class="px-2 py-2 border-t border-gray-200 bg-white bottom-0 left-0 right-0 fixed dark:(border-gray-700 bg-gray-800)"
+	>
 		<div class="flex gap-2 items-center justify-between">
 			<router-link
 				to="/"
@@ -19,8 +20,9 @@ const currentRoute = computed((): string => route.name as string);
 				:class="{
 					'text-primary-600 bg-primary-50 dark:(text-primary-400 bg-primary-900/20)': currentRoute === 'home',
 					'text-gray-600 hover:(bg-gray-100) dark:(text-gray-300 hover:bg-gray-700)': currentRoute !== 'home',
-				}">
-				<div class="i-ri-cloud-line text-xl mb-1"></div>
+				}"
+			>
+				<div class="i-ri-cloud-line text-xl mb-1" />
 				<span class="text-xs">{{ t('weather.current.title') }}</span>
 			</router-link>
 
@@ -30,8 +32,9 @@ const currentRoute = computed((): string => route.name as string);
 				:class="{
 					'text-primary-600 bg-primary-50 dark:(text-primary-400 bg-primary-900/20)': currentRoute === 'forecast',
 					'text-gray-600 hover:(bg-gray-100) dark:(text-gray-300 hover:bg-gray-700)': currentRoute !== 'forecast',
-				}">
-				<div class="i-ri-calendar-line text-xl mb-1"></div>
+				}"
+			>
+				<div class="i-ri-calendar-line text-xl mb-1" />
 				<span class="text-xs">{{ t('app.forecast') }}</span>
 			</router-link>
 
@@ -41,8 +44,9 @@ const currentRoute = computed((): string => route.name as string);
 				:class="{
 					'text-primary-600 bg-primary-50 dark:(text-primary-400 bg-primary-900/20)': currentRoute === 'settings',
 					'text-gray-600 hover:(bg-gray-100) dark:(text-gray-300 hover:bg-gray-700)': currentRoute !== 'settings',
-				}">
-				<div class="i-ri-settings-3-line text-xl mb-1"></div>
+				}"
+			>
+				<div class="i-ri-settings-3-line text-xl mb-1" />
 				<span class="text-xs">{{ t('app.settings.title') }}</span>
 			</router-link>
 		</div>

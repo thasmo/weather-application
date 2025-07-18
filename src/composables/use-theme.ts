@@ -1,6 +1,5 @@
 import { useColorMode } from '@vueuse/core';
 import { computed, watch } from 'vue';
-
 import { useSettingsStore } from '@/stores/settings-store';
 
 type ColorMode = 'auto' | 'dark' | 'light';
@@ -10,7 +9,7 @@ interface ThemeService {
 	readonly updateTheme: (value: 'dark' | 'light' | 'system') => void;
 }
 
-export const useThemeService = (): ThemeService => {
+export function useThemeService(): ThemeService {
 	const settingsStore = useSettingsStore();
 
 	const colorMode = useColorMode({
@@ -60,4 +59,4 @@ export const useThemeService = (): ThemeService => {
 		currentTheme,
 		updateTheme,
 	};
-};
+}

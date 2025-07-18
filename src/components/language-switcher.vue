@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-
 import type { Locale } from '@/locales';
-
 import SelectDropdown from '@/components/select-dropdown.vue';
 import { useSettingsStore } from '@/stores/settings-store';
 
@@ -32,16 +30,16 @@ watch(
 
 const localeOptions = computed(() => {
 	const availableLocales: Locale[] = ['en', 'de'];
-	return availableLocales.map((localeOption) => ({
+	return availableLocales.map(localeOption => ({
 		label: t(`app.language.${localeOption}`),
 		value: localeOption,
 	}));
 });
 
-const updateLocale = (value: string): void => {
+function updateLocale(value: string): void {
 	settingsStore.updateLocale(value);
 	locale.value = value as Locale;
-};
+}
 </script>
 
 <template>
@@ -50,6 +48,7 @@ const updateLocale = (value: string): void => {
 			:model-value="locale"
 			:options="localeOptions"
 			aria-label="Select language"
-			@update:model-value="updateLocale" />
+			@update:model-value="updateLocale"
+		/>
 	</div>
 </template>
