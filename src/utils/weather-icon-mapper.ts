@@ -62,7 +62,7 @@ const night: Map = {
 	99: 'i-custom-thunderstorms-night',
 };
 
-export const weatherCodeToIcon = (code: number, isDay: boolean): string | undefined => {
+export function weatherCodeToIcon(code: number, isDay: boolean): string | undefined {
 	const map = isDay ? day : night;
 	return map[code];
-};
+}
