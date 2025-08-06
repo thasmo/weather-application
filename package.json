@@ -38,7 +38,7 @@
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.6.0",
-		"@iconify/utils": "^2.3.0",
+		"@iconify/utils": "^3.0.0",
 		"@somehow-digital/commitlint-config": "^1.0.0",
 		"@somehow-digital/cspell-dictionary": "^2.7.0",
 		"@somehow-digital/eslint-config": "^3.0.3",
