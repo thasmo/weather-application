@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@ark-ui/vue':
         specifier: ^5.14.2
-        version: 5.22.0(vue@3.5.20(typescript@5.9.2))
+        version: 5.23.0(vue@3.5.20(typescript@5.9.2))
       '@iconify-json/ri':
         specifier: ^1.2.5
         version: 1.2.5
@@ -142,8 +142,8 @@ packages:
   '@antfu/utils@9.2.0':
     resolution: {integrity: sha512-Oq1d9BGZakE/FyoEtcNeSwM7MpDO2vUBi11RWBZXf75zPsbUVWmUs03EqkRFrcgbXyKTas0BdZWC1wcuSoqSAw==}
 
-  '@ark-ui/vue@5.22.0':
-    resolution: {integrity: sha512-Qz68oTUc/33JOIxjG4I0On+YHhWw+tmglyD/Rbqh4FHV24SsuUFfeO+ztQR980hi7YE07mfqL0eSz+VcjDnhrw==}
+  '@ark-ui/vue@5.23.0':
+    resolution: {integrity: sha512-sE5GgSoMxfzeG2hAzIZgp3qfECH4VICudNf/sMG/xW/REgmKjfhRkqymBowsSTEJd8fARMFp88LkfjU1ZNNb0w==}
     peerDependencies:
       vue: '>=3.5.0'
 
@@ -3480,7 +3480,7 @@ snapshots:
 
   '@antfu/utils@9.2.0': {}
 
-  '@ark-ui/vue@5.22.0(vue@3.5.20(typescript@5.9.2))':
+  '@ark-ui/vue@5.23.0(vue@3.5.20(typescript@5.9.2))':
     dependencies:
       '@internationalized/date': 3.8.2
       '@zag-js/accordion': 1.22.1
