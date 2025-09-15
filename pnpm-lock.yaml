@@ -44,7 +44,7 @@ importers:
         version: 19.8.1(@types/node@22.18.3)(typescript@5.9.2)
       '@iconify/utils':
         specifier: ^3.0.0
-        version: 3.0.1
+        version: 3.0.2
       '@somehow-digital/commitlint-config':
         specifier: ^1.0.0
         version: 1.1.0(@commitlint/cli@19.8.1(@types/node@22.18.3)(typescript@5.9.2))(cspell@9.2.1)
@@ -865,8 +865,8 @@ packages:
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
 
-  '@iconify/utils@3.0.1':
-    resolution: {integrity: sha512-A78CUEnFGX8I/WlILxJCuIJXloL0j/OJ9PSchPAfCargEIKmUBWvvEMmKWB5oONwiUqlNt+5eRufdkLxeHIWYw==}
+  '@iconify/utils@3.0.2':
+    resolution: {integrity: sha512-EfJS0rLfVuRuJRn4psJHtK2A9TqVnkxPpHY6lYHiB9+8eSuudsxbwMiavocG45ujOo6FJ+CIRlRnlOGinzkaGQ==}
 
   '@internationalized/date@3.8.2':
     resolution: {integrity: sha512-/wENk7CbvLbkUvX1tu0mwq49CVkkWpkXubGel6birjRPyo6uQ4nQpnq5xZu823zRCwwn82zgHrvgF1vZyvmVgA==}
@@ -4290,7 +4290,7 @@ snapshots:
 
   '@iconify/types@2.0.0': {}
 
-  '@iconify/utils@3.0.1':
+  '@iconify/utils@3.0.2':
     dependencies:
       '@antfu/install-pkg': 1.1.0
       '@antfu/utils': 9.2.0
@@ -4744,7 +4744,7 @@ snapshots:
 
   '@unocss/preset-icons@66.5.1':
     dependencies:
-      '@iconify/utils': 3.0.1
+      '@iconify/utils': 3.0.2
       '@unocss/core': 66.5.1
       ofetch: 1.4.1
     transitivePeerDependencies:
