@@ -57,9 +57,9 @@ interface WeatherParameters {
 	timezone: string;
 }
 
-const roundToOneDecimal = (value: number): number => {
+function roundToOneDecimal(value: number): number {
 	return Math.round(value * 10) / 10;
-};
+}
 
 export const useWeatherStore = defineStore('weather', () => {
 	const loading = ref(false);
@@ -125,62 +125,62 @@ export const useWeatherStore = defineStore('weather', () => {
 				wind_speed_10m: roundToOneDecimal(currentData.variables(7)?.value() || 0),
 			};
 
-			const dailyTimes = range(Number(dailyData.time()), Number(dailyData.timeEnd()), dailyData.interval()).map((t) =>
+			const dailyTimes = range(Number(dailyData.time()), Number(dailyData.timeEnd()), dailyData.interval()).map(t =>
 				processTime(t),
 			);
 
 			const dailyForecastData: DailyForecast = {
 				precipitation_sum: [...(dailyData.variables(3)?.valuesArray() || [])]
 					.map(Number)
-					.map((value) => roundToOneDecimal(value)),
+					.map(value => roundToOneDecimal(value)),
 				relative_humidity_2m_max: [...(dailyData.variables(4)?.valuesArray() || [])]
 					.map(Number)
-					.map((value) => roundToOneDecimal(value)),
+					.map(value => roundToOneDecimal(value)),
 				relative_humidity_2m_min: [...(dailyData.variables(5)?.valuesArray() || [])]
 					.map(Number)
-					.map((value) => roundToOneDecimal(value)),
+					.map(value => roundToOneDecimal(value)),
 				sunrise: [...(dailyData.variables(7)?.valuesArray() || [])]
 					.map(Number)
-					.map((timeValue) => processTime(timeValue)),
+					.map(timeValue => processTime(timeValue)),
 				sunset: [...(dailyData.variables(8)?.valuesArray() || [])]
 					.map(Number)
-					.map((timeValue) => processTime(timeValue)),
+					.map(timeValue => processTime(timeValue)),
 				temperature_2m_max: [...(dailyData.variables(1)?.valuesArray() || [])]
 					.map(Number)
-					.map((value) => roundToOneDecimal(value)),
+					.map(value => roundToOneDecimal(value)),
 				temperature_2m_min: [...(dailyData.variables(2)?.valuesArray() || [])]
 					.map(Number)
-					.map((value) => roundToOneDecimal(value)),
+					.map(value => roundToOneDecimal(value)),
 				time: dailyTimes,
 				weather_code: [...(dailyData.variables(0)?.valuesArray() || [])].map(Number),
 				wind_speed_10m_max: [...(dailyData.variables(6)?.valuesArray() || [])]
 					.map(Number)
-					.map((value) => roundToOneDecimal(value)),
+					.map(value => roundToOneDecimal(value)),
 			};
 
 			const hourlyTimes = range(Number(hourlyData.time()), Number(hourlyData.timeEnd()), hourlyData.interval()).map(
-				(t) => processTime(t),
+				t => processTime(t),
 			);
 
 			const hourlyForecastData: HourlyForecast = {
-				is_day: [...(hourlyData.variables(6)?.valuesArray() || [])].map(Number).map((value) => value === 1),
+				is_day: [...(hourlyData.variables(6)?.valuesArray() || [])].map(Number).map(value => value === 1),
 				precipitation: [...(hourlyData.variables(2)?.valuesArray() || [])]
 					.map(Number)
-					.map((value) => roundToOneDecimal(value)),
+					.map(value => roundToOneDecimal(value)),
 				precipitation_probability: [...(hourlyData.variables(1)?.valuesArray() || [])]
 					.map(Number)
-					.map((value) => roundToOneDecimal(value)),
+					.map(value => roundToOneDecimal(value)),
 				relative_humidity_2m: [...(hourlyData.variables(4)?.valuesArray() || [])]
 					.map(Number)
-					.map((value) => roundToOneDecimal(value)),
+					.map(value => roundToOneDecimal(value)),
 				temperature_2m: [...(hourlyData.variables(0)?.valuesArray() || [])]
 					.map(Number)
-					.map((value) => roundToOneDecimal(value)),
+					.map(value => roundToOneDecimal(value)),
 				time: hourlyTimes,
 				weather_code: [...(hourlyData.variables(3)?.valuesArray() || [])].map(Number),
 				wind_speed_10m: [...(hourlyData.variables(5)?.valuesArray() || [])]
 					.map(Number)
-					.map((value) => roundToOneDecimal(value)),
+					.map(value => roundToOneDecimal(value)),
 			};
 
 			current.value = currentWeatherData;
@@ -189,7 +189,8 @@ export const useWeatherStore = defineStore('weather', () => {
 			lastFetchedLocation.value = { ...location };
 			loading.value = false;
 			ready.value = true;
-		} catch (error_) {
+		}
+		catch (error_) {
 			console.error('Error fetching weather data:', error_);
 			error.value = error_ instanceof Error ? error_.message : 'Failed to fetch weather data';
 			loading.value = false;

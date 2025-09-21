@@ -4,9 +4,9 @@ import { createPinia } from 'pinia';
 import store from 'pinia-plugin-persistedstate';
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
-
+import type { Locale, MessageSchema } from '@/locales';
 import ApplicationRoot from '@/application-root.vue';
-import { type Locale, messages, type MessageSchema } from '@/locales';
+import { messages } from '@/locales';
 import router from '@/router';
 
 const pinia = createPinia();
