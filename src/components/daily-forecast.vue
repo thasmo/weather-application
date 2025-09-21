@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-
 import type { DailyForecast } from '@/stores/weather-store';
-
 import ForecastCard from '@/components/forecast-card.vue';
 import ForecastTile from '@/components/forecast-tile.vue';
 import { useFormat } from '@/composables/use-format';
@@ -21,9 +19,9 @@ const { t } = useI18n();
 const settingsStore = useSettingsStore();
 const { formatAirPressure, formatPrecipitation, formatTemperature, formatWeekday, formatWindSpeed } = useFormat();
 
-const selectDay = (index: number): void => {
+function selectDay(index: number): void {
 	emit('selectDay', index);
-};
+}
 </script>
 
 <template>
@@ -34,8 +32,8 @@ const selectDay = (index: number): void => {
 					<div class="flex-1 flex-shrink-0 min-w-140px relative sm:(min-w-180px)">
 						<div
 							v-if="index > 0 && selectedDayIndex !== index && selectedDayIndex !== index - 1"
-							class="bg-gray-200 h-100% w-1px left--8px absolute dark:(bg-gray-700)">
-						</div>
+							class="bg-gray-200 h-100% w-1px left--8px absolute dark:(bg-gray-700)"
+						/>
 
 						<ForecastTile
 							:title="formatWeekday(day, 'long')"
@@ -47,39 +45,40 @@ const selectDay = (index: number): void => {
 							:details="
 								settingsStore.advancedView
 									? [
-											{
-												icon: 'i-custom-temperature',
-												label: t('weather.temperature'),
-												value: formatTemperature(daily.temperature_2m_max[index]),
-												unit: '',
-											},
-											{
-												icon: 'i-custom-precipitation',
-												label: t('weather.precipitation'),
-												value: formatPrecipitation(daily.precipitation_sum[index]),
-												unit: '',
-											},
-											{
-												icon: '',
-												label: t('weather.wind'),
-												value: formatWindSpeed(daily.wind_speed_10m_max[index]),
-												unit: '',
-											},
-											...(daily.pressure_msl_mean
-												? [
-														{
-															icon: '',
-															label: t('weather.pressure'),
-															value: formatAirPressure(daily.pressure_msl_mean[index]),
-															unit: '',
-														},
-													]
-												: []),
-										]
+										{
+											icon: 'i-custom-temperature',
+											label: t('weather.temperature'),
+											value: formatTemperature(daily.temperature_2m_max[index]),
+											unit: '',
+										},
+										{
+											icon: 'i-custom-precipitation',
+											label: t('weather.precipitation'),
+											value: formatPrecipitation(daily.precipitation_sum[index]),
+											unit: '',
+										},
+										{
+											icon: '',
+											label: t('weather.wind'),
+											value: formatWindSpeed(daily.wind_speed_10m_max[index]),
+											unit: '',
+										},
+										...(daily.pressure_msl_mean
+											? [
+												{
+													icon: '',
+													label: t('weather.pressure'),
+													value: formatAirPressure(daily.pressure_msl_mean[index]),
+													unit: '',
+												},
+											]
+											: []),
+									]
 									: []
 							"
 							class="cursor-pointer"
-							@click="selectDay(index)" />
+							@click="selectDay(index)"
+						/>
 					</div>
 				</template>
 			</div>

@@ -1,6 +1,5 @@
 import { useGeolocation } from '@vueuse/core';
 import { computed, ref } from 'vue';
-
 import { useLocationStore } from '@/stores/location-store';
 
 interface LocationData {
@@ -16,7 +15,7 @@ interface LocationResponse {
 	};
 }
 
-const getLocationName = async (latitude: number, longitude: number): Promise<string | undefined> => {
+async function getLocationName(latitude: number, longitude: number): Promise<string | undefined> {
 	try {
 		const response = await fetch(
 			`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
@@ -34,11 +33,12 @@ const getLocationName = async (latitude: number, longitude: number): Promise<str
 		const data = (await response.json()) as LocationResponse;
 
 		return `${data.address.city}, ${data.address.country}`;
-	} catch (error) {
+	}
+	catch (error) {
 		console.error('Error fetching location name:', error);
 		return undefined;
 	}
-};
+}
 
 export function useLocationService() {
 	const locationStore = useLocationStore();
@@ -96,11 +96,13 @@ export function useLocationService() {
 			locationStore.saveLocation(newLocation);
 
 			return newLocation;
-		} catch (error_) {
+		}
+		catch (error_) {
 			console.error('Error getting user location:', error_);
 			error.value = error_ instanceof Error ? error_.message : 'Failed to get your location';
 			throw error_;
-		} finally {
+		}
+		finally {
 			loading.value = false;
 		}
 	};

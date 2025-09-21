@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-
 import LanguageSwitcher from '@/components/language-switcher.vue';
 import SelectDropdown from '@/components/select-dropdown.vue';
 import ThemeSwitcher from '@/components/theme-switcher.vue';
@@ -10,29 +9,29 @@ import { useSettingsStore } from '@/stores/settings-store';
 const settingsStore = useSettingsStore();
 const { t } = useI18n();
 
-const handleAirPressureUnitChange = (value: string): void => {
+function handleAirPressureUnitChange(value: string): void {
 	settingsStore.updateAirPressureUnit(value as 'hpa' | 'inHg');
-};
+}
 
-const handlePrecipitationUnitChange = (value: string): void => {
+function handlePrecipitationUnitChange(value: string): void {
 	settingsStore.updatePrecipitationUnit(value as 'inches' | 'mm');
-};
+}
 
-const handleTemperatureUnitChange = (value: string): void => {
+function handleTemperatureUnitChange(value: string): void {
 	settingsStore.updateTemperatureUnit(value as 'celsius' | 'fahrenheit');
-};
+}
 
-const handleTimeFormatChange = (value: string): void => {
+function handleTimeFormatChange(value: string): void {
 	settingsStore.updateTimeFormat(value as 'twelveHour' | 'twentyFourHour');
-};
+}
 
-const handleWindSpeedUnitChange = (value: string): void => {
+function handleWindSpeedUnitChange(value: string): void {
 	settingsStore.updateWindSpeedUnit(value as 'kmh' | 'mph' | 'ms');
-};
+}
 
-const handleAdvancedViewChange = (value: boolean): void => {
+function handleAdvancedViewChange(value: boolean): void {
 	settingsStore.updateAdvancedView(value);
-};
+}
 </script>
 
 <template>
@@ -49,7 +48,8 @@ const handleAdvancedViewChange = (value: boolean): void => {
 						{ value: 'twentyFourHour', label: t('app.timeFormat.twentyFourHour') },
 						{ value: 'twelveHour', label: t('app.timeFormat.twelveHour') },
 					]"
-					@update:model-value="handleTimeFormatChange" />
+					@update:model-value="handleTimeFormatChange"
+				/>
 			</div>
 
 			<div class="flex flex-col gap-1">
@@ -63,7 +63,8 @@ const handleAdvancedViewChange = (value: boolean): void => {
 						{ value: 'celsius', label: t('app.temperature.celsius').split(' ')[0] },
 						{ value: 'fahrenheit', label: t('app.temperature.fahrenheit').split(' ')[0] },
 					]"
-					@update:model-value="handleTemperatureUnitChange" />
+					@update:model-value="handleTemperatureUnitChange"
+				/>
 			</div>
 
 			<div class="flex flex-col gap-1">
@@ -74,7 +75,8 @@ const handleAdvancedViewChange = (value: boolean): void => {
 					:model-value="settingsStore.advancedView"
 					:label="settingsStore.advancedView ? t('weather.forecast.advancedView') : t('weather.forecast.simpleView')"
 					:aria-label="t('weather.forecast.toggleView')"
-					@update:model-value="handleAdvancedViewChange" />
+					@update:model-value="handleAdvancedViewChange"
+				/>
 			</div>
 
 			<div class="flex flex-col gap-1">
@@ -89,7 +91,8 @@ const handleAdvancedViewChange = (value: boolean): void => {
 						{ value: 'mph', label: t('app.windSpeed.mph').split(' ')[0] },
 						{ value: 'ms', label: t('app.windSpeed.ms').split(' ')[0] },
 					]"
-					@update:model-value="handleWindSpeedUnitChange" />
+					@update:model-value="handleWindSpeedUnitChange"
+				/>
 			</div>
 
 			<div class="flex flex-col gap-1">
@@ -103,7 +106,8 @@ const handleAdvancedViewChange = (value: boolean): void => {
 						{ value: 'mm', label: t('app.precipitation.mm').split(' ')[0] },
 						{ value: 'inches', label: t('app.precipitation.inches').split(' ')[0] },
 					]"
-					@update:model-value="handlePrecipitationUnitChange" />
+					@update:model-value="handlePrecipitationUnitChange"
+				/>
 			</div>
 
 			<div class="flex flex-col gap-1">
@@ -117,7 +121,8 @@ const handleAdvancedViewChange = (value: boolean): void => {
 						{ value: 'hpa', label: t('app.airPressure.hpa').split(' ')[0] },
 						{ value: 'inHg', label: t('app.airPressure.inHg').split(' ')[0] },
 					]"
-					@update:model-value="handleAirPressureUnitChange" />
+					@update:model-value="handleAirPressureUnitChange"
+				/>
 			</div>
 
 			<div class="flex flex-col gap-1">
