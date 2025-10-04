@@ -2,9 +2,7 @@
 import { useDateFormat } from '@vueuse/core';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-
 import type { DailyForecast, HourlyForecast } from '@/stores/weather-store';
-
 import ForecastCard from '@/components/forecast-card.vue';
 import VerticalForecast from '@/components/vertical-forecast.vue';
 import { useSettingsStore } from '@/stores/settings-store';
@@ -28,7 +26,8 @@ const selectedDayDate = computed((): string => {
 });
 
 const hourlyForecastData = computed(() => {
-	if (!properties.hourly) return [];
+	if (!properties.hourly)
+		return [];
 
 	const selectedDate = new Date(properties.daily.time[properties.selectedDayIndex]);
 	const startOfDay = new Date(selectedDate);
@@ -52,7 +51,8 @@ const hourlyForecastData = computed(() => {
 					windSpeed: properties.hourly.wind_speed_10m[index],
 				};
 			}
-			return;
+
+			return null;
 		})
 		.filter(Boolean);
 });

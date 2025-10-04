@@ -2,7 +2,6 @@
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-
 import CurrentWeatherDisplay from '@/components/current-weather-display.vue';
 import DailyForecast from '@/components/daily-forecast.vue';
 import HourlyForecastContainer from '@/components/hourly-forecast-container.vue';
@@ -23,30 +22,35 @@ const { isMobile } = useResponsive();
 const { current, daily, hourly } = storeToRefs(weatherStore);
 const { forgetLocation, hasStoredLocation, loading, location, useCurrentLocation } = useLocationService();
 
-const handleLocationUpdate = async (): Promise<void> => {
+async function handleLocationUpdate(): Promise<void> {
 	try {
 		const updatedLocation = await useCurrentLocation();
 		await weatherStore.fetch(updatedLocation);
-	} catch (error) {
+	}
+	catch (error) {
 		console.error('Error updating location:', error);
 	}
-};
+}
 
-const handleForgetLocation = (): void => {
+function handleForgetLocation(): void {
 	forgetLocation();
 	weatherStore.fetch(location.value);
-};
+}
 </script>
 
 <template>
 	<main
-		class="bg-gradient-to-b flex flex-col min-h-screen from-primary-50 to-primary-100 sm:(h-screen) md:(overflow-hidden) dark:(from-gray-900 to-gray-800)">
+		class="flex flex-col min-h-screen from-primary-50 to-primary-100 bg-gradient-to-b sm:(h-screen) md:(overflow-hidden) dark:(from-gray-900 to-gray-800)"
+	>
 		<header
-			class="p-4 border-b border-primary-100 flex flex-row gap-4 items-start items-center justify-between sm:(p-5) dark:(border-gray-700)">
+			class="p-4 border-b border-primary-100 flex flex-row gap-4 items-start items-center justify-between sm:(p-5) dark:(border-gray-700)"
+		>
 			<div>
-				<h1 class="text-3xl text-gray-800 font-bold md:(text-5xl) sm:(text-4xl) dark:(text-gray-100)">{{
-					t('app.title')
-				}}</h1>
+				<h1 class="text-3xl text-gray-800 font-bold md:(text-5xl) sm:(text-4xl) dark:(text-gray-100)">
+					{{
+						t('app.title')
+					}}
+				</h1>
 			</div>
 
 			<div class="flex-wrap gap-2 hidden items-center md:flex sm:(gap-3)">
@@ -56,13 +60,15 @@ const handleForgetLocation = (): void => {
 
 		<div class="flex flex-1 flex-col overflow-auto md:(flex-row overflow-hidden)">
 			<aside
-				class="border-primary-100 flex flex-col w-full md:(border-b-0 border-r max-w-xs overflow-auto) dark:(border-gray-700)">
+				class="border-primary-100 flex flex-col w-full md:(border-b-0 border-r max-w-xs overflow-auto) dark:(border-gray-700)"
+			>
 				<LocationDisplay
 					:location-name="location.name"
 					:is-loading="loading"
 					:has-stored-location="hasStoredLocation"
 					:on-refresh-location="handleLocationUpdate"
-					:on-forget-location="handleForgetLocation" />
+					:on-forget-location="handleForgetLocation"
+				/>
 
 				<CurrentWeatherDisplay :data="current" />
 			</aside>
@@ -73,14 +79,16 @@ const handleForgetLocation = (): void => {
 						:daily="daily"
 						:selected-day-index="selectedDayIndex"
 						:advanced-view="settingsStore.advancedView"
-						@select-day="(index) => (selectedDayIndex = index)" />
+						@select-day="(index) => (selectedDayIndex = index)"
+					/>
 
 					<HourlyForecastContainer
 						:current="current"
 						:daily="daily"
 						:hourly="hourly"
 						:selected-day-index="selectedDayIndex"
-						:is-advanced-view="settingsStore.advancedView" />
+						:is-advanced-view="settingsStore.advancedView"
+					/>
 				</div>
 			</div>
 		</div>

@@ -1,13 +1,12 @@
 import { watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-
 import { useResponsive } from './use-responsive';
 
 interface UseResponsiveRoutingOptions {
 	readonly route: string;
 }
 
-export const useResponsiveRouting = (options: UseResponsiveRoutingOptions): void => {
+export function useResponsiveRouting(options: UseResponsiveRoutingOptions): void {
 	const { isMobile } = useResponsive();
 	const router = useRouter();
 	const route = useRoute();
@@ -17,4 +16,4 @@ export const useResponsiveRouting = (options: UseResponsiveRoutingOptions): void
 			await router.push({ name: options.route });
 		}
 	});
-};
+}

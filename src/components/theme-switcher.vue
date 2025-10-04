@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-
 import SelectDropdown from '@/components/select-dropdown.vue';
 import { useThemeService } from '@/composables/use-theme';
 
@@ -23,6 +22,7 @@ const themeOptions = computed(() => {
 			:model-value="currentTheme"
 			:options="themeOptions"
 			aria-label="Select theme"
-			@update:model-value="updateTheme" />
+			@update:model-value="updateTheme"
+		/>
 	</div>
 </template>
