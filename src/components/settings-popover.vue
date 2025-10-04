@@ -2,19 +2,19 @@
 import { Popover } from '@ark-ui/vue/popover';
 import { computed, ref } from 'vue';
 
-type PopoverPlacement =
-	| 'bottom'
-	| 'bottom-end'
-	| 'bottom-start'
-	| 'left'
-	| 'left-end'
-	| 'left-start'
-	| 'right'
-	| 'right-end'
-	| 'right-start'
-	| 'top'
-	| 'top-end'
-	| 'top-start';
+type PopoverPlacement
+	= | 'bottom'
+		| 'bottom-end'
+		| 'bottom-start'
+		| 'left'
+		| 'left-end'
+		| 'left-start'
+		| 'right'
+		| 'right-end'
+		| 'right-start'
+		| 'top'
+		| 'top-end'
+		| 'top-start';
 
 const properties = withDefaults(
 	defineProps<{
@@ -48,12 +48,12 @@ const internalOpen = ref(properties.defaultOpen || false);
 const isControlled = computed(() => properties.isOpen !== undefined);
 const isOpen = computed(() => (isControlled.value ? properties.isOpen : internalOpen.value));
 
-const handleOpenChange = (details: { open: boolean }): void => {
+function handleOpenChange(details: { open: boolean }): void {
 	if (!isControlled.value) {
 		internalOpen.value = details.open;
 	}
 	emit('openChange', details);
-};
+}
 
 const positioning = computed(() => ({
 	middleware: [
@@ -74,36 +74,37 @@ const positioning = computed(() => ({
 		:close-on-interact-outside="closeOnInteractOutside"
 		:modal="modal"
 		:portalled="portalled"
-		@open-change="handleOpenChange">
+		@open-change="handleOpenChange"
+	>
 		<Popover.Trigger>
-			<slot name="trigger"></slot>
+			<slot name="trigger" />
 		</Popover.Trigger>
 
 		<Popover.Positioner>
 			<Popover.Content class="p-4 border border-gray-200 rounded bg-white z-50 dark:(border-gray-700 bg-gray-800)">
 				<template v-if="showArrow">
 					<Popover.Arrow>
-						<Popover.ArrowTip class="fill-white dark:(fill-gray-800)"></Popover.ArrowTip>
+						<Popover.ArrowTip class="fill-white dark:(fill-gray-800)" />
 					</Popover.Arrow>
 				</template>
 
 				<div v-if="$slots.title" class="font-bold mb-2">
 					<Popover.Title>
-						<slot name="title"></slot>
+						<slot name="title" />
 					</Popover.Title>
 				</div>
 
 				<div v-if="$slots.description" class="text-sm text-gray-600 mb-3 dark:(text-gray-300)">
 					<Popover.Description>
-						<slot name="description"></slot>
+						<slot name="description" />
 					</Popover.Description>
 				</div>
 
-				<slot></slot>
+				<slot />
 
 				<div v-if="$slots.closeTrigger" class="mt-4 flex justify-end">
 					<Popover.CloseTrigger>
-						<slot name="closeTrigger"></slot>
+						<slot name="closeTrigger" />
 					</Popover.CloseTrigger>
 				</div>
 			</Popover.Content>

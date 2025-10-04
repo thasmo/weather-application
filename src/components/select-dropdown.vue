@@ -44,14 +44,14 @@ watch(
 
 const collection = computed(() => {
 	return createListCollection({
-		items: properties.options.map((option) => option.value),
+		items: properties.options.map(option => option.value),
 	});
 });
 
-const getOptionLabel = (value: string): string => {
-	const option = properties.options.find((opt) => opt.value === value);
+function getOptionLabel(value: string): string {
+	const option = properties.options.find(opt => opt.value === value);
 	return option ? option.label : '';
-};
+}
 
 const currentLabel = computed(() => {
 	return getOptionLabel(properties.modelValue);
@@ -62,30 +62,35 @@ const currentLabel = computed(() => {
 	<Select.Root v-model="value" :collection="collection" :aria-label="ariaLabel">
 		<Select.Control>
 			<Select.Trigger
-				class="text-sm text-gray-700 font-medium px-3.5 py-2 border border-gray-300 rounded-lg bg-white flex w-full cursor-pointer items-center justify-between dark:(text-gray-200 border-gray-600 bg-gray-800) focus:(outline-none border-primary-500 ring-3 ring-primary-500/20) hover:(border-primary-400) dark:hover:(border-primary-500)">
+				class="text-sm text-gray-700 font-medium px-3.5 py-2 border border-gray-300 rounded-lg bg-white flex w-full cursor-pointer items-center justify-between dark:(text-gray-200 border-gray-600 bg-gray-800) focus:(outline-none border-primary-500 ring-3 ring-primary-500/20) hover:(border-primary-400) dark:hover:(border-primary-500)"
+			>
 				<Select.ValueText placeholder="Select an option" class="text-left flex-grow">
 					{{ currentLabel }}
 				</Select.ValueText>
 				<Select.Indicator class="text-gray-500 ml-2 flex-shrink-0 dark:(text-gray-400)">
-					<div class="i-ri-arrow-drop-down-line h-5 w-5"></div>
+					<div class="i-ri-arrow-drop-down-line h-5 w-5" />
 				</Select.Indicator>
 			</Select.Trigger>
 		</Select.Control>
 		<Teleport to="body">
 			<Select.Positioner>
 				<Select.Content
-					class="mt-1 border border-gray-300 rounded-lg bg-white min-w-180px z-50 overflow-hidden dark:(border-gray-600 bg-gray-800)">
+					class="mt-1 border border-gray-300 rounded-lg bg-white min-w-180px z-50 overflow-hidden dark:(border-gray-600 bg-gray-800)"
+				>
 					<Select.ItemGroup>
 						<Select.Item
 							v-for="option in properties.options"
 							:key="option.value"
 							:item="option.value"
+							class="text-sm text-gray-700 font-medium px-4 py-2.5 flex cursor-pointer items-center justify-between dark:(text-gray-200) hover:(bg-primary-50) dark:hover:(bg-primary-900/20)"
 							@click.stop
 							@mousedown.stop
-							class="text-sm text-gray-700 font-medium px-4 py-2.5 flex cursor-pointer items-center justify-between dark:(text-gray-200) hover:(bg-primary-50) dark:hover:(bg-primary-900/20)">
-							<Select.ItemText class="text-left">{{ option.label }}</Select.ItemText>
+						>
+							<Select.ItemText class="text-left">
+								{{ option.label }}
+							</Select.ItemText>
 							<Select.ItemIndicator class="text-primary-600 ml-2 dark:(text-primary-400)">
-								<div class="i-ri-check-line h-5 w-5"></div>
+								<div class="i-ri-check-line h-5 w-5" />
 							</Select.ItemIndicator>
 						</Select.Item>
 					</Select.ItemGroup>

@@ -1,15 +1,15 @@
 import { useDateFormat } from '@vueuse/core';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-
 import { useSettingsStore } from '@/stores/settings-store';
 
-export const useFormat = () => {
+export function useFormat() {
 	const settingsStore = useSettingsStore();
 	const { locale } = useI18n();
 
 	const formatTemperature = (temperature: number | undefined): string => {
-		if (temperature === undefined) return 'N/A';
+		if (temperature === undefined)
+			return 'N/A';
 
 		const temporaryValue = settingsStore.temperatureUnit === 'fahrenheit' ? (temperature * 9) / 5 + 32 : temperature;
 
@@ -18,7 +18,8 @@ export const useFormat = () => {
 	};
 
 	const formatWindSpeed = (speed: number | undefined): string => {
-		if (speed === undefined) return 'N/A';
+		if (speed === undefined)
+			return 'N/A';
 
 		let convertedSpeed: number;
 		let unitSymbol: string;
@@ -45,7 +46,8 @@ export const useFormat = () => {
 	};
 
 	const formatPrecipitation = (precipitation: number | undefined): string => {
-		if (precipitation === undefined) return 'N/A';
+		if (precipitation === undefined)
+			return 'N/A';
 
 		let convertedPrecipitation: number;
 		let unitSymbol: string;
@@ -67,7 +69,8 @@ export const useFormat = () => {
 	};
 
 	const formatAirPressure = (pressure: number | undefined): string => {
-		if (pressure === undefined) return 'N/A';
+		if (pressure === undefined)
+			return 'N/A';
 
 		let convertedPressure: number;
 		let unitSymbol: string;
@@ -91,7 +94,8 @@ export const useFormat = () => {
 	const formatTime = (date: Date): string => {
 		if (settingsStore.timeFormat === 'twentyFourHour') {
 			return useDateFormat(date, 'HH:mm', { locales: locale.value }).value;
-		} else {
+		}
+		else {
 			const formatString = locale.value.startsWith('de') ? 'h A' : 'h A';
 			return useDateFormat(date, formatString, { locales: locale.value }).value;
 		}
@@ -117,4 +121,4 @@ export const useFormat = () => {
 		formatWeekday,
 		formatWindSpeed,
 	};
-};
+}

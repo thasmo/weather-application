@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-
 import MobileNavigation from '@/components/mobile-navigation.vue';
 import { useLocationService } from '@/composables/use-geolocation';
 import { useResponsive } from '@/composables/use-responsive';

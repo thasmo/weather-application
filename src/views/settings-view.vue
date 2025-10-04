@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-
 import SettingsContent from '@/components/settings-content.vue';
 
 const { t } = useI18n();
@@ -8,9 +7,11 @@ const { t } = useI18n();
 
 <template>
 	<main
-		class="bg-gradient-to-b flex flex-col min-h-screen from-primary-50 to-primary-100 dark:(from-gray-900 to-gray-800)">
+		class="flex flex-col min-h-screen from-primary-50 to-primary-100 bg-gradient-to-b dark:(from-gray-900 to-gray-800)"
+	>
 		<header
-			class="p-4 border-b border-primary-100 flex flex-row gap-4 items-start items-center justify-between sm:(p-5) dark:(border-gray-700)">
+			class="p-4 border-b border-primary-100 flex flex-row gap-4 items-start items-center justify-between sm:(p-5) dark:(border-gray-700)"
+		>
 			<div>
 				<h1 class="text-3xl text-gray-800 font-bold md:(text-5xl) sm:(text-4xl) dark:(text-gray-100)">
 					{{ t('app.settings.title') }}
