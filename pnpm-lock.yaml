@@ -28,7 +28,7 @@ importers:
         version: 3.0.3(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))
       pinia-plugin-persistedstate:
         specifier: ^4.3.0
-        version: 4.6.0(pinia@3.0.3(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3)))
+        version: 4.7.1(pinia@3.0.3(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3)))
       vue:
         specifier: ^3.5.13
         version: 3.5.22(typescript@5.9.3)
@@ -2164,9 +2164,6 @@ packages:
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
 
-  deep-pick-omit@1.2.1:
-    resolution: {integrity: sha512-2J6Kc/m3irCeqVG42T+SaUMesaK7oGWaedGnQQK/+O0gYc+2SP5bKh/KKTE7d7SJ+GCA9UUE1GRzh6oDe0EnGw==}
-
   default-browser-id@5.0.0:
     resolution: {integrity: sha512-A6p/pu/6fyBcA1TRz/GqWYPViplrftcW2gZC9q79ngNCKAeR/X3gcEdXQHl4KNXV+3wgIJ1CPkJQ3IHM6lcsyA==}
     engines: {node: '>=18'}
@@ -3261,8 +3258,8 @@ packages:
     engines: {node: '>=0.10'}
     hasBin: true
 
-  pinia-plugin-persistedstate@4.6.0:
-    resolution: {integrity: sha512-BxcwDohxlNVg1wcCQKczHIxq/ZbH4csB+zz1bN/batAH0gV7vCH6O4mZLwfdeaLoaRsiPeB1eNsI4I4SA6707Q==}
+  pinia-plugin-persistedstate@4.7.1:
+    resolution: {integrity: sha512-WHOqh2esDlR3eAaknPbqXrkkj0D24h8shrDPqysgCFR6ghqP/fpFfJmMPJp0gETHsvrh9YNNg6dQfo2OEtDnIQ==}
     peerDependencies:
       '@nuxt/kit': '>=3.0.0'
       '@pinia/nuxt': '>=0.10.0'
@@ -6513,8 +6510,6 @@ snapshots:
 
   deep-is@0.1.4: {}
 
-  deep-pick-omit@1.2.1: {}
-
   default-browser-id@5.0.0: {}
 
   default-browser@5.2.1:
@@ -7867,11 +7862,9 @@ snapshots:
 
   pidtree@0.6.0: {}
 
-  pinia-plugin-persistedstate@4.6.0(pinia@3.0.3(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))):
+  pinia-plugin-persistedstate@4.7.1(pinia@3.0.3(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))):
     dependencies:
-      deep-pick-omit: 1.2.1
       defu: 6.1.4
-      destr: 2.0.5
     optionalDependencies:
       pinia: 3.0.3(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))
 
