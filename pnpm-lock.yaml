@@ -22,7 +22,7 @@ importers:
         version: 14.0.0(vue@3.5.22(typescript@5.9.3))
       openmeteo:
         specifier: ^1.2.0
-        version: 1.2.1
+        version: 1.2.2
       pinia:
         specifier: ^3.0.3
         version: 3.0.3(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))
@@ -993,8 +993,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@openmeteo/sdk@1.21.2':
-    resolution: {integrity: sha512-AaX53PfPMVAaxdvuthRJePLD46eGYoaGQMEW5A0/xuAjigTQncN4WOhrXlOvg8aG8zfQQVUmhKFDHB/+UCUVoQ==}
+  '@openmeteo/sdk@1.22.0':
+    resolution: {integrity: sha512-llo/RbkN8wwOF8XrGe42pMbd3qFLUcBYCkmB3nWb8Ozwd+C47Xb0c2o/AsTmyk2WA6hV9tjXDSvyQWTaUFG6WA==}
     engines: {node: '>=12.0'}
 
   '@oxc-resolver/binding-android-arm-eabi@11.12.0':
@@ -3162,8 +3162,8 @@ packages:
     resolution: {integrity: sha512-YgBpdJHPyQ2UE5x+hlSXcnejzAvD0b22U2OuAP+8OnlJT+PjWPxtgmGqKKc+RgTM63U9gN0YzrYc71R2WT/hTA==}
     engines: {node: '>=18'}
 
-  openmeteo@1.2.1:
-    resolution: {integrity: sha512-BNps/RuJo0tIWhBiEvThO28Df3pU6q7m77wBhuS74FkvYYmrub9+KqzBiMd6XNPhWL4tPfG0iE3tXREy+pkwiQ==}
+  openmeteo@1.2.2:
+    resolution: {integrity: sha512-n0FeYOFts9Tr/KYajfPvFVaYKd0PDQRuG3xnkgVsyagOI91QkVcSo2+CLIYgN4LlGCCVM5FZ5e+dswSG81PGZA==}
     engines: {node: '>=12.0'}
 
   optionator@0.9.4:
@@ -4898,7 +4898,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
-  '@openmeteo/sdk@1.21.2':
+  '@openmeteo/sdk@1.22.0':
     dependencies:
       flatbuffers: 25.9.23
 
@@ -7758,9 +7758,9 @@ snapshots:
       is-inside-container: 1.0.0
       wsl-utils: 0.1.0
 
-  openmeteo@1.2.1:
+  openmeteo@1.2.2:
     dependencies:
-      '@openmeteo/sdk': 1.21.2
+      '@openmeteo/sdk': 1.22.0
       flatbuffers: 25.9.23
 
   optionator@0.9.4:
