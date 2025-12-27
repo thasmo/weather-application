@@ -40,7 +40,7 @@
 		"@somehow-digital/cspell-dictionary": "^2.7.0",
 		"@somehow-digital/eslint-config": "^4.0.0",
 		"@somehow-digital/typescript-config": "^3.0.0",
-		"@tsconfig/node22": "^22.0.1",
+		"@tsconfig/node24": "^24.0.0",
 		"@types/node": "^24.0.0",
 		"@unocss/preset-web-fonts": "^66.3.1",
 		"@unocss/reset": "^66.0.0",
