@@ -4,8 +4,9 @@
 		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 		"paths": {
 			"@/*": ["./src/*"]
-		}
+		},
+		"types": ["vite/client", "@cloudflare/workers-types"]
 	},
-	"include": ["environment.d.ts", "src/**/*.vue", "src/**/*.ts"],
+	"include": ["src/**/*.vue", "src/**/*.ts", "worker-configuration.d.ts"],
 	"exclude": ["src/**/__tests__/*"]
 }
