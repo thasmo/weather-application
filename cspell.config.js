@@ -7,7 +7,7 @@ export default {
 			path: './dictionary.txt',
 		},
 	],
-	ignorePaths: ['**/dist/', '**/src/data/', '**/src/locales/'],
+	ignorePaths: ['**/dist/', '**/src/data/', '**/src/locales/', 'worker-configuration.d.ts'],
 	import: ['@somehow-digital/cspell-dictionary'],
 	language: 'en',
 	version: '0.2',

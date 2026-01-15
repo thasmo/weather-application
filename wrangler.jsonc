@@ -1,0 +1,25 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "thasmo-weather-application",
+	"main": "src/worker.ts",
+	"compatibility_date": "2025-01-12",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1
+	},
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist/client/",
+		"not_found_handling": "none"
+	},
+	"routes": [
+		{
+			"pattern": "weather.thasmo.dev",
+			"custom_domain": true
+		}
+	]
+}

@@ -1,4 +1,4 @@
 export default {
-	ignore: ['environment.d.ts'],
+	entry: ['src/main.ts', 'src/worker.ts'],
 	ignoreDependencies: ['@iconify-json/ri', '@iconify-json/wi'],
 };

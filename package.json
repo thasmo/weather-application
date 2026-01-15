@@ -10,13 +10,16 @@
 		"dev": "vite",
 		"preview": "vite preview",
 		"build": "vite build",
+		"deploy": "wrangler deploy",
+		"upload": "wrangler versions upload",
 		"prepare": "concurrently --group --prefix-colors 'auto' 'pnpm:prepare:*'",
 		"prepare:husky": "husky",
+		"prepare:wrangler": "wrangler types",
 		"lint": "concurrently --group --prefix-colors 'auto' 'pnpm:lint:*'",
-		"lint:eslint": "eslint .",
 		"lint:types": "vue-tsc --noEmit",
+		"lint:eslint": "eslint .",
 		"lint:cspell": "cspell --no-progress --no-summary --no-must-find-files .",
-		"lint:knip": "knip --no-progress --workspace .",
+		"lint:knip": "knip --no-progress",
 		"fix": "concurrently --group --prefix-colors 'auto' 'pnpm:fix:*'",
 		"fix:eslint": "eslint --fix .",
 		"fix:knip": "knip --fix --no-progress --workspace ."
@@ -34,6 +37,8 @@
 		"vue-router": "^4.5.0"
 	},
 	"devDependencies": {
+		"@cloudflare/vite-plugin": "^1.21.0",
+		"@cloudflare/workers-types": "^4.20260115.0",
 		"@commitlint/cli": "^20.0.0",
 		"@iconify/utils": "^3.0.0",
 		"@somehow-digital/commitlint-config": "^1.0.0",
@@ -57,7 +62,8 @@
 		"unocss": "^66.0.0",
 		"vite": "^7.0.0",
 		"vite-plugin-vue-devtools": "^8.0.0",
-		"vue-tsc": "^3.0.0"
+		"vue-tsc": "^3.0.0",
+		"wrangler": "^4.59.2"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
