@@ -64,10 +64,5 @@
 		"vite-plugin-vue-devtools": "^8.0.0",
 		"vue-tsc": "^3.0.0",
 		"wrangler": "^4.59.2"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"esbuild"
-		]
 	}
 }
