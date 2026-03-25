@@ -6,6 +6,8 @@ fontshare
 iconify
 meteo
 persistedstate
+esbuild
+workerd
 
 Hectopascal
 Satoshi
