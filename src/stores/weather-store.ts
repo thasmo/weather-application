@@ -130,31 +130,23 @@ export const useWeatherStore = defineStore('weather', () => {
 			);
 
 			const dailyForecastData: DailyForecast = {
-				precipitation_sum: [...(dailyData.variables(3)?.valuesArray() || [])]
-					.map(Number)
+				precipitation_sum: Array.from(dailyData.variables(3)?.valuesArray() || [], Number)
 					.map(value => roundToOneDecimal(value)),
-				relative_humidity_2m_max: [...(dailyData.variables(4)?.valuesArray() || [])]
-					.map(Number)
+				relative_humidity_2m_max: Array.from(dailyData.variables(4)?.valuesArray() || [], Number)
 					.map(value => roundToOneDecimal(value)),
-				relative_humidity_2m_min: [...(dailyData.variables(5)?.valuesArray() || [])]
-					.map(Number)
+				relative_humidity_2m_min: Array.from(dailyData.variables(5)?.valuesArray() || [], Number)
 					.map(value => roundToOneDecimal(value)),
-				sunrise: [...(dailyData.variables(7)?.valuesArray() || [])]
-					.map(Number)
+				sunrise: Array.from(dailyData.variables(7)?.valuesArray() || [], Number)
 					.map(timeValue => processTime(timeValue)),
-				sunset: [...(dailyData.variables(8)?.valuesArray() || [])]
-					.map(Number)
+				sunset: Array.from(dailyData.variables(8)?.valuesArray() || [], Number)
 					.map(timeValue => processTime(timeValue)),
-				temperature_2m_max: [...(dailyData.variables(1)?.valuesArray() || [])]
-					.map(Number)
+				temperature_2m_max: Array.from(dailyData.variables(1)?.valuesArray() || [], Number)
 					.map(value => roundToOneDecimal(value)),
-				temperature_2m_min: [...(dailyData.variables(2)?.valuesArray() || [])]
-					.map(Number)
+				temperature_2m_min: Array.from(dailyData.variables(2)?.valuesArray() || [], Number)
 					.map(value => roundToOneDecimal(value)),
 				time: dailyTimes,
-				weather_code: [...(dailyData.variables(0)?.valuesArray() || [])].map(Number),
-				wind_speed_10m_max: [...(dailyData.variables(6)?.valuesArray() || [])]
-					.map(Number)
+				weather_code: Array.from(dailyData.variables(0)?.valuesArray() || [], Number),
+				wind_speed_10m_max: Array.from(dailyData.variables(6)?.valuesArray() || [], Number)
 					.map(value => roundToOneDecimal(value)),
 			};
 
@@ -163,23 +155,18 @@ export const useWeatherStore = defineStore('weather', () => {
 			);
 
 			const hourlyForecastData: HourlyForecast = {
-				is_day: [...(hourlyData.variables(6)?.valuesArray() || [])].map(Number).map(value => value === 1),
-				precipitation: [...(hourlyData.variables(2)?.valuesArray() || [])]
-					.map(Number)
+				is_day: Array.from(hourlyData.variables(6)?.valuesArray() || [], Number).map(value => value === 1),
+				precipitation: Array.from(hourlyData.variables(2)?.valuesArray() || [], Number)
 					.map(value => roundToOneDecimal(value)),
-				precipitation_probability: [...(hourlyData.variables(1)?.valuesArray() || [])]
-					.map(Number)
+				precipitation_probability: Array.from(hourlyData.variables(1)?.valuesArray() || [], Number)
 					.map(value => roundToOneDecimal(value)),
-				relative_humidity_2m: [...(hourlyData.variables(4)?.valuesArray() || [])]
-					.map(Number)
+				relative_humidity_2m: Array.from(hourlyData.variables(4)?.valuesArray() || [], Number)
 					.map(value => roundToOneDecimal(value)),
-				temperature_2m: [...(hourlyData.variables(0)?.valuesArray() || [])]
-					.map(Number)
+				temperature_2m: Array.from(hourlyData.variables(0)?.valuesArray() || [], Number)
 					.map(value => roundToOneDecimal(value)),
 				time: hourlyTimes,
-				weather_code: [...(hourlyData.variables(3)?.valuesArray() || [])].map(Number),
-				wind_speed_10m: [...(hourlyData.variables(5)?.valuesArray() || [])]
-					.map(Number)
+				weather_code: Array.from(hourlyData.variables(3)?.valuesArray() || [], Number),
+				wind_speed_10m: Array.from(hourlyData.variables(5)?.valuesArray() || [], Number)
 					.map(value => roundToOneDecimal(value)),
 			};
 
