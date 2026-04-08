@@ -8,6 +8,7 @@ meteo
 persistedstate
 esbuild
 workerd
+trufflesecurity
 
 Hectopascal
 Satoshi
