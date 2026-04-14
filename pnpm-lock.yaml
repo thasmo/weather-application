@@ -41,7 +41,7 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: ^1.21.0
-        version: 1.32.1(vite@8.0.8(@types/node@24.12.2)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.3))(workerd@1.20260410.1)(wrangler@4.82.2(@cloudflare/workers-types@4.20260414.1))
+        version: 1.32.2(vite@8.0.8(@types/node@24.12.2)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.3))(workerd@1.20260410.1)(wrangler@4.82.2(@cloudflare/workers-types@4.20260414.1))
       '@cloudflare/workers-types':
         specifier: ^4.20260115.0
         version: 4.20260414.1
@@ -357,11 +357,11 @@ packages:
       workerd:
         optional: true
 
-  '@cloudflare/vite-plugin@1.32.1':
-    resolution: {integrity: sha512-W0FLVZXc6utvkbjmm4/m1ei4iJXN6wi3f+pLu5kTXScZFN2e5nLlHJK17aFZlvjfEmhWY50urpU21kbPBj1m7g==}
+  '@cloudflare/vite-plugin@1.32.2':
+    resolution: {integrity: sha512-sEI/jusfDvzHIL4oiBBV5iUxAXfTRvguecIDWQ/AxBgEjGO1ZslHOEy4rlxfgqrdRWtq0TM9m3oC+hT32hajEg==}
     peerDependencies:
       vite: ^6.1.0 || ^7.0.0 || ^8.0.0
-      wrangler: ^4.82.1
+      wrangler: ^4.82.2
 
   '@cloudflare/workerd-darwin-64@1.20260410.1':
     resolution: {integrity: sha512-0sh6xPmCKUfv/lUklP1dfyeKxCuEZGS0HeduxnucL8ECxSgAdWTOD42h/lQTwZCIiWtyHB+ZNB9hsS2Mlf0tMQ==}
@@ -5106,7 +5106,7 @@ snapshots:
     optionalDependencies:
       workerd: 1.20260410.1
 
-  '@cloudflare/vite-plugin@1.32.1(vite@8.0.8(@types/node@24.12.2)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.3))(workerd@1.20260410.1)(wrangler@4.82.2(@cloudflare/workers-types@4.20260414.1))':
+  '@cloudflare/vite-plugin@1.32.2(vite@8.0.8(@types/node@24.12.2)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.3))(workerd@1.20260410.1)(wrangler@4.82.2(@cloudflare/workers-types@4.20260414.1))':
     dependencies:
       '@cloudflare/unenv-preset': 2.16.0(unenv@2.0.0-rc.24)(workerd@1.20260410.1)
       miniflare: 4.20260410.0
