@@ -39,7 +39,7 @@
 	"devDependencies": {
 		"@cloudflare/vite-plugin": "^1.21.0",
 		"@cloudflare/workers-types": "^4.20260115.0",
-		"@commitlint/cli": "^20.0.0",
+		"@commitlint/cli": "^21.0.0",
 		"@iconify/utils": "^3.0.0",
 		"@somehow-digital/commitlint-config": "^1.0.0",
 		"@somehow-digital/cspell-dictionary": "^2.7.0",
