@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@ark-ui/vue':
         specifier: ^5.14.2
-        version: 5.37.1(vue@3.5.38(typescript@6.0.3))
+        version: 5.37.2(vue@3.5.38(typescript@6.0.3))
       '@iconify-json/ri':
         specifier: ^1.2.5
         version: 1.2.10
@@ -190,8 +190,8 @@ packages:
   '@antfu/install-pkg@1.1.0':
     resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
 
-  '@ark-ui/vue@5.37.1':
-    resolution: {integrity: sha512-t8gj3SkrzgPMlMHGWuJi/9886DMRrTAzc2N2nkJTLfz/EgZYkcyNB2Wsc6oQ7mNb89e8O58P1KNS6/p5XxryUg==}
+  '@ark-ui/vue@5.37.2':
+    resolution: {integrity: sha512-hLV6yBz/MOYdd58lVduGDyAVmaZDAqyk9UX3dOgXgkiRHq3mYzWK2cY3c9AoyeDRssdzyti/xkRv3nBYSHrE7A==}
     peerDependencies:
       vue: '>=3.5.0'
 
@@ -4778,7 +4778,7 @@ snapshots:
       package-manager-detector: 1.6.0
       tinyexec: 1.2.4
 
-  '@ark-ui/vue@5.37.1(vue@3.5.38(typescript@6.0.3))':
+  '@ark-ui/vue@5.37.2(vue@3.5.38(typescript@6.0.3))':
     dependencies:
       '@internationalized/date': 3.12.2
       '@zag-js/accordion': 1.41.2
