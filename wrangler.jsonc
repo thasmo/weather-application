@@ -2,11 +2,14 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "thasmo-weather-application",
 	"main": "src/worker.ts",
-	"compatibility_date": "2025-01-12",
+	"compatibility_date": "2026-06-18",
 	"compatibility_flags": [
 		"nodejs_compat",
 		"global_fetch_strictly_public"
 	],
+	"keep_vars": true,
+	"preview_urls": true,
+	"send_metrics": false,
 	"observability": {
 		"enabled": true,
 		"head_sampling_rate": 1
