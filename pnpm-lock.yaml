@@ -41,10 +41,7 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: ^1.21.0
-        version: 1.45.0(vite@8.1.5(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(wrangler@4.111.0(@cloudflare/workers-types@4.20260702.1))
-      '@cloudflare/workers-types':
-        specifier: ^4.20260115.0
-        version: 4.20260702.1
+        version: 1.45.0(vite@8.1.5(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(wrangler@4.111.0)
       '@commitlint/cli':
         specifier: ^21.0.0
         version: 21.2.1(@types/node@24.13.3)(conventional-commits-parser@7.1.0)(typescript@6.0.3)
@@ -119,7 +116,7 @@ importers:
         version: 3.3.7(typescript@6.0.3)
       wrangler:
         specifier: ^4.59.2
-        version: 4.111.0(@cloudflare/workers-types@4.20260702.1)
+        version: 4.111.0
 
 packages:
 
@@ -416,9 +413,6 @@ packages:
     engines: {node: '>=16'}
     cpu: [x64]
     os: [win32]
-
-  '@cloudflare/workers-types@4.20260702.1':
-    resolution: {integrity: sha512-mOhf5TUEB1m2vPrxtqoIGfz0fUC9xyxRDx5gWHy5s+OCo6dcV+g7wI1R7gYCMFohhqF/2y2xeKVwMwCJjfn/WA==}
 
   '@commitlint/cli@21.2.1':
     resolution: {integrity: sha512-blsZGe29hJ72VGEFVl72IVYX+1vsfINpjA9yWQA6i7OKD/McGEOXg08sKIRKjFk4JvzhV/9n0l3i6NooPLTNfg==}
@@ -5031,14 +5025,14 @@ snapshots:
     optionalDependencies:
       workerd: 1.20260710.1
 
-  '@cloudflare/vite-plugin@1.45.0(vite@8.1.5(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(wrangler@4.111.0(@cloudflare/workers-types@4.20260702.1))':
+  '@cloudflare/vite-plugin@1.45.0(vite@8.1.5(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(wrangler@4.111.0)':
     dependencies:
       '@cloudflare/unenv-preset': 2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260710.1)
       miniflare: 4.20260710.0
       unenv: 2.0.0-rc.24
       vite: 8.1.5(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)
       workerd: 1.20260710.1
-      wrangler: 4.111.0(@cloudflare/workers-types@4.20260702.1)
+      wrangler: 4.111.0
       ws: 8.21.0
     transitivePeerDependencies:
       - bufferutil
@@ -5058,8 +5052,6 @@ snapshots:
 
   '@cloudflare/workerd-windows-64@1.20260710.1':
     optional: true
-
-  '@cloudflare/workers-types@4.20260702.1': {}
 
   '@commitlint/cli@21.2.1(@types/node@24.13.3)(conventional-commits-parser@7.1.0)(typescript@6.0.3)':
     dependencies:
@@ -9769,7 +9761,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20260710.1
       '@cloudflare/workerd-windows-64': 1.20260710.1
 
-  wrangler@4.111.0(@cloudflare/workers-types@4.20260702.1):
+  wrangler@4.111.0:
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
       '@cloudflare/unenv-preset': 2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260710.1)
@@ -9780,7 +9772,6 @@ snapshots:
       unenv: 2.0.0-rc.24
       workerd: 1.20260710.1
     optionalDependencies:
-      '@cloudflare/workers-types': 4.20260702.1
       fsevents: 2.3.3
     transitivePeerDependencies:
       - bufferutil

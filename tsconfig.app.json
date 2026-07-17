@@ -5,7 +5,7 @@
 		"paths": {
 			"@/*": ["./src/*"]
 		},
-		"types": ["vite/client", "@cloudflare/workers-types"]
+		"types": ["vite/client"]
 	},
 	"include": ["src/**/*.vue", "src/**/*.ts", "worker-configuration.d.ts"],
 	"exclude": ["src/**/__tests__/*"]
