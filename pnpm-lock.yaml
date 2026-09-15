@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@ark-ui/vue':
         specifier: ^5.14.2
-        version: 5.39.1(vue@3.5.42(typescript@6.0.3))
+        version: 5.39.2(vue@3.5.42(typescript@6.0.3))
       '@iconify-json/ri':
         specifier: ^1.2.5
         version: 1.2.10
@@ -190,8 +190,8 @@ packages:
   '@antfu/install-pkg@2.0.1':
     resolution: {integrity: sha512-iCKVQcIC0e3oDxEfs3SHQGW+ovhBMZmS1TE+bTk50rVyMCBmCfClv7Qi3HQKlumYwvjb/iIMeWCW2i67q6kFfQ==}
 
-  '@ark-ui/vue@5.39.1':
-    resolution: {integrity: sha512-WQan9gtoU0EX9Amn05UQ8HRjcU2YKHZo6o6Kv4X6foPy6TGEjnRfvLvneyb+Ooz25r58h1KsGbvE2cVZjUgkGw==}
+  '@ark-ui/vue@5.39.2':
+    resolution: {integrity: sha512-ZAkJPhsXKm92A8yZBO8RU+oPqZr244UaJi74XYzxeEFpo19h+CubihkyZlCcmAfvweUi8nUe0CA8y9ttiU2Unw==}
     peerDependencies:
       vue: '>=3.5.0'
 
@@ -1274,8 +1274,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@internationalized/date@3.12.3':
-    resolution: {integrity: sha512-fuLX+3ZKLsxI73y8b01EG/WjHb6gE6weCqlfawPO27kBWGMh9G1yH6Csv1uU7/cac9H2GHmOMt6CjmuQ1aia4Q==}
+  '@internationalized/date@3.12.4':
+    resolution: {integrity: sha512-M1dEn4c1U1HsSlaVR8upZtSqvXrTkHDfv18H01uCSJyjVLDxnBR38v/fMxecmlwXKR4i9HeZcmgQAPE6A+aGJQ==}
 
   '@internationalized/number@3.6.7':
     resolution: {integrity: sha512-3ji1fcrT+FPAK86UqEhB/psHixYo6niWPJtt7+qRaYFynt/BaJG8GhAPimtWUpEiVSTq8ZM8L5psMxGquiB/Vg==}
@@ -4892,9 +4892,9 @@ snapshots:
       package-manager-detector: 1.8.0
       tinyexec: 1.3.1
 
-  '@ark-ui/vue@5.39.1(vue@3.5.42(typescript@6.0.3))':
+  '@ark-ui/vue@5.39.2(vue@3.5.42(typescript@6.0.3))':
     dependencies:
-      '@internationalized/date': 3.12.3
+      '@internationalized/date': 3.12.4
       '@zag-js/accordion': 1.43.3
       '@zag-js/anatomy': 1.43.3
       '@zag-js/angle-slider': 1.43.3
@@ -4911,9 +4911,9 @@ snapshots:
       '@zag-js/color-utils': 1.43.3
       '@zag-js/combobox': 1.43.3
       '@zag-js/core': 1.43.3
-      '@zag-js/date-input': 1.43.3(@internationalized/date@3.12.3)
-      '@zag-js/date-picker': 1.43.3(@internationalized/date@3.12.3)
-      '@zag-js/date-utils': 1.43.3(@internationalized/date@3.12.3)
+      '@zag-js/date-input': 1.43.3(@internationalized/date@3.12.4)
+      '@zag-js/date-picker': 1.43.3(@internationalized/date@3.12.4)
+      '@zag-js/date-utils': 1.43.3(@internationalized/date@3.12.4)
       '@zag-js/dialog': 1.43.3
       '@zag-js/dom-query': 1.43.3
       '@zag-js/drawer': 1.43.3
@@ -6040,7 +6040,7 @@ snapshots:
   '@img/sharp-win32-x64@0.35.4':
     optional: true
 
-  '@internationalized/date@3.12.3':
+  '@internationalized/date@3.12.4':
     dependencies:
       '@swc/helpers': 0.5.23
 
@@ -7225,23 +7225,23 @@ snapshots:
       '@zag-js/dom-query': 1.43.3
       '@zag-js/utils': 1.43.3
 
-  '@zag-js/date-input@1.43.3(@internationalized/date@3.12.3)':
+  '@zag-js/date-input@1.43.3(@internationalized/date@3.12.4)':
     dependencies:
-      '@internationalized/date': 3.12.3
+      '@internationalized/date': 3.12.4
       '@zag-js/anatomy': 1.43.3
       '@zag-js/core': 1.43.3
-      '@zag-js/date-utils': 1.43.3(@internationalized/date@3.12.3)
+      '@zag-js/date-utils': 1.43.3(@internationalized/date@3.12.4)
       '@zag-js/dom-query': 1.43.3
       '@zag-js/live-region': 1.43.3
       '@zag-js/types': 1.43.3
       '@zag-js/utils': 1.43.3
 
-  '@zag-js/date-picker@1.43.3(@internationalized/date@3.12.3)':
+  '@zag-js/date-picker@1.43.3(@internationalized/date@3.12.4)':
     dependencies:
-      '@internationalized/date': 3.12.3
+      '@internationalized/date': 3.12.4
       '@zag-js/anatomy': 1.43.3
       '@zag-js/core': 1.43.3
-      '@zag-js/date-utils': 1.43.3(@internationalized/date@3.12.3)
+      '@zag-js/date-utils': 1.43.3(@internationalized/date@3.12.4)
       '@zag-js/dismissable': 1.43.3
       '@zag-js/dom-query': 1.43.3
       '@zag-js/live-region': 1.43.3
@@ -7249,9 +7249,9 @@ snapshots:
       '@zag-js/types': 1.43.3
       '@zag-js/utils': 1.43.3
 
-  '@zag-js/date-utils@1.43.3(@internationalized/date@3.12.3)':
+  '@zag-js/date-utils@1.43.3(@internationalized/date@3.12.4)':
     dependencies:
-      '@internationalized/date': 3.12.3
+      '@internationalized/date': 3.12.4
 
   '@zag-js/dialog@1.43.3':
     dependencies:
