@@ -28,7 +28,7 @@
 		"@ark-ui/vue": "^5.14.2",
 		"@iconify-json/ri": "^1.2.5",
 		"@iconify-json/wi": "^1.2.1",
-		"@vueuse/core": "^14.0.0",
+		"@vueuse/core": "^15.0.0",
 		"openmeteo": "^1.2.0",
 		"pinia": "^4.0.0",
 		"pinia-plugin-persistedstate": "^4.3.0",
