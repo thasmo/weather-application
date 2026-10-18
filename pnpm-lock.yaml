@@ -34,7 +34,7 @@ importers:
         version: 3.5.44(typescript@6.0.3)
       vue-i18n:
         specifier: ^11.1.6
-        version: 11.4.14(vue@3.5.44(typescript@6.0.3))
+        version: 11.4.15(vue@3.5.44(typescript@6.0.3))
       vue-router:
         specifier: ^5.0.0
         version: 5.4.0(@vue/compiler-sfc@3.5.44)(esbuild@0.28.2)(pinia@4.1.0(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.44(typescript@6.0.3)))(rolldown@1.2.13)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(vue@3.5.44(typescript@6.0.3))
@@ -1257,20 +1257,20 @@ packages:
   '@internationalized/number@3.6.7':
     resolution: {integrity: sha512-3ji1fcrT+FPAK86UqEhB/psHixYo6niWPJtt7+qRaYFynt/BaJG8GhAPimtWUpEiVSTq8ZM8L5psMxGquiB/Vg==}
 
-  '@intlify/core-base@11.4.14':
-    resolution: {integrity: sha512-Lox+qRGBLnEYfNz4iajqKpw1zuvSAWl4PtzEk654bEM+0NT1GBy9AbOecxzSh7krsyqn9mGKhgmvtuyBsqS6oQ==}
+  '@intlify/core-base@11.4.15':
+    resolution: {integrity: sha512-yHNg7+M6VKQuj+KUO/CrtcBMm3iAspvfFe1H/eKI0TP0pn2T2srBF1gEb/TL3c8RA/BZZGOIySwtZD0i+9/hhw==}
     engines: {node: '>= 22'}
 
-  '@intlify/devtools-types@11.4.14':
-    resolution: {integrity: sha512-EQHRYveQg6yHQ51kePfsFyaW2WW+0hk3FdVxSpLDyuKtqFtsRFoyQR2QzASZPmY767ujs9ipuxc2DiGJARkuiQ==}
+  '@intlify/devtools-types@11.4.15':
+    resolution: {integrity: sha512-NFV9LsP720IkR6BHNfUYBSkd/abocWimcOWAS63D3spwczy8zDvXCf9WMyhCVQ7FcYkWyECZke18x8D6UNVBFw==}
     engines: {node: '>= 22'}
 
-  '@intlify/message-compiler@11.4.14':
-    resolution: {integrity: sha512-y79GatHfMhN672Vooxw0v6mgX/vclFHggO1ENL6aH/QubLXiV529WXu/+FhVUbYF+HLTeDDkQpmnpfvSJddBCg==}
+  '@intlify/message-compiler@11.4.15':
+    resolution: {integrity: sha512-dV6apms3MXAG3jZ/6bAq+IW2IKDGasmjA/Aoi0JVKCStVi6GbzrPruCVbU/Djn1n41w5EiM3KdnpTuo6I1qe5w==}
     engines: {node: '>= 22'}
 
-  '@intlify/shared@11.4.14':
-    resolution: {integrity: sha512-f8zSlPs4+Yd9za3CPQfW9OHxAJBOeRQzB/hhOhkbGA7hlqWk0W0bUtSV/LmyrGNwdl8JriBnFtJqZyF140bjGg==}
+  '@intlify/shared@11.4.15':
+    resolution: {integrity: sha512-jlTJkM4bMdr267e1iUE2RMNz1LyoYU6IPReKjnQM6RvipEBUVwmMHbeUckDcOmR+WeungEGjaNmSQJdQzJcOfQ==}
     engines: {node: '>= 22'}
 
   '@jridgewell/gen-mapping@0.3.13':
@@ -4433,8 +4433,8 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
 
-  vue-i18n@11.4.14:
-    resolution: {integrity: sha512-oRFZtQjRDRQtfxu7tFlsZlnCa5gPkg/KX89kJDKdC9bz4GIYgo3cAMaD0XFeUx/WHuKoVbDMRTIo9Hvg67HnPw==}
+  vue-i18n@11.4.15:
+    resolution: {integrity: sha512-bOoNYoEd/ta4g2EelI9HKxPyMZvTDFoykTNYujDTOGoKDRy5ehKJg8WmMDU7hWqNM5efO7fEGNRuwrBXnwHyDg==}
     engines: {node: '>= 22'}
     peerDependencies:
       vue: ^3.0.0
@@ -5768,23 +5768,23 @@ snapshots:
     dependencies:
       '@swc/helpers': 0.5.23
 
-  '@intlify/core-base@11.4.14':
+  '@intlify/core-base@11.4.15':
     dependencies:
-      '@intlify/devtools-types': 11.4.14
-      '@intlify/message-compiler': 11.4.14
-      '@intlify/shared': 11.4.14
+      '@intlify/devtools-types': 11.4.15
+      '@intlify/message-compiler': 11.4.15
+      '@intlify/shared': 11.4.15
 
-  '@intlify/devtools-types@11.4.14':
+  '@intlify/devtools-types@11.4.15':
     dependencies:
-      '@intlify/core-base': 11.4.14
-      '@intlify/shared': 11.4.14
+      '@intlify/core-base': 11.4.15
+      '@intlify/shared': 11.4.15
 
-  '@intlify/message-compiler@11.4.14':
+  '@intlify/message-compiler@11.4.15':
     dependencies:
-      '@intlify/shared': 11.4.14
+      '@intlify/shared': 11.4.15
       source-map-js: 1.2.2
 
-  '@intlify/shared@11.4.14': {}
+  '@intlify/shared@11.4.15': {}
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
@@ -9552,11 +9552,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-i18n@11.4.14(vue@3.5.44(typescript@6.0.3)):
+  vue-i18n@11.4.15(vue@3.5.44(typescript@6.0.3)):
     dependencies:
-      '@intlify/core-base': 11.4.14
-      '@intlify/devtools-types': 11.4.14
-      '@intlify/shared': 11.4.14
+      '@intlify/core-base': 11.4.15
+      '@intlify/devtools-types': 11.4.15
+      '@intlify/shared': 11.4.15
       '@vue/devtools-api': 6.6.4
       vue: 3.5.44(typescript@6.0.3)
 
