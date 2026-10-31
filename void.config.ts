@@ -22,6 +22,7 @@ export default defineConfig({
 			},
 		],
 		send_metrics: false,
+		workers_dev: false,
 	},
 	inference: {
 		appType: 'void',
