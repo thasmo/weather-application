@@ -25,7 +25,8 @@ export default defineConfig({
 		workers_dev: false,
 	},
 	inference: {
-		appType: 'void',
+		appType: 'spa',
+		outputDir: 'dist/client',
 	},
 	routing: {
 		headers: {
