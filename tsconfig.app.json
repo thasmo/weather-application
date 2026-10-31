@@ -7,6 +7,6 @@
 		},
 		"types": ["vite/client"]
 	},
-	"include": ["src/**/*.vue", "src/**/*.ts", "worker-configuration.d.ts"],
+	"include": ["src/**/*.vue", "src/**/*.ts"],
 	"exclude": ["src/**/__tests__/*"]
 }

@@ -1,6 +1,8 @@
+/.void/
+/.void-wrangler.jsonc
+/.vite-hooks/_/
 /node_modules/
 /dist/
 /.wrangler/
 
 *.tsbuildinfo
-worker-configuration.d.ts
