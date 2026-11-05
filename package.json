@@ -55,9 +55,9 @@
 		"knip": "^6.0.0",
 		"typescript": "^6.0.0",
 		"unocss": "^66.0.0",
-		"vite": "npm:@voidzero-dev/vite-plus-core@1.4.0",
+		"vite": "npm:@voidzero-dev/vite-plus-core@1.5.0",
 		"vite-plugin-vue-devtools": "^8.0.0",
-		"vite-plus": "1.4.0",
+		"vite-plus": "1.5.0",
 		"void": "^1.4.0",
 		"vue-tsc": "^3.0.0",
 		"wrangler": "^4.155.0"
