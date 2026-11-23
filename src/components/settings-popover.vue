@@ -57,9 +57,15 @@ function handleOpenChange(details: { open: boolean }): void {
 
 const positioning = computed(() => ({
 	middleware: [
-		{ name: 'offset', options: { mainAxis: properties.offset } },
+		{
+			name: 'offset',
+			options: { mainAxis: properties.offset },
+		},
 		{ name: 'flip', options: {} },
-		{ name: 'shift', options: { padding: 8 } },
+		{
+			name: 'shift',
+			options: { padding: 8 },
+		},
 	],
 	placement: properties.placement,
 }));

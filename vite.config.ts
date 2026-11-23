@@ -6,7 +6,12 @@ import { defineConfig } from 'vite-plus';
 import { voidPlugin } from 'void';
 
 export default defineConfig({
-	plugins: [voidPlugin(), vue(), tools(), unocss()],
+	plugins: [
+		voidPlugin(),
+		vue(),
+		tools(),
+		unocss(),
+	],
 	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('src', import.meta.url)),

@@ -11,9 +11,13 @@ export function useFormat() {
 		if (temperature === undefined)
 			return 'N/A';
 
-		const temporaryValue = settingsStore.temperatureUnit === 'fahrenheit' ? (temperature * 9) / 5 + 32 : temperature;
+		const temporaryValue = settingsStore.temperatureUnit === 'fahrenheit'
+			? (temperature * 9) / 5 + 32
+			: temperature;
 
-		const unitSymbol = settingsStore.temperatureUnit === 'fahrenheit' ? '°F' : '°C';
+		const unitSymbol = settingsStore.temperatureUnit === 'fahrenheit'
+			? '°F'
+			: '°C';
 		return `${Math.round(temporaryValue)}${unitSymbol}`;
 	};
 
@@ -96,13 +100,17 @@ export function useFormat() {
 			return useDateFormat(date, 'HH:mm', { locales: locale.value }).value;
 		}
 		else {
-			const formatString = locale.value.startsWith('de') ? 'h A' : 'h A';
+			const formatString = locale.value.startsWith('de')
+				? 'h A'
+				: 'h A';
 			return useDateFormat(date, formatString, { locales: locale.value }).value;
 		}
 	};
 
 	const formatWeekday = (date: Date, format: 'long' | 'short' = 'short'): string => {
-		const formatString = format === 'long' ? 'dddd' : 'ddd';
+		const formatString = format === 'long'
+			? 'dddd'
+			: 'ddd';
 		return useDateFormat(date, formatString, { locales: locale.value }).value;
 	};
 

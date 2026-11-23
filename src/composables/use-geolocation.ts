@@ -99,7 +99,9 @@ export function useLocationService() {
 		}
 		catch (error_) {
 			console.error('Error getting user location:', error_);
-			error.value = error_ instanceof Error ? error_.message : 'Failed to get your location';
+			error.value = error_ instanceof Error
+				? error_.message
+				: 'Failed to get your location';
 			throw error_;
 		}
 		finally {
