@@ -7,7 +7,12 @@ export default {
 			path: './dictionary.txt',
 		},
 	],
-	ignorePaths: ['.void/', '**/dist/', '**/src/data/', '**/src/locales/'],
+	ignorePaths: [
+		'.void/',
+		'**/dist/',
+		'**/src/data/',
+		'**/src/locales/',
+	],
 	import: ['@somehow-digital/cspell-dictionary'],
 	language: 'en',
 	version: '0.2',

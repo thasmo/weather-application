@@ -60,7 +60,7 @@ function handleForgetLocation(): void {
 
 		<div class="flex flex-1 flex-col overflow-auto md:(flex-row overflow-hidden)">
 			<aside
-				class="border-primary-100 flex flex-col w-full md:(border-b-0 border-r max-w-xs overflow-auto) dark:(border-gray-700)"
+				class="border-primary-100 flex flex-col w-full md:(border-r border-b-0 max-w-xs overflow-auto) dark:(border-gray-700)"
 			>
 				<LocationDisplay
 					:location-name="location.name"

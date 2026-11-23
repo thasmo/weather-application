@@ -85,7 +85,7 @@ export const useWeatherStore = defineStore('weather', () => {
 					'temperature_2m,precipitation_probability,precipitation,weather_code,relative_humidity_2m,wind_speed_10m,is_day',
 				latitude: [location.latitude],
 				longitude: [location.longitude],
-				timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+				timezone: new Intl.DateTimeFormat().resolvedOptions().timeZone,
 			};
 
 			const responses = await fetchWeatherApi(url, parameters);
@@ -179,7 +179,9 @@ export const useWeatherStore = defineStore('weather', () => {
 		}
 		catch (error_) {
 			console.error('Error fetching weather data:', error_);
-			error.value = error_ instanceof Error ? error_.message : 'Failed to fetch weather data';
+			error.value = error_ instanceof Error
+				? error_.message
+				: 'Failed to fetch weather data';
 			loading.value = false;
 		}
 	};

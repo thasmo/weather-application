@@ -36,10 +36,14 @@ export function useThemeService(): ThemeService {
 
 	const currentTheme = computed({
 		get() {
-			return settingsStore.theme === 'system' ? 'auto' : settingsStore.theme;
+			return settingsStore.theme === 'system'
+				? 'auto'
+				: settingsStore.theme;
 		},
 		set(value: ColorMode) {
-			settingsStore.updateTheme(value === 'auto' ? 'system' : value);
+			settingsStore.updateTheme(value === 'auto'
+				? 'system'
+				: value);
 		},
 	});
 

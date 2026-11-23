@@ -9,9 +9,18 @@ const { currentTheme, updateTheme } = useThemeService();
 
 const themeOptions = computed(() => {
 	return [
-		{ label: t('app.theme.auto'), value: 'auto' },
-		{ label: t('app.theme.light'), value: 'light' },
-		{ label: t('app.theme.dark'), value: 'dark' },
+		{
+			label: t('app.theme.auto'),
+			value: 'auto',
+		},
+		{
+			label: t('app.theme.light'),
+			value: 'light',
+		},
+		{
+			label: t('app.theme.dark'),
+			value: 'dark',
+		},
 	];
 });
 </script>

@@ -37,7 +37,9 @@ const hourlyForecastData = computed(() => {
 
 	return properties.hourly.time
 		.map((time: Date | string, index: number) => {
-			const hourDate = time instanceof Date ? time : new Date(time);
+			const hourDate = time instanceof Date
+				? time
+				: new Date(time);
 			if (hourDate >= startOfDay && hourDate <= endOfDay) {
 				return {
 					airPressure: properties.hourly.pressure_msl?.[index],
