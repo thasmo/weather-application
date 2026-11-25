@@ -237,9 +237,9 @@ importers:
       '@somehow-digital/typescript-config':
         specifier: ^3.0.0
         version: 3.0.0(typescript@6.0.3)
-      '@tsconfig/node24':
-        specifier: ^24.0.0
-        version: 24.0.6
+      '@tsconfig/node26':
+        specifier: ^26.0.0
+        version: 26.0.2
       '@types/node':
         specifier: ^26.0.0
         version: 26.6.6
@@ -2997,8 +2997,8 @@ packages:
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
 
-  '@tsconfig/node24@24.0.6':
-    resolution: {integrity: sha512-/SK4JuydRQLGSCq7+hbiQ8fdAVR4Suv5EcBvkIAG3zo3GbXQvGoSclz4olL12Ar4OpH8gwGYJ67P4wwQqBRxKw==}
+  '@tsconfig/node26@26.0.2':
+    resolution: {integrity: sha512-RIBSoNGQxUQ8r4hSrEzS6TrUneoKaCuX6BjL4zF3wqttGq2w06zCea4d8P1gRvM/HZyDT1FQJ8trZSyy/63oMg==}
 
   '@tsrs/darwin-arm64@7.1.0-beta.tsrs2':
     resolution: {integrity: sha512-VMsXBPFD0SO5p7XrXhLutPmnpHc4kMIt7uztBJoHr/5Jd6qC8eH/TomobdPGugw27U3uiW2wJDqYjqYq5fxoCA==}
@@ -9027,7 +9027,7 @@ snapshots:
     dependencies:
       '@testing-library/dom': 10.4.2
 
-  '@tsconfig/node24@24.0.6': {}
+  '@tsconfig/node26@26.0.2': {}
 
   '@tsrs/darwin-arm64@7.1.0-beta.tsrs2':
     optional: true
